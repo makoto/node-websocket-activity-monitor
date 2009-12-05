@@ -1,26 +1,29 @@
+# node-websocket-activity-monitor
+Show, don't tell - http://screenr.com/A1U
 
 # Prerequisite
 - node.js (http://nodejs.org/)
+- ruby (just to server static files. Can be anything)
 
 # How to try this on WebSocket supported browser
-node websocket-server-node.js/server.js
-open iostat-client.html in Websocke supported browser (eg: Chrome)
+node server/websocket-server-node.js/server.js
+open client/web-socket-js/iostat-client.html in Websocke supported browser (eg: Chrome)
 
 # How to try this on NON WebSocket supported browser
 node websocket-server-node.js/server.js
-
-open http://localhost:10080/iostat-client.html in any browser
-
+cd client/web-socket-js
+ruby server.rb
+open http://localhost:10080/iostat-client.html
 
 # Watch acitivity_monitor in action
 http://screenr.com/A1U_
 
 # my bits
-iostat-client.html
 README
-style.css
-server.rb
-websocket-server-node.js/resources/iostat.js
+client/web-socket-js/iostat-client.html
+client/web-socket-js/style.css
+client/web-socket-js/server.rb
+server/websocket-server-node.js/resources/iostat.js
 
 # others
 
