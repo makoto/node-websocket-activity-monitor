@@ -13,12 +13,12 @@
 
     git clone git://github.com/makoto/node-websocket-activity-monitor.git
 
-## How to setup on WebSocket supported browser
+## How to setup on WebSocket supported browsers
 
     node server/websocket-server-node.js/server.js
     open client/web-socket-js/iostat-client.html # in Websocke supported browser (eg: Chrome)
 
-## How to setup on NON WebSocket supported browser (tested on firefox, and safari)
+## How to setup on NON WebSocket supported browsers (tested on firefox, and safari)
 
     node server/websocket-server-node.js/server.js
     cd client/web-socket-js
@@ -35,8 +35,8 @@
 
 ## others (Thanks !!)
 
-* [jquery](jquery.com) - no need to explain
-* [underscore](http://documentcloud.github.com/underscore/) - for functional style and handy template
+* [jquery](jquery.com) - The Write Less, Do More, JavaScript Library
+* [underscore](http://documentcloud.github.com/underscore/) - Functional Programming Aid for Javascript. Works well with jQuery.
 * [RGraph](http://www.rgraph.net/) - A canvas graph library based on the HTML5 canvas tag
 * [web-socket-js](http://github.com/gimite/web-socket-js) - HTML5 Web Socket implementation powered by Flash
 * [websocket-server-node.js](http://github.com/alexanderte/websocket-server-node.js) - A Web Socket server for local use written in JavaScript, using node.js
