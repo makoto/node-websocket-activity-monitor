@@ -6,7 +6,7 @@
 
 * [node.js](http://nodejs.org)
 * [ruby](www.ruby-lang.org) - just to server static files. Can be anything
-* OS to be able to run "[iostat](http://www.linuxcommand.org/man_pages/iostat1.html)". most linux and osx should be okay. don't know about windows.
+* OS which runs "[iostat](http://www.linuxcommand.org/man_pages/iostat1.html)". Most linux and osx should be okay. Don't know about windows.
 * A browser which supports HTML5 canvas
 
 ## How to get this
@@ -16,7 +16,7 @@
 ## How to setup on WebSocket supported browsers
 
     node server/websocket-server-node.js/server.js
-    open client/web-socket-js/iostat-client.html # in Websocke supported browser (eg: Chrome)
+    open client/web-socket-js/iostat-client.html # in Websocke supported browser (eg: Chromium, OSX Chrome)
 
 ## How to setup on NON WebSocket supported browsers (tested on firefox, and safari)
 
@@ -25,7 +25,7 @@
     ruby server.rb
     open http://localhost:10080/iostat-client.html
 
-## my bits
+## My bits and bobs
 
 * README.md
 * client/web-socket-js/iostat-client.html
@@ -33,7 +33,7 @@
 * client/web-socket-js/server.rb
 * server/websocket-server-node.js/resources/iostat.js
 
-## others (Thanks !!)
+## Others (Thanks !!)
 
 * [jquery](jquery.com) - The Write Less, Do More, JavaScript Library
 * [underscore](http://documentcloud.github.com/underscore/) - Functional Programming Aid for Javascript. Works well with jQuery.
@@ -52,5 +52,5 @@
 
 ## License 
 
- My bits are [MIT](http://en.wikipedia.org/wiki/MIT_License), but be aware of others. Especially RGraph has its own license, and you can not use it for commercial purpose, I think...
+ My bits and bobs are [MIT](http://en.wikipedia.org/wiki/MIT_License), but be aware of others. Especially RGraph has its own license, and you can not use it for commercial purpose, I think...
 
