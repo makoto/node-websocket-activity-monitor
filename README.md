@@ -25,6 +25,14 @@
     ruby server.rb
     open http://localhost:10080/iostat-client.html
 
+## How to make your cpu 100%
+
+From console, type the following
+
+    while true; do echo 'a'; done
+  
+Crtl + c will terminate the command.
+
 ## My bits and bobs
 
 * README.md
