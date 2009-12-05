@@ -1,6 +1,8 @@
 # node-websocket-activity-monitor
 
-[Show, don't tell](http://screenr.com/A1U)
+**Show, don't tell..**
+
+<object classid='clsid:d27cdb6e-ae6d-11cf-96b8-444553540000' codebase='http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,115,0' width='560' height='345'><param name='movie' value='http://screenr.com/Content/assets/screenr_1116090935.swf' /><param name='flashvars' value='i=31391' /><param name='allowFullScreen' value='true' /><embed src='http://screenr.com/Content/assets/screenr_1116090935.swf' flashvars='i=31391' allowFullScreen='true' width='560' height='345' pluginspage='http://www.macromedia.com/go/getflashplayer'></embed></object>
 
 ## Prerequisite
 
@@ -27,7 +29,7 @@
 
 ## my bits
 
-* README
+* README.md
 * client/web-socket-js/iostat-client.html
 * client/web-socket-js/style.css
 * client/web-socket-js/server.rb
@@ -38,8 +40,8 @@
 * [jquery](jquery.com) - no need to explain
 * [underscore](http://documentcloud.github.com/underscore/) - for functional style and handy template
 * [RGraph](http://www.rgraph.net/) - A canvas graph library based on the HTML5 canvas tag
-* [web-socket-js](http://github.com/gimite/web-socket-js) - HTML5 Web Socket implementation powered by Flas
-* [websocket-server-node.js](http://github.com/alexanderte/websocket-server-node.js) A Web Socket server for local use written in JavaScript, using node.js
+* [web-socket-js](http://github.com/gimite/web-socket-js) - HTML5 Web Socket implementation powered by Flash
+* [websocket-server-node.js](http://github.com/alexanderte/websocket-server-node.js) - A Web Socket server for local use written in JavaScript, using node.js
 
 **NOTE**: I [forked websocket-server-node.js](http://github.com/makoto/websocket-server-node.js) and implemented support for websocket-server-node.js
 
@@ -47,7 +49,7 @@
 ## Todo
 
   * Tidy up file structures
-  * Remove ruby (please someone let me know nice way to server static files from node.js)
+  * Remove ruby (please someone let me know nice ways to server static files from node.js)
   * Write a blog post
 
 ## License 
