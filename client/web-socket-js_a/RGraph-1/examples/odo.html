@@ -1,0 +1,162 @@
+<?php ob_start('ob_gzhandler') ?>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <!--
+        /**
+        * o------------------------------------------------------------------------------o
+        * | This file is part of the RGraph package - you can learn more at:             |
+        * |                                                                              |
+        * |                          http://www.rgraph.net                               |
+        * |                                                                              |
+        * | This package is licensed under the RGraph license. For all kinds of business |
+        * | purposes there is a small one-time licensing fee to pay and for personal,    |
+        * | charity and educational purposes it is free to use. You can read the full    |
+        * | license here:                                                                |
+        * |                      http://www.rgraph.net/LICENSE.txt                       |
+        * o------------------------------------------------------------------------------o
+        */
+    -->
+    <title>RGraph: HTML5 canvas graph library - odometer</title>
+    <link rel="stylesheet" href="../css/website.css" type="text/css" media="screen" />
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <script src="../libraries/RGraph.common.js" ></script>
+    <script src="../libraries/RGraph.odo.js" ></script>
+
+    <script>
+        window.onload = function ()
+        {
+            // ID, MINIMUM, MAXIMUM, INDICATED VALUE
+            odo1 = new RGraph.Odometer('odo1', 0, 100, 46);
+            odo1.Set('chart.green.start', 0);
+            odo1.Set('chart.green.end', 100);
+            odo1.Set('chart.yellow.start', 70);
+            odo1.Set('chart.yellow.end', 90);
+            odo1.Set('chart.red.start', 90);
+            odo1.Set('chart.red.end', 100);
+            odo1.Set('chart.needle.thickness', 4);
+            odo1.Set('chart.needle.style', '#333');
+            odo1.Set('chart.needle.head', false);
+            odo1.Set('chart.title', 'An odo (context, zoom)');
+            odo1.Set('chart.label.area', 30);
+            odo1.Set('chart.contextmenu', [
+                                           ['Zoom in', RGraph.Zoom],
+                                           ['Cancel', function () {}]
+                                          ]);
+            odo1.Set('chart.shadow.outer', true);
+            odo1.Draw();
+            
+            // ID, MINIMUM, MAXIMUM, INDICATED VALUE
+            var odo2 = new RGraph.Odometer('odo2', 0, 10, 7.67543);
+            odo2.Set('chart.annotatable', true);
+            odo2.Set('chart.green.start', 0);
+            odo2.Set('chart.green.end', 6);
+            odo2.Set('chart.yellow.start', 6);
+            odo2.Set('chart.yellow.end', 8);
+            odo2.Set('chart.red.start', 8);
+            odo2.Set('chart.red.end', 10);
+            odo2.Set('chart.needle.thickness', 2);
+            odo2.Set('chart.needle.style', '#000');
+            odo2.Set('chart.label.area', 35);
+            odo2.Set('chart.title', 'Pressure (annotatable)');
+            odo2.Set('chart.shadow.outer', true);
+            odo2.Draw();
+            
+            
+            odo3 = new RGraph.Odometer('odo3', 0, 100, 56);
+            odo3.Set('chart.green.start', 0);
+            odo3.Set('chart.green.end', 75);
+            odo3.Set('chart.yellow.start', 75);
+            odo3.Set('chart.yellow.end', 90);
+            odo3.Set('chart.red.start', 90);
+            odo3.Set('chart.red.end', 100);
+            odo3.Set('chart.title', 'An odometer');
+            odo3.Set('chart.shadow.inner', true);
+            odo3.Set('chart.zoom.mode', 'thumbnail');
+            odo3.Draw();
+            
+            odo4 = new RGraph.Odometer('odo4', 0, 10, 6);
+            odo4.Set('chart.green.start', 0);
+            odo4.Set('chart.green.end', 7);
+            odo4.Set('chart.yellow.start', 7);
+            odo4.Set('chart.yellow.end', 9);
+            odo4.Set('chart.red.start', 9);
+            odo4.Set('chart.red.end', 10);
+            odo4.Set('chart.title', 'Another odometer');
+            odo4.Draw();
+            
+            odo5 = new RGraph.Odometer('odo5', 0, 50, 15);
+            odo5.Set('chart.green.start', 0);
+            odo5.Set('chart.green.end', 35);
+            odo5.Set('chart.yellow.start', 35);
+            odo5.Set('chart.yellow.end', 45);
+            odo5.Set('chart.red.start', 45);
+            odo5.Set('chart.red.end', 50);
+            odo5.Set('chart.title', 'And another odometer');
+            odo5.Set('chart.needle.thickness', 2);
+            odo5.Set('chart.label.area', 30);
+            odo5.Draw();
+
+            odo6 = new RGraph.Odometer('odo6', 0, 100, 15);
+            odo6.Set('chart.green.start', 0);
+            odo6.Set('chart.green.end', 70);
+            odo6.Set('chart.yellow.start', 70);
+            odo6.Set('chart.yellow.end', 90);
+            odo6.Set('chart.red.start', 90);
+            odo6.Set('chart.red.end', 100);
+            odo6.Set('chart.title', 'And another Odometer');
+            odo6.Set('chart.needle.thickness', 1);
+            odo6.Set('chart.label.area', 30);
+            odo6.Draw();
+        }
+    </script>
+</head>
+<body>
+
+<h1>RGraph: Odometer</h1>
+
+    <script>
+        if (document.all) {
+            document.write('<div style="background-color: #fee; border: 2px dashed red; padding: 5px"><b>Important</b><br /><br /> Internet Explorer does not natively support the HTML5 canvas tag yet, so if you want to see the graphs, you can either:<ul><li>Install <a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a></li><li>Use another browser entirely. Your choices are Firefox, Chrome or Safari</li></ul></div>');
+        }
+    </script>
+
+
+    <div id="logo">
+        <a href="../index.html">RGraph: HTML5 canvas graph library</a>
+        >
+        <a href="./index.html">Examples</a>
+        >
+        Odometer
+    </div>
+    
+    <div>
+        <p>
+            The Odometer can be used to provide an indication of a particular value. For example you could easily use it to
+            represent values for a control panel that shows information about a server. An Odometer indicating how much disk
+            space is used for example, would be more visual than a simple number.
+        </p>
+        
+        <p>
+            The green, yellow and red areas are configurable, allowing you to add some level of urgency into your figures. The
+            figures are also configurable, so it can go from 0-10, or from 0-100. Or if you wanted a specific range, you could
+            have it go from 60-200.
+        </p>
+    </div>
+
+    <div>
+        <ul>
+            <li><a href="../docs/odo.html">Odometer API documentation</a></li>
+        </ul>
+    </div>
+    
+    <canvas id="odo1" width="300" height="300"><div class="canvasfallback">[No canvas support]</div></canvas>
+    <canvas id="odo2" width="300" height="300"><div class="canvasfallback">[No canvas support]</div></canvas>
+    <canvas id="odo3" width="300" height="300"><div class="canvasfallback">[No canvas support]</div></canvas>
+    <canvas id="odo4" width="300" height="300"><div class="canvasfallback">[No canvas support]</div></canvas>
+    <canvas id="odo5" width="300" height="300"><div class="canvasfallback">[No canvas support]</div></canvas>
+    <canvas id="odo6" width="300" height="300"><div class="canvasfallback">[No canvas support]</div></canvas>
+</body>
+</html>

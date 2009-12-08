@@ -1,0 +1,590 @@
+ 28th November 2009
+ ==================
+ o [DOCS] Added RGraph.HideContext() to API documentation.
+ o [MISC] Simplified logic for showing the context menu. Please test your browser on the website before upgrading as this may
+          cause regressions.
+ o [MISC] Fixed slight oddity for zoom which resulted in a small zoom thumbnail
+ o [MISC] The RGraph website now works with Google Chrome Frame. NB: If you're having a similar problem, ensure the META
+          tag is in the first 1Kb of the page.
+ o [MISC] Achieved a degree of Opera compatibility. Please bear in mind that Opera does not yet support the canvas text
+          or shadow APIs so do not expect to see any shadows on your graphs. Text is simulated however, so the graphs
+          are still usable in some circumstances however. Also bear in mind that Opera support is buggy.
+
+ 20th November 2009
+ ==================
+  o [MISC] Added new mode for zoom - thumbnail This shows a zoom thumbnail (you must set chart.zoom.mode to thumbnail) instead of
+           zooming the entire canvas. The line graph on the front page shows an example of it.
+  o [MISC] Context menu in Mac Firefox is now attached to the left mouse button instead of the right
+  o [NOTE] Annotations are now persistent in Chrome (dev channel releases at the moment) and Chrome Frame
+
+ 14th November 2009
+ ==================
+  o [ALL] Finished zoom function
+  o [PIE] Work on linewidth and line color
+  o [MISC] Changed Safari to use left click for context menu - should elimate the temperamentality
+
+ 8th November 2009
+ =================
+  o [ALL] Added zoom functionality (This is not finished yet)
+  o [API] Corrected this regarding graph data
+  o [MISC] Added RGraph.ClearAnnotations() to API documentation. NB: This function is called when you call RGraph.Clear()
+
+ 31st October 2009
+ =================
+  o [DOCS] Correct the docs regarding text sizes
+  o [PIE] Miscellaneous fixes
+  o [RADAR] Changed to be left aligned
+
+ 25th October 2009
+ =================
+  o [ALL] Added property: chart.text.font
+  o [ALL] Added property: chart.text.color
+  o [ALL] Changed from pixels to points for font sizes (you may need to reduce your font sizes slightly). Default is now 10pt
+  o [DONUT] Added ability to set key as being in gutter
+  o [DONUT] Added chart.align for left/center/right aligning the chart
+  o [PIE] Added chart.align for left/center/right aligning the chart
+
+ 17th October 2009
+ =================
+  o [BAR] Added new option: chart.axis.color
+  o [Bipolar] Added new option: chart.axis.color
+  o [DOCS] Automated generation of API (properties) documentation
+  o [HBAR] Added new option: chart.axis.color
+  o [LINE] Added new option: chart.noxaxis
+  o [LINE] Added new option: chart.axis.color
+  o [LINE] Reduced default X/Y shadow offset
+  o [LINE] Added new option: chart.noendtick - useful for when you're generating line charts with Y axes on both sides
+  o [MISC] Changed "Combining..." page to illustrate combining two line charts
+  o [MISC] Added XML documentation
+  o [MISC] Added performance note about combining libraries
+  o [SCATTER] Added new option: chart.axis.color
+
+ 10th October 2009
+ =================
+  o [BAR] Added chart.background.grid.hlines, chart.background.grid.chart.background.grid.vlines and chart.background.grid.border
+  o [BAR] Changed chart.labels.abovebar to chart.labels.above
+  o [BAR] Added chart.labels.above to stacked bar charts
+  o [BIPOLAR] Fixed using chart.xmax
+  o [BIPOLAR] Added chart.scale.decimals
+  o [HBAR] Added chart.background.grid.hlines, chart.background.grid.chart.background.grid.vlines and chart.background.grid.border
+  o [HBAR] Added chart.labels.above. Not technically "above" the bar (not at all), but it's so named for API compatibility
+  o [HBAR] Added chart.labels.above to stacked chart
+  o [LINE] Added chart.background.grid.hlines, chart.background.grid.chart.background.grid.vlines and chart.background.grid.border
+  o [PIE] Miscellaeous work
+  o [SCATTER] Added chart.background.grid.hlines, chart.background.grid.chart.background.grid.vlines and chart.background.grid.border
+  o [WEBSITE] Added sharing buttons
+
+ 3rd October 2009
+ ================
+  o [ALL] Charts now clean up events if tooltips are not installed. This means that if tooltips are not being used
+          the onmousemove/onclick events (depending on the graph library) are reset to null.
+  o [BAR] 3D effect now works with background grid and bars
+  o [DOCS] Added API documentation (replaces working.html)
+  o [MISC] Changed various graphs default background bar colors to white
+  O [MISC] Removed array_range() function - unused
+  o [LINE] More (general) work
+  o [LINE] chart.fillstyle can now be an array as well as a string
+  o [LINE] Added 3D variant to line chart.
+  o [MISC] Added minified library archive
+
+ 19th September 2009
+ ===================
+  o [ALL] Added new option - chart.title.color - to all graph types (except the LED)
+  o [LINE] Slight modification to filled line charts and the (stroke) colour.
+  o [LINE] Changed stepped line chart so last vertical line is not drawn
+  o [LINE] Changed the look (for the better) of filled line charts and thick lines
+  o [LINE] Added option - chart.axesontop - useful in a minority of cases; causes the axes to be
+           redrawn after the graph
+  o [LINE] Added "chart.filled.range" option. Used to compare the range/difference between two sets of data.
+  o [MISC] Fixed negative horizontal bars
+  o [LINE] Fixed problem with null arguments
+  o [LINE] Filled line charts now work a little better with negative values
+  o [PROGRESS] Added chart.tickmarks.color
+  o [PROGRESS] Added chart.text.color
+
+ 6th September 2009
+ ==================
+  o [ALL] Fixed libraries to work with Prototype.js
+  o [ALL] Added chart.title.vpos allowing you override and specify the position of the title. This should be a
+          decimal from 0 to 1. By default it's not used
+  o [BAR] Can now have Y axis labels in right hand gutter
+  o [LINE] Can now have Y axis labels in right hand gutter
+  o [COMMON] Fixed scale generation bug when maximum value is zero (ie all of your values are zero)
+
+ 22nd August 2009
+ ================
+  o [MISC] Optimisations on various graph libraries
+  o [MISC] Very minor albeit better HTML5 compliance
+  o [LINE] You can now specify the Y axis position - left (default) or right
+  
+ 8th August 2009
+ ===============
+  o [BAR] Added 3D effect to regular, grouped and stacked charts
+  o [GANTT] Can now specify background grid width
+  o [LED] The text is now stripped of right-most whitespace
+
+ 25th July 2009
+ ==============
+  o [MISC] Stop using $() function for better compatibility with outside libraries
+  o [SCATTER] Support supplying multiple datasets as one big array instead of multiple arrays
+  o [ALL] Changed all graph types to "new RGraph.xxx()" format
+ 
+ 3rd July 2009
+ =============
+  o [DOCS] Misc updates
+  o [DOCS] Fixed docs regarding default gutter size
+  o [LINE] Handle null values better
+  o [LINE] Documented optional different fill colour
+  o [MISC] Added caching enhancements
+  o [MISC] Slight change to FixEventObject() so offsetX and offsetY are available in Firefox
+  o [SCATTER] Allow multiple datasets. Effect is only visible when lines are shown
+  o [SCATTER] Key can now be shown for multiple lines
+
+ 20th June 2009
+ ==============
+  o [ALL] Code optimisations
+  o [ALL] Annotations are now persistent in browsers that support HTML5 DOM storage (currently Firefox 3.5 and Safari 4)
+  o [BAR] Added ability to specify labels above bars on single and grouped bar charts
+  o [SCATTER] Added ability to show connecting line
+
+ 6th June 2009
+ =============
+  o [ALL] On graphs that support tooltips, you can now have context menus at the same time as tooltips
+  o [MISC] Fixes to hiding palette in Chrome
+  o [MISC] Fixed a palette resizing bug
+  o [MISC] Changed the number of frames for expand and fade tooltip effects from 5 to 10 - looks a little smoother
+  o [MISC] Fixed a minor scale bug
+  o [MISC] Changed name of ShowPalette() function to RGraph.Showpalette()
+  o [PIE] Fixed minor pie chart bugs with mouse cursor
+
+ 23rd May 2009
+ =============
+  o [ALL] Documented context menu
+  o [ALL] Added annotations - useful to highlight interactively, and added example to front page line chart
+  o [BAR] Added pyramid chart variant
+  o [BAR] Added arrow chart variant
+  o [BAR] Added crosshairs
+  o [FUNNEL] Added tooltips
+  o [LINE] Added crosshairs
+  o [LINE] Can now have a context menu at the same time as tooltips
+  o [MISC] Added annotations mini colour palette
+  o [SCATTER] Added crosshairs
+  o [SCATTER] Fixed bug where pre/post units were not being shown
+  o [SCATTER] Can now have a context menu at the same time as tooltips
+
+ 9th May 2009
+ ============
+  o [BAR] Can now better control the shadow
+  o [BAR] Now ymax is exactly that which is used
+  o [BAR] You can now control the number of decimals that are used
+  o [BIPOLAR] Added shadow
+  o [HBAR] Can now better control the shadow
+  o [HBAR] Added tooltipcapability
+  o [PIE] Can now better control the shadow
+  o [LINE] Can now better control the shadow
+  o [LINE] Reversed order of arguments to the constructor - ie the data - so they are uniform with things like labels and tooltips
+  o [LINE] Can now have a fill colour that's different to the line colour (see the last example on the lines example page)
+  o [LINE] Added arrow style tickmarks (filled and not) - look best with a linewidth of 1 or 2
+  o [LINE] Number of labels is now independent of number of datapoints, as are number of X tickmarks
+           The second to last two line chart examples show this in action
+  o [LINE] Added an interesting example showing off the new independence of labels, datapoints and tickmarks. The ninth
+           line example (the sin/cos/tan curves) has 361 datapoints but only 5 labels - 361 labels would be a bit much.
+  o [LINE] Line chart no longer draws in the gutter (see this in action by looking at the above tangent curve example)
+  o [PROGRESS] Brought shadow into line with the rest of the graphs
+  o [PROGRESS] Tidied this up a little
+  o [PROGRESS] Added tooltip capability
+  o [RADAR] Added tooltip capability
+  o [DOCS] Added small note about canvas and accessibility
+  o [MISC] Fixed a few HTML warnings
+  o [MISC] Cleaned up CSS warnings
+  o [MISC] Updated license
+  o [MISC] Slight tweaks to context menu: Specifying a null callback now means that that menu item
+           will not trigger the rollover effect
+ o [MISC] Fixed a scale bug where the top value is 5.xxx
+ o [WEBSITE] Made the line graph and pie chart on the front page a little more interactive
+ o [WEBSITE] Added a funnel chart to the front page
+ o [FUNNEL] Added horizontal alignment for labels
+
+ 25th April 1009
+ ===============
+  o [MISC] Changed to .zip format for archive instead of .tar.gz - easier to work with
+  o [MISC] Fixed issue with "expand" type tooltips & timers
+  o [MISC] Unified default gutter setting (25px)
+  o [MISC] Made shadows all point the same way across all graphs
+  o [MISC] Fixed horizontal background bars so that specifying a value greater than the ymax (or less than the negative ymax)
+           uses the ymax value instead
+  o [MISC] ModalDialog fixes for width and height settings on various browsers and DOM modes
+  o [MISC] Scale is now generated more accurately for *really* tiny values
+  o [LINE] Performance enhancements regarding scale generation
+
+ 11th April 2009
+ ===============
+  o [MISC] Slight aleration to improve "grow" option of tooltips. Instead of starting at the top and growing downwards, it now
+           starts in the center and grows outward in all directions
+  o [MISC] Changed "grow" to "expand" for tooltips
+  o [ODO] Documented ability to turn off the pointer end
+  o [DONUT] Added ring-in-ring effect, enabling multiple datasets
+  o [DONUT] Added option to use in-graph key instead of labels
+  o [LINE] Changed "tick" style tickmarks to "halftick". "tick" now gives a fullheight tickmark, and also added "endtick"
+           which gives a full height tick mark at the ends of the lines
+  o [MISC] Added doctype to all pages and fixed modaldialog accordingly
+  o [MISC] CSS and DTD fixes across the site
+  o [MISC] ModalDialog fixes
+  o [MISC] Add type attribute back to SCRIPT tags - needed for DTD compliance
+  o [HBAR] Added new graph type - Horizontal Bar chart
+
+ 28th March 2009
+ ===============
+  o [BAR] Added dot chart capability
+  o [BAR] When mouse is over a hotspot, cursor now changes
+  o [PIE] When mouse is over a hotspot, cursor now changes
+  o [LINE] When mouse is over a hotspot, cursor now changes
+  o [GANTT] When mouse is over a hotspot, cursor now changes
+  o [DONUT] When mouse is over a hotspot, cursor now changes
+  o [SCATTER] When mouse is over a hotspot, cursor now changes
+  o [MISC] Added new effect for tooltips. So now you can have "fade" (default) or "grow"
+  o [MISC] Added drop shadow to context menu
+  o [MISC] Resolved Chrome color, shadow and gradient bugs
+  o [DOCS] Added short section about suggested library layout
+  o [WEBSITE] Always now show two download links
+
+ 14th March 2009
+ ===============
+  o o------------------------------------------------------------------------------------------------------------------o
+    | IMPORTANT !                                                                                                      |
+    | Every single one of the property names has been changed to be a little more unified. The new format is now       |
+    | "chart.xxx" where xxx is the actual name. Some of the names have been changed completely, eg. "chart.text.size", |
+    | which was formerly "textheight", whilst others only marginally. This was necessary to bring some semblance of    |
+    | uniformity to the RGraph properties across all of the libraries, make it look a bit more "proffessional" and     |
+    | provide plenty of scope for future properties.                                                                   |
+    |                                                                                                                  |
+    | You should also note that as of this release (14th March 2009) that RGraph has been changed to use the canvas    |
+    | text and shadow APIs. This may mean you needing to upgrade your browser if you want to use the latest version.   |
+    | At the time of writing, this meant Firefox 3.1b2, Safari 4 and Chrome 2. If you don't wish to upgrade your       |
+    | browser, or need Opera support, then you will need to remain on the 28th February 2009 version.                  |
+    o------------------------------------------------------------------------------------------------------------------o
+  o [FUNNEL] Added key ability to Funnel chart
+  o [FUNNEL] Added shadow for key
+  o [BAR] Added shadow for key
+  o [LINE] Added shadow for key
+  o [RADAR] Added shadow for key
+  o [TRADAR] Added shadow for key
+  o [RADAR] Added tick marks to the axes
+  o [PIE] Added border option.
+  o [BAR] Added "in graph" static labels, useful for highlighting things
+  o [LINE] Added "in graph" static labels, useful for highlighting things
+  o [MISC] Provided easy access to minified copies of the libraries
+  o [ODO] Added inner and outer shadows
+  o [BAR] Changed to canvas text & shadow API
+  o [BIPOLAR] Changed to canvas text & shadow API
+  o [DONUT] Changed to canvas text & shadow API
+  o [FUNNEL] Changed to canvas text & shadow API
+  o [GANTT] Changed to canvas text & shadow API
+  o [LED] Changed to canvas text & shadow API
+  o [LINE] Changed to canvas text & shadow API
+  o [ODO] Changed to canvas text & shadow API
+  o [PIE] Changed to canvas text & shadow API
+  o [PROGRESS] Changed to canvas text & shadow API
+  o [radar] Changed to canvas text & shadow API
+  o [SCATTER] Changed to canvas text & shadow API
+  o [TRADAR] Changed to canvas text & shadow API
+
+ 28th February 2009
+ ==================
+  o [MISC] Added performance information about onload
+  o [BAR] Can now specify Y axis units (both before and after the number)
+  o [LINE] Can now specify Y axis units (both before and after the number)
+  o [SCATTER] Can now specify Y axis units (both before and after the number)
+  o [PROGRESS] Can now specify Y axis units (both before and after the number)
+  o [BIPOLAR] Can now specify X axis units (both before and after the number)
+  o [BAR] Fixed scale bug
+  o [MISC] Added UK pound sign to font set
+  o [FUNNEL] Added new chart - Funnel chart. Can be used to represent sales processes
+  o [FUNNEL] Made funnel use canvas shadow API
+  o [MISC] Changed minification script to work "in-place" NOTE
+  o [PROGRESS] Made progress use canvas shadow API
+  o [MISC] Tested RGraph on Safari 4.0 - appears to be fine
+  o [LINE] Added ability to specify horizontal coloured bars
+  o [BAR] Added ability to specify horizontal coloured bars
+  o [SCATTER] Added ability to specify horizontal coloured bars
+
+ 14th February 2009
+ ==================
+  o [PIE] Added tooltips + updated docs to correspond
+  o [WEBSITE] Added tooltips to Pie on front page
+  o [LED] Added "counter-like" basic LED grid
+  o [DONUT] Made donut a proxy to pie chart
+  o [DONUT] Added tooltips
+  o [MISC] Moved CSS styles to scripts. You no longer need to define CSS styles unless you wish to override something
+  o [PIE] Made tooltips for pie use 3D effect. This is optional - it can be the traditional 2D or the new 3D effect
+  o [SCATTER] Can now have the X axis in the center
+  o [SCATTER] Added tooltip facility
+  o [MISC] Consolidated invoice handling
+  o [MISC] Minor fix to DOM structure of context menu
+  o [LINE] Can now have combined Line and Bar chart so you can overlay Line graphs on top of Bar charts
+  o [BAR] Can now have combined Line and Bar chart so you can overlay Line graphs on top of Bar charts
+  o [MISC] Moved showcase examples to separate pages - showcase.html was doing too much and becoming far too slow
+
+ 31st January 2009
+ =================
+  o [ODO] Added .beginPath() when starting to draw the Odo - needed for animation
+  o [MISC] Rewrote ModalDialog
+  o [GANTT] Corrected gantt chart docs
+  o [MISC] Context menu is now always the correct width
+  o [BAR] Added ability to specify X axis labels to be drawn at eith 45 or 90 degrees
+  o [LINE] Added ability to specify X axis labels to be drawn at eith 45 or 90 degrees
+  o [SCATTER] Added ability to specify X axis labels to be drawn at eith 45 or 90 degrees
+  o [BIPOLAR] Added tooltips
+  o [DOCS] Re-jigged (ever so slightly) docs index layout
+  o [DOCS] Added info on working with RGraph objects in conjunction with accessing the underlying
+           canvas/context objects
+  o [DONUT] Made sure the above was valid
+  o [PROGRESS] Made sure the above was valid
+
+ 17th January 2009
+ =================
+  o [MISC] Added licensing FAQ page including invoice mailer
+  o [MISC] Moved CSS to css subfolder
+  o [MISC] Renamed modaldialog and removed external fade library
+  o [MISC] Added example of how to integrate RGraph with external libraries using the ModalDialog
+  o [MISC] ymax property is no longer deprecated - it can be used to stop the scale changing when animating your graphs.
+  o [MISC] Added documentation page about animation
+  o [SCATTER] Added square tick type
+  o [PIE]  Fixed last segments line width
+  o [MISC] Updated copyright notice
+  o [DOCS] Added basic example for implementation guidance
+  o [MISC] Changed test page to use tables instead of divs. This will make it more apparent if something breaks
+           in the RGraph.getMouseXY() function.
+  o [ODO]  Changed to use 10 labels instead of 8 - should make for nicer scale values.
+  o [ODO]  Made tick marks tie into labels more
+
+ 4th January 2009
+ ================
+  o [DOCS] Added note about pre-caching
+  o [SCATTER] Added color example to scatter chart
+  o [MISC] Fixed tooltips appearing in the wrong place
+  o [MISC] Removed tooltip shadow layer. Shadows are accomodated for in CSS3
+  o [DOCS] CSS class documentation
+  o [MISC] More work on things working with html5 doctype
+  o [MISC] Removed shadow layer from tooltips. This will be accomodated in CSS3, and is already by some browsers (MSIE (!), Chrome,
+           Safari, and the forthcoming FF 3.1)
+  o [MISC] Ditto for context menus
+  o [MISC] Changed RGraph.getMouseXY() to be more accomodating
+  o [WEBSITE] Added favicon.png
+  o [WEBSITE] Added example of pie chart to front page
+  o [WEBSITE] Changed front page to use tables instead of divs to tell if tooltips keep working
+  o [MISC] Overhauled RGraph.getMouseXY() so that it works in spite of being nested in tables. It also works
+           if you position the canvas absolutely and only specify one of the top or left. Wonderbar!
+  o [SCATTER] Added ability to specify the color of the tick ie:[x, y, color] It's optional. ** Could do with a key **
+  o [DOCS] Added color information
+  o [DOCS] Added context menu information
+  o [MISC] Made context menus more XP style
+  o [GANTT] Customised the example more, showing the completage indicators.
+  o [GANTT] Events and vertical bars are now defined in the usual way, by using the Set() method
+  o ]MISC] Added __object__ property to all graph objects
+  o [MISC] Unified text size at 10 points (and 2 greater for titles).
+  o [MISC] Added context menus to all graph types
+  o [MISC] Fixed tooltip widths on front page. And siving in general in Opera
+
+ 20th December 2008
+ ==================
+  o [MISC] Converted all graphs to use dollar ($) function in place of document.getElementById("...")
+  o [TRADAR] Now defaults to drawing the key out of graph
+  o [LINE] Now labels are turned off if there's fewer labels than data points (every line)
+  o [MISC] Added better smaller scales - now goes down to 0.0005
+  o [DOCS] Added more details on tooltips and positioning
+  o [LINE] Added gridwidth property
+  o [BAR] Added gridwidth property
+  o [MISC] Removed rotating text example (it's still in the archive - it's just not linked)
+  o [MISC] More work on scales when decimal values are involved, plus graphs now use thousand seperators to aid readability
+  o [MISC] More work on tooltips and their positioning.
+  o [MISC] Added "keyposition" option, which can be either "gutter" or "graph" and determines where the key is drawn
+  o [MISC] Unified all graphs to use the same "textheight" property for text.
+  o [MISC] All titles are now drawn two pixels larger than the "textheight" property
+  o [LINE] Key can now be placed above the actual graph area if  desired
+  o [BAR] Key can now be placed above the actual graph area if  desired
+  o [MISC] Fixes to number formatting, including when there multiple graphs on a page
+  o [BAR] Changed summary line to default to off
+  o [BIPOLAR] Scale values now contain thousand separators
+  o [SCATTER] Scale values now contain thousand separators
+  o [LINE] Scale values now contain thousand separators
+  o [BAR] Scale values now contain thousand separators
+  o [MISC] Updated issues.html with details of the smallest scales
+  o [SCATTER] Deprecated the ymax property. RGraph.getScale() is now good enough (xMax is bipolar chart equivalent)
+  o [LINE] Deprecated the ymax property. RGraph.getScale() is now good enough
+  o [BIPOLAR] Deprecated the xmax property. RGraph.getScale() is now good enough
+  o [BAR] Deprecated the ymax property. RGraph.getScale() is now good enough
+  o [MISC] Made RGraph.getScale() return the whole scale (all five values), not just the top value
+           This means better quality scales can be produced.
+  o [MISC] Made note about positioning in docs on issues page
+  o [ODO] Work on Small scale values
+  o [BIPOLAR] Work on Small scale values
+  o [BAR] Work on Small scale values
+  o [LINE] Work on Small scale values
+  o [MISC] Added tooltip fade in effect using CSS3 opacity
+  o [BAR] Added tooltip functionality to stacked bar chart
+  o [BAR] Added tooltip functionality to grouped bar chart
+  o [MISC] Added gradient to front page graphs
+  o [TRADAR] Added gradient to bipolar on test page
+  o [TRADAR] Re-added traditional radar chart. It doesn't work in Opera 9.x, only Opera 10+. Documentation for this also fine tuned
+  o [MISC] Tidied up RGraph.common.js
+  o [MISC] Removed drawTextAngle() - RGraph.Text() does this
+  o [MISC] Added a bar chart with centre X axis to example page
+  o [GANTT] Fixed Gantt chart title text placement
+  o [GANTT] Added title text size property
+  o [WEBSITE] Changed colour of example on website
+  o [RADAR] Changed key to be the same as the bar/line/tradar
+  o [DOCS] Lots of link updates
+
+ 5th December 2008
+ =================
+  o [LINE] Made keys and lines (ie stacked/filled) totally correspond.
+  o [BAR] Stopped bar chart tooltips redrawing the axes. Not entirely sure why it's doing this, but it seems fine without it.
+  o [DOCS] Bundled license document with archive
+  o [DOCS] Documentation and example updates.
+  o [MISC] Changed index.php to index.html Not earth shattering, but should make it clearer for people where to start,
+           and also makes the downloaded index.html styled as it should be.
+  o [WEBSITE] Added Cache-Control: Header
+  o [WEBSITE] Added link to support group on Google more obvious
+  o [DOCS] Added list of common issues
+  o [MISC] Added header into files that didn't have it
+  o [MISC] Removed CanvasText.enable() - unneccessary
+  o [ODO] Shortened the Odos pointer
+
+ 28th November 2008
+ ==================
+  o [MISC] Got rid of HTML5 doctypes - they seem to be interfering with tooltip positioning.
+           If you don't use tooltips, you'll therefore be fine.
+  o [ODO] Better needle. I think.
+  o [BAR] Keys for charts are now specified in the same order as the pertaining datasets
+  o [LINE] Keys for charts are now specified in the same order as the pertaining datasets
+  o [MISC] Added CSS3 shadows to tooltips
+  o [GANTT] Fixed bug in Gantt chart textsize property
+  o [LINE] Finally made shadows 100% accurate (ie tickmarks now have shadows too), including stepped line
+  o [WEBSITE] Added tooltips to line chart on front page
+  o [MISC] Fixed release script (check)
+  o [LINE] Added keys to line & bar chart
+  o [BAR] Added keys to line & bar chart
+  o [MISC] o-----------------------------------------------------------------------------------------------------o
+           | Use unified better getters/setters for all charts. This is a MAJOR update, since it affects all the |
+           | charts in a fundamental way. For the better. Any update should be done cautiously. But since        |
+           | RGraph is beta, all updates should be done that way. Judging by the RGraph test page though,        |
+           | everything seems fine.                                                                              |
+           o-----------------------------------------------------------------------------------------------------o
+
+ 15th November 2008
+ ------------------
+  o [BAR] Removed animation
+  o [LINE] Documented stepped line chart
+  o [LINE] Fixed tick marks
+  o [LINE] Added ability to specify line chart as being stepped
+  o [MISC] Documented default values.
+  o [GANTT] Added gantt chart
+  o [PROGRESS] Corrected name of Progressbar
+  o [LINE] Moved the background drawing to RGraph.common.js
+  o [SCATTER] Moved the background drawing to RGraph.common.js
+  o [MISC] Tooltips now move to the left of the cursor when it's too far right
+  o [MISC] Changed print_r() to pr() - less to type
+  o [MISC] Added GetDays() function for Gantt chart
+  o [GANT] Added it
+  o [MISC] Added an RGraph.print_r() method for easier debugging
+  o [MISC] Added a registry object to the common library to resolve scoping issues and so we don't need to use globals. Globals suck.
+  o [SCATTER] Added a plus tick style to the scatter chart - added a demo too
+  o [SCATTER] Fixed a bug in the Scatter graphs background drawing
+  o [BAR] Moved bar charts DrawBackground() into the RGraph.background class. Should make reuse far easier.
+  o [BAR] "backgroundGrid" property changed to "grid"
+  o [MISC] Added a minification script. This script doesn't reduce the scripts to the bare minimum. But it can take 50% off the size (!).
+  o [LINE] Can now specify colour of shadows for line and bar graphs
+   o [BAR] Can now specify colour of shadows for line and bar graphs
+  o [LINE] line chart now has real shadows and so they can be used for lines of any thickness
+  o [LINE] can now specify shadow offset
+  o [SCATTER] Fixed background bar boundaries
+  o [SCATTER] Added plus cross type
+  o [MISC] Moved background drawing to common library
+  o [WEBSITE] sitemap.xml Now has correct <lastmod> date which changes correctly when a release is performed CHECK
+  o [MISC] Tooltip nows store the text in __text__ variable on the tooltip object (.innerHTML changes the HTML when it's set)
+  
+ 1st November 2008
+ ------------------
+  o [BAR] Last bar chart example now uses a gradient
+  o [MISC] Changed hyphens to be slightly shorter
+  o [WEBSITE] Changed sitemap to use an update frequency of weekly. Last modified is now updated when a release is performed
+  o [BAR] Can now specify the grid size on the bar chart
+  o [LINE] Setting propeties can now be any case, upper or lower
+  o [MISC] Added RGraph.print_r() function
+  o [LINE] TickSize now actually has an effect
+  o [LINE] Added tooltips to line chart
+  o [WEBSITE] Moved support forum to Google group
+  o [MISC] Added object registration (for redrawing)
+  o [BAR] Removed margin from being accounted for in height calculation
+  o [LINE] Made tickmarks more coherent
+  o [BAR] Bar chart now uses canvas ID in some, but not all, error messages
+  o [LINE] Added small drop shadow to line chart
+  o [WEBSITE] Added example graphs to front page
+  o [BAR] Added tooltips to line chart
+  o [WEBSITE] Added more performance related information
+  o [PIE] Added drop shadow
+
+ 25th October 2008
+ -----------------
+  o [DOCS[ Added integration section
+  o [RADAR] Added title to radar
+  o [RADAR] Added textStyle to radar
+  o [PIE] Made one of the pie charts use a gradient
+  o [PROGRESS] Added shadows
+  o [PROGRESS] Added title
+  o [ODO] Converted plain colour to radial gradient
+  o [PIE] Added gutter and title
+  o [DONUT] Added gutter and title
+  o [MISC] Fixed comma issue with rendering text
+  o [MISC] Added something to text bounding box illustrating exactly where the point specified is
+  o [BIPOLAR] Bipolar middle bit is now 60px wide instead of 50
+  o [BAR] Fixed shadow bugettee in Safari, Chrome, Opera
+  o [ODO] Documented and vastly improved. Made it use a gutter now allowind for a title (implemented)
+  o [MISC] Added common function, DrawTitle()
+  o [MISC] Added a Javascript version of the PHP function range()
+  o [MISC] Added ability to specify a title to the bar chart, line graph and scatter graph.
+  o [MISC] Changed directory layout slightly
+  o [MISC] Forum is now ecluded from the tar
+  o [MISC] Much improved scale auto-generation
+  o [DOCS] Added code samples to docs pages
+  o [DOCS] Added section on the front page about performance
+  o [SCATTER] Many improvements to the scatter graph
+  o [SCATTER] Much better auto scale generation
+  o [SCATTER] Made scatter use RGraph common library for text
+  o [RADAR] Converted to use common library for text
+  o [LINE] Much improved scale auto-generation
+  o [LINE] Changed to rounded line ends - not very noticable though
+  o [LINE] Converted labels to be drawn by the RGraph library
+  o [BAR] Added optional shadow effect
+  o [BAR] Removed ability to have X axis at the top. It served no real purpose and only served to complicate the code
+  o [BAR] Added animation
+  o [BAR] Much improved scale auto-generation
+  o [BAR] Converted text functions to use RGraph common library
+  o [BAR] Can now specify a title for the bar chart
+  o [BAR] Fixed a bug for Chrome
+  o [BAR] Fixed minor bugs in bar chart (background bars)
+  o [BAR] Added grouping property, which defaults to stacked, but can also be grouped, producing what you would
+          expect (unless you're expecting a chicken.
+  o [BAR] Added a few warnings concerning bad combinations of axis positions
+  o [ODO] Added more labels, now at 8 instead of 4
+
+ 24th September 2008
+ -------------------
+  o [WEBSITE] Added RSS feed to forum
+  o [DOCS] Added more documentation
+  o [ALL] Unified (sort of) the error messages
+  o [ODO] Added odometer
+  o [BIPOLAR] Added a bottom gutter for scale to go in
+  o [BIPOLAR] Added bottom text labels
+  o [PIE] Made pie chart work without translating
+  o [TRADAR] Added real radar chart.
+  o [BAR] Bar chart can now have the X axis in the center, so it now able to represent negative values
+  o [LINE] Allowed multiple lines
+  o [LINE] Line chart can now have the X axis in the center, so it now able to represent negative values
+  o [LINE] Fixed bug in line chart that meant if it was filled the filled line was stopping too short
+  o [LINE] Made it more obvious (I think) for specifying data when using multiple data sets (ie multiple lines)
+
+ 4th September 2008
+ ------------------
+  o Various additions including labels on all the graphs

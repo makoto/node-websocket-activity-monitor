@@ -1,0 +1,276 @@
+<?php ob_start('ob_gzhandler') ?>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <!--
+        /**
+        * o------------------------------------------------------------------------------o
+        * | This file is part of the RGraph package - you can learn more at:             |
+        * |                                                                              |
+        * |                          http://www.rgraph.net                               |
+        * |                                                                              |
+        * | This package is licensed under the RGraph license. For all kinds of business |
+        * | purposes there is a small one-time licensing fee to pay and for personal,    |
+        * | charity and educational purposes it is free to use. You can read the full    |
+        * | license here:                                                                |
+        * |                      http://www.rgraph.net/LICENSE.txt                       |
+        * o------------------------------------------------------------------------------o
+        */
+    -->
+    <title>RGraph: HTML5 canvas graph library - Bi-polar chart documentation</title>
+    <link rel="stylesheet" href="../css/website.css" type="text/css" media="screen" />
+    <link rel="icon" type="image/png" href="/favicon.png">
+</head>
+<body>
+    <div id="logo">
+        <a href="../index.html">RGraph: HTML5 canvas graph library</a>
+        >
+        <a href="index.html">Documentation</a>
+        >
+        Bi-polar chart
+    </div>
+
+    <h1>RGraph: Bi-polar chart documentation</h1>
+
+    <script>
+        if (document.all) {
+            document.write('<div style="background-color: #fee; border: 2px dashed red; padding: 5px"><b>Important</b><br /><br /> Internet Explorer does not natively support the HTML5 canvas tag yet, so if you want to see the graphs, you can either:<ul><li>Install <a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a></li><li>Use another browser entirely. Your choices are Firefox, Chrome or Safari</li></ul></div>');
+        }
+    </script>
+
+    <p>
+        The Bi-polar chart is good for comparing two things side by side. For example sales trends for two separate years, that you
+        want to compare.
+    </p>
+    
+    <p> 
+        The example file is <a href="../examples/bipolar.html">here</a>.
+    </p> 
+    
+    <pre class="code">
+&lt;script&gt;
+    window.onload = function ()
+    {
+        var left  = [5,6,8,9,12,13,4,9];
+        var right = [5,8,4,11,15,26,13,16];
+    
+        var bipolar = new RGraph.Bipolar('myBipolar', left, right);
+        bipolar.Set('chart.colors', ['#fff', '#eef', '#ddf', '#ccf', '#bbf', '#bbf', '#aaf', '#99f']);
+        bipolar.Set('chart.margin', 3);
+        bipolar.Set('chart.labels', ['Barry', 'John', 'Fred', 'George', 'Rich', 'Larry', 'John', 'Mike']);
+        bipolar.Set('chart.title.left', '2007');
+        bipolar.Set('chart.title.right', '2008');
+        bipolar.Set('chart.gutter', 35);
+        bipolar.Draw();
+    }
+&lt;/script&gt;
+</pre>
+
+
+    <h2>Available properties</h2>
+    
+    <p>
+        You can use these properties to control how the chart apears. You can set them by using the Set() method. Eg:
+    </p>
+    
+    <p>
+        <b>myBipolar.Set('name', 'value');</b>
+    </p>
+
+
+    <!--
+        <PROPERTIES>
+            chart.gutter :: The space given over to the labels. <br /><i>Default: 25</i>
+            chart.margin :: The space above and below each bar. <br /><i>Default: 2</i>
+            chart.xtickinterval :: The X tick mark interval. <br /><i>Default: 25</i>
+            chart.axis.color :: The color of the axes. <br /><i>Default: black</i>
+            chart.xmax :: This allows you to set the maximum X value that the chart uses, instead of it being auto-generated.<br><i>Default: null</i></br>
+            chart.scale.decimals :: This allows you to set the precision of the X labels.<br /><i>Default: null</i>
+            chart.labels :: An array of the graphs labels (they go in the middle). <br /><i>Default: null</i>
+            chart.text.size :: The size of the text used (in points). <br /><i>Default: 10</i>
+            chart.text.font :: The font used to render the text.<br /><i>Default: Verdana</i>
+            chart.text.color :: The color of the labels. <br /><i>Default: black</i>
+            chart.title.vpos :: This allows you to completely override the vertical positioning of the title. It should be a number between 0 and 1, and is multiplied with the gutter and then used as the vertical position. It can be useful if you need to have a large gutter.<br /><i>Default: null</i>
+            chart.title.color :: The color of the title.<br /> <i>Default: black</i>
+            chart.title :: The main title of the chart.<br /><i>Default: (An empty string)</i>
+            chart.title.left :: The left title. <br /><i>Default: An empty string</i>
+            chart.title.right :: The right title. <br /><i>Default: An empty string</i>
+            chart.colors :: An array of colors. These too can be gradients that you make if you wish. <br /><i>Default: ['#fcf', '#00f', '#f00', '#0f0', '#ff0', '#0ff', '#f0f', '#ff6101', '#b401ff', '#e4ff01', '#fb8195', '#ccc']</i>
+            chart.units.pre :: The units that are applied to the X axis labels (these are pre-pended to the number).<br /><i>Default: none</i>
+            chart.units.post :: The units that are applied to the X axis labels (these are appended to the number).<br /><i>Default: none</i>
+            chart.tooltips :: A numerically indexed array of tooltips that are shown when a bar is clicked. These can contain HTML.<br /><i>Default: An empty array</i>
+            chart.tooltip.effect :: The animated effect used for showing tooltips. Can be either <i>fade</i> or <i>expand</i>.<br /><i>Default: fade</i>
+            chart.shadow :: Turns the shadow on or off.<br /> <i>Default: false</i>
+            chart.shadow.color :: The color of the shadow.<br /> <i>Default: #666</i>
+            chart.shadow.offsetx :: The horizontal offset of the shadow.<br /> <i>Default: 3</i>
+            chart.shadow.offsety :: The vertical offset of the shadow. <br /> <i>Default: 3</i>
+            chart.shadow.blur :: How severe the blurring effect is for the shadow.<br /> <i>Default: 3</i>
+            chart.contextmenu :: An array of context menu items. Cannot be used in conjunction with tooltips.<br /><i>Default: [] (An empty array)</i>
+            chart.annotatable :: Whether annotations are enabled for the chart (ie you can draw on the chart interactively.<br /><i>Default: false</i>
+            chart.annotate.color :: If you do not allow the use of the palette, then this will be the only colour allowed for annotations.<br /><i>Default: black</i>
+            chart.zoom.mode :: Can be used to control whether the zoom is in thumbnail or canvas mode. Possible values are: <i>thumbnail</i> and <i>canvas</i>.<br /><i>Default: canvas</i>
+            chart.zoom.factor :: This is the factor that the graph will be zoomed by (bigger values means more zoom)<br /><i>Default: 1.5</i>
+            chart.zoom.fade.in :: Whether the zoomed canvas fades in or not. This also can be used to control the fade in for the zoom in thumbnail mode.<br /><i>Default: true</i>
+            chart.zoom.fade.out :: Whether the zoomed canvas fades out or not. This also can be used to control the fade in for the zoom in thumbnail mode.<br /><i>Default: true</i>
+            chart.zoom.hdir :: The horizontal direction of the zoom. Possible values are: <i>left</i>, <i>center</i>, <i>right</i><br /><i>Default: right</i>
+            chart.zoom.vdir :: The vertical direction of the zoom. Possible values are: <i>up</i>, <i>center</i>, <i>down</i><br /><i>Default: down</i>
+            chart.zoom.delay :: The delay (in milliseconds) between frames.<br /><i>Default: 50</i>
+            chart.zoom.frames :: The number of frames in the zoom animation.<br /><i>Default: 10</i>
+            chart.zoom.shadow :: Whether or not the zoomed canvas has a shadow or not.<br /><i>Default: true</i>
+            chart.zoom.thumbnail.width :: When the zoom is in thumbnail mode, this is the width (in pixels) of the thumbnail.<br /><i>Default: 75</i>
+            chart.zoom.thumbnail.height :: When the zoom is in thumbnail mode, this is the height (in pixels) of the thumbnail.<br /><i>Default: 75</i>
+        </PROPERTIES>
+    -->
+
+    <!-- DOCS -->
+
+    <table border="0" id="docs">
+        <tr>
+            <th>chart.gutter</th>
+            <td>The space given over to the labels. <br /><i>Default: 25</i></td>
+            <th>chart.margin</th>
+            <td>The space above and below each bar. <br /><i>Default: 2</i></td>
+        </tr>
+        <tr>
+            <th>chart.xtickinterval</th>
+            <td>The X tick mark interval. <br /><i>Default: 25</i></td>
+            <th>chart.axis.color</th>
+            <td>The color of the axes. <br /><i>Default: black</i></td>
+        </tr>
+        <tr>
+            <th>chart.xmax</th>
+            <td>This allows you to set the maximum X value that the chart uses, instead of it being auto-generated.<br><i>Default: null</i></br></td>
+            <th>chart.scale.decimals</th>
+            <td>This allows you to set the precision of the X labels.<br /><i>Default: null</i></td>
+        </tr>
+        <tr>
+            <th>chart.labels</th>
+            <td>An array of the graphs labels (they go in the middle). <br /><i>Default: null</i></td>
+            <th>chart.text.size</th>
+            <td>The size of the text used (in points). <br /><i>Default: 10</i></td>
+        </tr>
+        <tr>
+            <th>chart.text.font</th>
+            <td>The font used to render the text.<br /><i>Default: Verdana</i></td>
+            <th>chart.text.color</th>
+            <td>The color of the labels. <br /><i>Default: black</i></td>
+        </tr>
+        <tr>
+            <th>chart.title.vpos</th>
+            <td>This allows you to completely override the vertical positioning of the title. It should be a number between 0 and 1, and is multiplied with the gutter and then used as the vertical position. It can be useful if you need to have a large gutter.<br /><i>Default: null</i></td>
+            <th>chart.title.color</th>
+            <td>The color of the title.<br /> <i>Default: black</i></td>
+        </tr>
+        <tr>
+            <th>chart.title</th>
+            <td>The main title of the chart.<br /><i>Default: (An empty string)</i></td>
+            <th>chart.title.left</th>
+            <td>The left title. <br /><i>Default: An empty string</i></td>
+        </tr>
+        <tr>
+            <th>chart.title.right</th>
+            <td>The right title. <br /><i>Default: An empty string</i></td>
+            <th>chart.colors</th>
+            <td>An array of colors. These too can be gradients that you make if you wish. <br /><i>Default: ['#fcf', '#00f', '#f00', '#0f0', '#ff0', '#0ff', '#f0f', '#ff6101', '#b401ff', '#e4ff01', '#fb8195', '#ccc']</i></td>
+        </tr>
+        <tr>
+            <th>chart.units.pre</th>
+            <td>The units that are applied to the X axis labels (these are pre-pended to the number).<br /><i>Default: none</i></td>
+            <th>chart.units.post</th>
+            <td>The units that are applied to the X axis labels (these are appended to the number).<br /><i>Default: none</i></td>
+        </tr>
+        <tr>
+            <th>chart.tooltips</th>
+            <td>A numerically indexed array of tooltips that are shown when a bar is clicked. These can contain HTML.<br /><i>Default: An empty array</i></td>
+            <th>chart.tooltip.effect</th>
+            <td>The animated effect used for showing tooltips. Can be either <i>fade</i> or <i>expand</i>.<br /><i>Default: fade</i></td>
+        </tr>
+        <tr>
+            <th>chart.shadow</th>
+            <td>Turns the shadow on or off.<br /> <i>Default: false</i></td>
+            <th>chart.shadow.color</th>
+            <td>The color of the shadow.<br /> <i>Default: #666</i></td>
+        </tr>
+        <tr>
+            <th>chart.shadow.offsetx</th>
+            <td>The horizontal offset of the shadow.<br /> <i>Default: 3</i></td>
+            <th>chart.shadow.offsety</th>
+            <td>The vertical offset of the shadow. <br /> <i>Default: 3</i></td>
+        </tr>
+        <tr>
+            <th>chart.shadow.blur</th>
+            <td>How severe the blurring effect is for the shadow.<br /> <i>Default: 3</i></td>
+            <th>chart.contextmenu</th>
+            <td>An array of context menu items. Cannot be used in conjunction with tooltips.<br /><i>Default: [] (An empty array)</i></td>
+        </tr>
+        <tr>
+            <th>chart.annotatable</th>
+            <td>Whether annotations are enabled for the chart (ie you can draw on the chart interactively.<br /><i>Default: false</i></td>
+            <th>chart.annotate.color</th>
+            <td>If you do not allow the use of the palette, then this will be the only colour allowed for annotations.<br /><i>Default: black</i></td>
+        </tr>
+        <tr>
+            <th>chart.zoom.mode</th>
+            <td>Can be used to control whether the zoom is in thumbnail or canvas mode. Possible values are: <i>thumbnail</i> and <i>canvas</i>.<br /><i>Default: canvas</i></td>
+            <th>chart.zoom.factor</th>
+            <td>This is the factor that the graph will be zoomed by (bigger values means more zoom)<br /><i>Default: 1.5</i></td>
+        </tr>
+        <tr>
+            <th>chart.zoom.fade.in</th>
+            <td>Whether the zoomed canvas fades in or not. This also can be used to control the fade in for the zoom in thumbnail mode.<br /><i>Default: true</i></td>
+            <th>chart.zoom.fade.out</th>
+            <td>Whether the zoomed canvas fades out or not. This also can be used to control the fade in for the zoom in thumbnail mode.<br /><i>Default: true</i></td>
+        </tr>
+        <tr>
+            <th>chart.zoom.hdir</th>
+            <td>The horizontal direction of the zoom. Possible values are: <i>left</i>, <i>center</i>, <i>right</i><br /><i>Default: right</i></td>
+            <th>chart.zoom.vdir</th>
+            <td>The vertical direction of the zoom. Possible values are: <i>up</i>, <i>center</i>, <i>down</i><br /><i>Default: down</i></td>
+        </tr>
+        <tr>
+            <th>chart.zoom.delay</th>
+            <td>The delay (in milliseconds) between frames.<br /><i>Default: 50</i></td>
+            <th>chart.zoom.frames</th>
+            <td>The number of frames in the zoom animation.<br /><i>Default: 10</i></td>
+        </tr>
+        <tr>
+            <th>chart.zoom.shadow</th>
+            <td>Whether or not the zoomed canvas has a shadow or not.<br /><i>Default: true</i></td>
+            <th>chart.zoom.thumbnail.width</th>
+            <td>When the zoom is in thumbnail mode, this is the width (in pixels) of the thumbnail.<br /><i>Default: 75</i></td>
+        </tr>
+        <tr>
+            <th>chart.zoom.thumbnail.height</th>
+            <td>When the zoom is in thumbnail mode, this is the height (in pixels) of the thumbnail.<br /><i>Default: 75</i></td>
+        </tr>
+    </table><br /><br />
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+</body>
+</html>

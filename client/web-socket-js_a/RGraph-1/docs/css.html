@@ -1,0 +1,134 @@
+<?php ob_start('ob_gzhandler') ?>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <!--
+        /**
+        * o------------------------------------------------------------------------------o
+        * | This file is part of the RGraph package - you can learn more at:             |
+        * |                                                                              |
+        * |                          http://www.rgraph.net                               |
+        * |                                                                              |
+        * | This package is licensed under the RGraph license. For all kinds of business |
+        * | purposes there is a small one-time licensing fee to pay and for personal,    |
+        * | charity and educational purposes it is free to use. You can read the full    |
+        * | license here:                                                                |
+        * |                      http://www.rgraph.net/LICENSE.txt                       |
+        * o------------------------------------------------------------------------------o
+        */
+    -->
+    <title>RGraph: HTML5 canvas graph library - available CSS classes</title>
+    <link rel="stylesheet" href="../css/website.css" type="text/css" media="screen" />
+    <link rel="icon" type="image/png" href="/favicon.png">
+    
+    <style type="text/css">
+        li {
+            margin: 0 ! important;
+        }
+        
+        li a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="logo">
+        <a href="../index.html">RGraph: HTML5 canvas graph library</a>
+        >
+        <a href="index.html">Documentation</a>
+        >
+        Available CSS classes
+    </div>
+
+    <h1>RGraph: Available CSS classes</h1>
+
+    <script>
+        if (document.all) {
+            document.write('<div style="background-color: #fee; border: 2px dashed red; padding: 5px"><b>Important</b><br /><br /> Internet Explorer does not natively support the HTML5 canvas tag yet, so if you want to see the graphs, you can either:<ul><li>Install <a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a></li><li>Use another browser entirely. Your choices are Firefox, Chrome or Safari</li></ul></div>');
+        }
+    </script>
+
+    <p>
+        This is information about a few CSS classes available to you to allow you to customise the appearance of tooltips and
+        context menus.
+    </p>
+    
+    <ol>
+        <li><a href="#RGraph_tooltip">RGraph_tooltip</a></li>
+        <li><a href="#RGraph_contextmenu">RGraph_contextmenu</a></li>
+        <li><a href="#RGraph_contextmenu_item">RGraph_contextmenu_item</a></li>
+        <li><a href="#RGraph_contextmenu_background">RGraph_contextmenu_background</a></li>
+        <li><a href="#example">An example usage</a></li>
+        <li><a href="#important">! important</a></li>
+    </ol>
+    
+    <a name="RGraph_tooltip"></a>
+    <h2>1. RGraph_tooltip</h2>
+        <p>
+            This controls the appearance of tooltips. The default is to have them look like Windows tooltips.
+        </p>
+
+    <a name="RGraph_contextmenu"></a>
+    <h2>2. RGraph_contextmenu</h2>
+        <p>
+            This controls how context menus appear. The default is similar to the look that Windows XP has.
+        </p>
+
+    <a name="RGraph_contextmenu_item"></a>
+    <h2>3. RGraph_contextmenu_item</h2>
+        <p>
+            This controls how individual items on the context menu will appear, for example the default has roughly 25px padding-left
+            to accomodate the left bar.
+        </p>
+
+    <a name="RGraph_contextmenu_background"></a>
+    <h2>4. RGraph_contextmenu_background</h2>
+        <p>
+            This is the Windows XP style left vertical bar. By default this is light grey.
+        </p>
+    
+    <a name="example"></a>
+    <h2>Example usage</h2>
+        <p>
+            Here is an example of using the CSS classes. At the time of writing, some of the items here were only implemented in newer
+            web browsers:
+        </p>
+
+        <pre class="code">
+&lt;style type="text/css"&gt;
+    .RGraph_tooltip {
+        border-radius: 5px;
+        -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+        -webkit-box-shadow: rgba(96,96,96,0.5) 3px 3px 3px;
+        -moz-box-shadow: rgba(96,96,96,0.5) 3px 3px 3px;
+        filter: progid:DXImageTransform.Microsoft.Shadow(color=#666666,direction=135);
+    }
+    
+    .RGraph_contextmenu {
+        -webkit-box-shadow: rgba(96,96,96,0.5) 3px 3px 3px;
+        -moz-box-shadow: rgba(96,96,96,0.5) 3px 3px 3px;
+        filter: progid:DXImageTransform.Microsoft.Shadow(color=#666666,direction=135);
+    }
+    
+    .RGraph_contextmenu_background {
+        background-color: #ddd ! important;
+        border-right: 1px solid #ccc ! important;
+    }
+    
+    .RGraph_contextmenu_item {
+        font-weight: normal;
+    }
+&lt;/style&gt;
+</pre>
+
+<a name="important"></a>
+<h2>! important</h2>
+    
+    <p>
+        If you're attempting to override default styles, then because of the ordering (ie the script is setting the style  AFTER
+        your own CSS) you may need to use the "! important" modifier, as in the example above.
+    </p>
+</body>
+</html>

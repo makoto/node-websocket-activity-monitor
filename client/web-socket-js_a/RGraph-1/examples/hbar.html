@@ -1,0 +1,165 @@
+<?php ob_start('ob_gzhandler') ?>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <!--
+        /**
+        * o------------------------------------------------------------------------------o
+        * | This file is part of the RGraph package - you can learn more at:             |
+        * |                                                                              |
+        * |                          http://www.rgraph.net                               |
+        * |                                                                              |
+        * | This package is licensed under the RGraph license. For all kinds of business |
+        * | purposes there is a small one-time licensing fee to pay and for personal,    |
+        * | charity and educational purposes it is free to use. You can read the full    |
+        * | license here:                                                                |
+        * |                      http://www.rgraph.net/LICENSE.txt                       |
+        * o------------------------------------------------------------------------------o
+        */
+    -->
+    <title>RGraph: HTML5 canvas graph library - horizontal bar chart</title>
+    <link rel="stylesheet" href="../css/website.css" type="text/css" media="screen" />
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <script src="../libraries/RGraph.common.js" ></script>
+    <script src="../libraries/RGraph.hbar.js" ></script>
+
+    <script>
+        /**
+        * The onload function creates the graph
+        */
+        window.onload = function ()
+        {
+            hbar1 = new RGraph.HBar('hbar1', [1,1,3,4,4,3.6,2,0.75,1,2,3,5]);
+            hbar1.Set('chart.labels', ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']);
+            hbar1.Set('chart.title', 'Results for 2008 (annotatable, context, zoom)');
+            hbar1.Set('chart.colors', ['red']);
+            hbar1.Set('chart.units.pre', '$');
+            hbar1.Set('chart.units.post', 'k');
+            hbar1.Set('chart.background.barcolor1', '#fff');
+            hbar1.Set('chart.background.barcolor2', '#fff');
+            hbar1.Set('chart.background.grid.hsize', 20);
+            hbar1.Set('chart.background.grid.vsize', 20);
+            hbar1.Set('chart.vmargin', 2);
+            hbar1.Set('chart.shadow', true);
+            hbar1.Set('chart.shadow.color', '#666');
+            hbar1.Set('chart.text.style', '#333');
+            hbar1.Set('chart.zoom.vdir', 'center');
+            hbar1.Set('chart.contextmenu', [['Zoom in', RGraph.Zoom], ['Clear', function () {RGraph.Clear(hbar1.canvas); hbar1.Draw();}]]);
+            hbar1.Set('chart.annotatable', true);
+            hbar1.Set('chart.tooltip.effect', 'expand');
+            hbar1.Set('chart.grouping', 'grouped');
+            hbar1.Set('chart.gutter', 30);
+            hbar1.Set('chart.labels.above', true);
+            hbar1.Draw();
+
+            hbar2 = new RGraph.HBar('hbar2', [
+                                       [3,2,3],
+                                       [3,4,5],
+                                       [5,6,7],
+                                       [7,8,6],
+                                       [9,10,9],
+                                       [10,15,3]
+                                      ]);
+            hbar2.Set('chart.labels', ['Fred', 'Barney', 'Julia', 'Francis', 'Hoolio', 'Jemima']);
+            hbar2.Set('chart.colors', ['#afa', 'red', '#ccf']);
+            hbar2.Set('chart.shadow', false);
+            hbar2.Set('chart.key', ['Monday', 'Tuesday', 'Wednesday']); // No point to the key at the moment
+            hbar2.Set('chart.key.shadow', true);
+            hbar2.Set('chart.key.position', 'graph');
+            hbar2.Set('chart.title', 'Drinks consumed (context, annotatable)');
+            hbar2.Set('chart.contextmenu', [
+                                            ['Show palette', RGraph.Showpalette],
+                                            ['Clear', function () {RGraph.Clear(hbar2.canvas); hbar2.Draw();}]
+                                           ]);
+            hbar2.Set('chart.grouping', 'stacked');
+            hbar2.Set('chart.annotatable', true);
+            hbar2.Set('chart.labels.above', true);
+            hbar2.Set('chart.units.post', 'l');
+            hbar2.Draw();
+
+            hbar3 = new RGraph.HBar('hbar3', [
+                                       [3,2,3],
+                                       [3,4,5],
+                                       [5,6,7],
+                                       [7,8,6],
+                                       [9,10,9],
+                                       [10,15,3]
+                                      ]);
+            hbar3.Set('chart.labels', ['Fred', 'Barney', 'Julia', 'Francis', 'Hoolio', 'Jemima']);
+            hbar3.Set('chart.labels.above', true);
+            hbar3.Set('chart.units.post', 'k');
+            hbar3.Set('chart.units.pre', '$');
+            hbar3.Set('chart.gutter', 40);
+            hbar3.Set('chart.colors', ['green', 'red', '#ccf']);
+            hbar3.Set('chart.shadow', false);
+            hbar3.Set('chart.key', ['Monday', 'Tuesday', 'Wednesday']);
+            hbar3.Set('chart.key.background', 'white');
+            hbar3.Set('chart.shadow', true);
+            hbar3.Set('chart.grouping', 'grouped');
+            hbar3.Set('chart.title', 'Drinks consumed last week (tooltips)');
+            hbar3.Set('chart.tooltips', [
+                                         'Fred on Monday', '...on Tuesday', '...on Wednesday',
+                                         'Barney on Monday', '...on Tuesday', '...on Wednesday',
+                                         'Julia on Monday', '...on Tuesday', '...on Wednesday',
+                                         'Francis on Monday', '...on Tuesday', '...on Wednesday',
+                                         'Hoolio on Monday', '...on Tuesday', '...on Wednesday',
+                                         'Jemima on Monday', '...on Tuesday', '...on Wednesday'
+                                        ]);
+            hbar3.Set('chart.strokestyle', '#000');
+            hbar3.Draw();
+            
+            hbar4 = new RGraph.HBar('hbar4', [
+                                       [23,56,21],
+                                       [30,60,10],
+                                       [35,55,10],
+                                       [35,50,15],
+                                       [30,48,22],
+                                       [28,47,25],
+                                       [28,47,25]
+                                 ]);
+            hbar4.Set('chart.grouping', 'stacked');
+            hbar4.Set('chart.colors', ['#faa', '#afa', '#aaf']);
+            hbar4.Set('chart.title', 'A chart showing percentages (zoom)');
+            hbar4.Set('chart.labels', ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']);
+            hbar4.Set('chart.zoom.mode', 'thumbnail');
+            hbar4.Draw();
+        }
+    </script>
+</head>
+<body>
+    <div id="logo">
+        <a href="../index.html">RGraph: HTML5 canvas graph library</a>
+        >
+        <a href="./index.html">Examples</a>
+        >
+        Horizontal Bar chart
+    </div>
+
+
+    <h1>RGraph: Horizontal bar chart</h1>
+
+    <script>
+        if (document.all) {
+            document.write('<div style="background-color: #fee; border: 2px dashed red; padding: 5px"><b>Important</b><br /><br /> Internet Explorer does not natively support the HTML5 canvas tag yet, so if you want to see the graphs, you can either:<ul><li>Install <a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a></li><li>Use another browser entirely. Your choices are Firefox, Chrome or Safari</li></ul></div>');
+        }
+    </script>
+    
+    <p>
+        A horizontal bar chart can be useful when your labels are too big for a regular bar chart. The horizontal bar
+        chart will ideally have most of the same features as the regular bar chart, but may lag behind it slightly. And as of
+        11th April 2009 I'm bringing this particular graph type up to the same feature level as the other graphs.
+    </p>
+    
+    <ul>
+        <li><a href="../docs/hbar.html">The API documentation</a></li>
+    </ul>
+
+    <canvas id="hbar1" width="450" height="400"><div class="canvasfallback">[No canvas support]</div></canvas>
+    <canvas id="hbar2" width="450" height="400"><div class="canvasfallback">[No canvas support]</div></canvas>
+    <canvas id="hbar3" width="450" height="400"><div class="canvasfallback">[No canvas support]</div></canvas>
+    <canvas id="hbar4" width="450" height="400"><div class="canvasfallback">[No canvas support]</div></canvas>
+
+</body>
+</html>

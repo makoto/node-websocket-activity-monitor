@@ -1,0 +1,252 @@
+<?php ob_start('ob_gzhandler') ?>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <!--
+        /**
+        * o------------------------------------------------------------------------------o
+        * | This file is part of the RGraph package - you can learn more at:             |
+        * |                                                                              |
+        * |                          http://www.rgraph.net                               |
+        * |                                                                              |
+        * | This package is licensed under the RGraph license. For all kinds of business |
+        * | purposes there is a small one-time licensing fee to pay and for personal,    |
+        * | charity and educational purposes it is free to use. You can read the full    |
+        * | license here:                                                                |
+        * |                      http://www.rgraph.net/LICENSE.txt                       |
+        * o------------------------------------------------------------------------------o
+        */
+    -->
+    <title>RGraph: HTML5 canvas graph library - scatter graph</title>
+    <link rel="stylesheet" href="../css/website.css" type="text/css" media="screen" />
+    <link rel="icon" type="image/png" href="/favicon.png">
+    
+    <script src="../libraries/RGraph.common.js" ></script>
+    <script src="../libraries/RGraph.scatter.js" ></script>
+
+    <script>
+        window.onload = function ()
+        {
+            data = [
+                    [1,9, 'red'],   [360,5, 'red'],  [150,45, 'red'], [132,12, 'red'],
+                    [43,21, 'green'],  [12,106, 'green', '<b>Third place</b><br />A close thing for third place'],  [96,63, 'green'],  [45,31, 'green'],
+                    [61,23, 'blue'],  [133,23, 'blue'], [166,52, 'blue'], [333,54, 'blue'],
+                    [45,166, null, '<b>Second place</b><br />This person collected quite a few doobries'], [166,45],
+                    [12,333, null, '<b>The winner!</b><br />By far the most doobries!'], [45,33],
+                    [16,26],  [98,94],  [46,85],  [43,42]
+                   ];
+            scatter1 = new RGraph.Scatter('scatter1', data);
+            scatter1.Set('chart.background.barcolor1', '#fff');
+            scatter1.Set('chart.background.barcolor2', '#fff');
+            scatter1.Set('chart.labels', ['Q1', 'Q2', 'Q3', 'Q4']);
+            scatter1.Set('chart.xmax', 365); // Necessary
+            scatter1.Set('chart.title', 'A scatter graph (tooltips, context, zoom)');
+            scatter1.Set('chart.gutter', 47);
+            scatter1.Set('chart.tooltip.hotspot', 3);
+            scatter1.Set('chart.tooltip.effect', 'expand');
+            scatter1.Set('chart.units.post', 'pc');
+            scatter1.Set('chart.xaxispos', 'center');
+            scatter1.Set('chart.contextmenu', [['Zoom in', RGraph.Zoom], ['Cancel', function () {}]]);
+            scatter1.Draw();
+
+            data2 = [
+                     [10,-15,'red'],[13,-16,'red'],[12,-11,'red'],[15,16,'red'],[20,19,'red'],[19,16,'red'],[13,15,'red'],[11,12,'red'],[13,16,'red'],[5,19,'red'],[16,15,'red'],[13,15,'red'],[14,14,'red'],[12,12,'red'],
+                     [5,4,'green'],[6,14,'green'],[19,12,'green'],[3,-5,'green'],[1,16,'green'],[13,5,'green'],[15,15,'green'],[13,5,'green'],[4,9,'green'],[16,6,'green'],[13,18,'green'],[18,12,'green'],[19,18,'green'],[13,16,'green'],[15,14,'green'],
+                     [12,4,'blue'],[4,23,'blue'],[13,-8,'blue'],[12,12,'blue'],[18,4,'blue'],[4,18,'blue'],[11,2,'blue'],[4,3,'blue'],[5,8,'blue'],[1,9,'blue'],[4,6,'blue'],[16,8,'blue'],[17,8,'blue'],[19,9,'blue'],[13,5,'blue'],[16,21,'blue'],
+                     [12,-4],[13,12],[11,16],[4,-19],[4,3],[5,6],[1,9],[4,12],[6,12],[8,8],[16,6],[13,5],[15,13],[23,-23,'red'], [1,-1, 'gray'],
+                     [1,-4,'gray'], [2,-3,'gray'], [1,-6,'gray'], [2,-3,'gray'], [2,-5,'gray'], [3,-7,'gray'], [1,-4,'gray'], [2,-7,'gray']
+                    ];
+            scatter2 = new RGraph.Scatter('scatter2', data2);
+            scatter2.Set('chart.background.barcolor1', '#fff');
+            scatter2.Set('chart.background.barcolor2', '#fff');
+            scatter2.Set('chart.background.hbars', [[-20,-5, '#f00'], [0,-20,'yellow'], [0,25,'rgba(0,255,0,0.3)']]);
+            scatter2.Set('chart.labels', ['Wk1', 'Wk2', 'Wk3', 'Wk4']);
+            scatter2.Set('chart.xmax', 28); // Necessary
+            scatter2.Set('chart.defaultcolor', 'black'); // Optional
+            scatter2.Set('chart.title', 'A scatter chart (center X axis, context, crosshairs)');
+            scatter2.Set('chart.gutter', 40);
+            scatter2.Set('chart.tickmarks', 'square');
+            scatter2.Set('chart.ticksize', 4);
+            scatter2.Set('chart.units.pre', '$');
+            scatter2.Set('chart.xaxispos', 'center');
+            scatter2.Set('chart.contextmenu', [['Clear', function () {RGraph.Clear(scatter2.canvas); scatter2.Draw();}]]);
+            scatter2.Set('chart.crosshairs', true);
+            scatter2.Draw();
+
+            scatter3 = new RGraph.Scatter('scatter3', [
+                                              [12,45, 'red'],[19,65, 'red', 'The highest'],[16,56, 'red'],[23,45, 'red'],[19,45, 'red'],
+                                              [12,23, 'red'],[35,26, 'red'],[18,13, 'red'],[10,55, 'red'],[15,13, 'green'],
+                                              [23,35, 'green'],[22,22, 'green'],[11,11, 'green'],[13,19, 'green'],[12,19, 'blue'],
+                                              [14,46, 'blue'],[13,64, 'blue', 'The second highest'],[16,16, 'blue']
+                                             ]);
+            scatter3.Set('chart.xmax', 35);
+            scatter3.Set('chart.ymax', 70);
+            scatter3.Set('chart.gutter', 25);
+            scatter3.Set('chart.labels', ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5']);
+            scatter3.Set('chart.title', 'A colorful scatter graph with tooltips');
+            scatter3.Set('chart.tooltip.hotspot', 3);
+            scatter3.Set('chart.background.barcolor1', '#fff');
+            scatter3.Set('chart.background.barcolor2', '#fff');
+            scatter3.Set('chart.tickmarks', 'plus');
+            scatter3.Set('chart.ticksize', 5);
+            scatter3.Draw();
+            
+            scatter4 = new RGraph.Scatter('scatter4', [
+                                              [122,45],[191,65],[16,56],[236,45],[193,45],[120,23],[42,26],[184,13],[100,55],
+                                              [153,13],[239,35],[226,22],[114,11],[135,19],[12,19],[104,46],[130,64],[164,16]
+                                             ]);
+            scatter4.Set('chart.xmax', 365);
+            scatter4.Set('chart.ymax', 100);
+            scatter4.Set('chart.gutter', 30);
+            scatter4.Set('chart.labels', ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']);
+            scatter4.Set('chart.title', 'Blue cross style ticks (context, zoom)');
+            scatter4.Set('chart.background.barcolor1', 'white');
+            scatter4.Set('chart.background.barcolor2', 'white');
+            scatter4.Set('chart.tickmarks', 'cross');
+            scatter4.Set('chart.ticksize', 2);
+            scatter4.Set('chart.text.angle', 90);
+            scatter4.Set('chart.defaultcolor', 'blue');
+            scatter4.Set('chart.annotatable', true);
+            scatter4.Set('chart.zoom.mode', 'thumbnail');
+            scatter4.Set('chart.contextmenu', [['Clear', function () {RGraph.Clear(scatter4.canvas); scatter4.Draw();}]]);
+            scatter4.Draw();
+            
+            scatter5 = new RGraph.Scatter('scatter5', [
+                                              [12,145],[19,165],[16,56],[23,45],[19,45],[12,23],[42,26],[18,13],[10,55],
+                                              [15,113],[23,135],[22,122],[11,11],[13,19],[12,19],[14,46],[13,64],[16,16],
+                                              [15,-113,'red'],[23,-135,'red'],[22,-122,'red'],[11,-11,'red'],[13,-19,'red'],[12,-19,'red'],[14,-46,'red'],[13,-64,'red'],[16,-16,'red']
+                                             ]);
+            scatter5.Set('chart.xmax', 28);
+            scatter5.Set('chart.ymax', 500);
+            scatter5.Set('chart.gutter', 35);
+            scatter5.Set('chart.labels', ['Week 1', 'Week 2', 'Week 3', 'Week 4']);
+            scatter5.Set('chart.title', 'X axis in the centre & square ticks');
+            scatter5.Set('chart.background.barcolor1', '#fff');
+            scatter5.Set('chart.background.barcolor2', '#fff');
+            scatter5.Set('chart.tickmarks', 'square');
+            scatter5.Set('chart.ticksize', 4);
+            scatter5.Set('chart.xaxispos', 'center');
+            scatter5.Draw();
+            
+            scatter6a = new RGraph.Scatter('scatter6', [
+                                                [0,5, null, 'The start of the year'],
+                                                [45,45, null, 'Middle of February'],
+                                                [60,51, null, 'Towards the end of February'],
+                                                [150,12, null, 'The end of May'],
+                                                [280,23, null, 'The closing quarter'],
+                                                [305,29, null, 'Winter time sales'],
+                                                [335,35, null, 'Christmas time boost'],
+                                                [365,23, null, 'The far end of the year'],
+                                               ],
+                                               
+                                               [
+                                                [30,99],
+                                                [50,52],
+                                                [300,28]
+                                               ]);
+            scatter6a.Set('chart.xmax', 365);
+            scatter6a.Set('chart.ymax', 100);
+            scatter6a.Set('chart.gutter', 35);
+            scatter6a.Set('chart.background.barcolor1', '#fff');
+            scatter6a.Set('chart.background.barcolor2', '#fff');
+            scatter6a.Set('chart.title', 'An example of joining lines');
+            scatter6a.Set('chart.tickmarks', 'square');
+            scatter6a.Set('chart.ticksize', 4);
+            scatter6a.Set('chart.line', true); // A simple line connecting the tickmarks
+            scatter6a.Set('chart.line.color', '#f00');
+            scatter6a.Set('chart.labels', ['Q1', 'Q2', 'Q3', 'Q4']);
+            scatter6a.Set('chart.line.shadow.color', '#aaa');
+            scatter6a.Set('chart.line.shadow.offsetx', 2);
+            scatter6a.Set('chart.line.shadow.offsety', 2);
+            scatter6a.Set('chart.line.shadow.blur', 2);
+            scatter6a.Set('chart.line.colors', ['yellow', 'cyan']);
+            scatter6a.Set('chart.key', ['A yellow line', 'A cyan line']);
+            scatter6a.Set('chart.key.background', 'white');
+            scatter6a.Set('chart.key.shadow', true);
+            scatter6a.Set('chart.key.position', 'graph');
+            scatter6a.Draw();
+
+            scatter7 = new RGraph.Scatter('scatter7', [
+                                                        [[0,5, null, 'The start of the year'],[45,45, null, 'Middle of February'],[60,51, null, 'Towards the end of February'],[150,12, null, 'The end of May'],[280,23, null, 'The closing quarter'],[305,29, null, 'Winter time sales'],[335,35, null, 'Christmas time boost'],[365,23, null, 'The far end of the year']],
+                                                        [[30,99],[50,52],[300,28]]
+                                                       ]);
+            scatter7.Set('chart.xmax', 365);
+            scatter7.Set('chart.ymax', 100);
+            scatter7.Set('chart.gutter', 35);
+            scatter7.Set('chart.background.barcolor1', '#fff');
+            scatter7.Set('chart.background.barcolor2', '#fff');
+            scatter7.Set('chart.title', 'An(other) example of joining lines');
+            scatter7.Set('chart.tickmarks', 'square');
+            scatter7.Set('chart.ticksize', 4);
+            scatter7.Set('chart.line', true); // A simple line connecting the tickmarks
+            scatter7.Set('chart.line.color', '#f00');
+            scatter7.Set('chart.labels', ['Q1', 'Q2', 'Q3', 'Q4']);
+            scatter7.Set('chart.line.shadow.color', '#aaa');
+            scatter7.Set('chart.line.shadow.offsetx', 2);
+            scatter7.Set('chart.line.shadow.offsety', 2);
+            scatter7.Set('chart.line.shadow.blur', 2);
+            scatter7.Set('chart.line.colors', ['yellow', 'cyan']);
+            scatter7.Set('chart.key', ['A yellow line', 'A cyan line']);
+            scatter7.Set('chart.key.background', 'white');
+            scatter7.Set('chart.key.shadow', true);
+            scatter7.Set('chart.key.position', 'graph');
+            scatter7.Draw();
+        }
+    </script>
+</head>
+<body>
+
+<div id="logo">
+    <a href="../index.html">RGraph: HTML5 canvas graph library</a>
+    >
+    <a href="./index.html">Examples</a>
+    >
+    Scatter graph
+</div>
+
+<h1>RGraph: Scatter graph</h1>
+
+    <script>
+        if (document.all) {
+            document.write('<div style="background-color: #fee; border: 2px dashed red; padding: 5px"><b>Important</b><br /><br /> Internet Explorer does not natively support the HTML5 canvas tag yet, so if you want to see the graphs, you can either:<ul><li>Install <a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a></li><li>Use another browser entirely. Your choices are Firefox, Chrome or Safari</li></ul></div>');
+        }
+    </script>
+    
+    <p>
+        The Scatter graph uses two variables to plot points and makes it clear where there are congregations. The data points
+        make up the X and Y coordinates. The labels on the X axis are separate from the X units, allowing you to "group" them. For
+        example, like the example, you could set the maxium X value to be 365, but only have four labels. That way you would
+        have a granularity of a day, but the X axis would only have four labels. Like the example.
+    </p>
+
+    <div>
+        <ul>
+            <li><a href="../docs/scatter.html">Scatter graph API documentation</a></li>
+        </ul>
+    </div>
+
+    <canvas id="scatter1" width="450" height="250"><div class="canvasfallback">[No canvas support]</div></canvas>
+    <canvas id="scatter2" width="450" height="250"><div class="canvasfallback">[No canvas support]</div></canvas>
+    <canvas id="scatter3" width="450" height="250"><div class="canvasfallback">[No canvas support]</div></canvas>
+    <canvas id="scatter4" width="450" height="250"><div class="canvasfallback">[No canvas support]</div></canvas>
+    <canvas id="scatter5" width="450" height="250"><div class="canvasfallback">[No canvas support]</div></canvas>
+    <canvas id="scatter6" width="450" height="250"><div class="canvasfallback">[No canvas support]</div></canvas>
+    
+    <table border="0" style="width: 450px">
+        <tr>
+            <td><canvas id="scatter7" width="450" height="250"><div class="canvasfallback">[No canvas support]</div></canvas></td>
+        </tr>
+        
+        <tr>
+            <td>
+                <div style="background-color: #ddd; border: 2px dashed gray;  padding: 3px">
+                    This is similar to the previous example, but demonstrates the alternative method of supplying data to the constructor, as one big
+                    array instead of seperate arrays.
+                </div>
+            </td>
+        </tr>
+    </table>
+    
+</body>
+</html>

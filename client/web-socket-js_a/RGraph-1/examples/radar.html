@@ -1,0 +1,117 @@
+<?php ob_start('ob_gzhandler') ?>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <!--
+        /**
+        * o------------------------------------------------------------------------------o
+        * | This file is part of the RGraph package - you can learn more at:             |
+        * |                                                                              |
+        * |                          http://www.rgraph.net                               |
+        * |                                                                              |
+        * | This package is licensed under the RGraph license. For all kinds of business |
+        * | purposes there is a small one-time licensing fee to pay and for personal,    |
+        * | charity and educational purposes it is free to use. You can read the full    |
+        * | license here:                                                                |
+        * |                      http://www.rgraph.net/LICENSE.txt                       |
+        * o------------------------------------------------------------------------------o
+        */
+    -->
+    <title>RGraph: HTML5 canvas graph library - radar chart</title>
+    <link rel="stylesheet" href="../css/website.css" type="text/css" media="screen" />
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <script src="../libraries/RGraph.common.js" ></script>
+    <script src="../libraries/RGraph.radar.js" ></script>
+
+    <script>
+        window.onload = function ()
+        {
+            radar1 = new RGraph.Radar('radar1', [41,37,16,3,3]);
+            radar1.Set('chart.labels', ['MSIE 7 (41%)',
+                                        'MSIE 6 (37%)',
+                                        'Firefox (16%)',
+                                        'Safari (3%)',
+                                        'Other (3%)']);
+            radar1.Set('chart.gutter', 30);
+            radar1.Set('chart.title', "Browser share (tooltips, context, zoom)");
+            radar1.Set('chart.key.shadow', true);
+            radar1.Set('chart.tooltips', ['MSIE 7: 41%', 'MSIE 6: 37%', 'Firefox: 16%', 'Safari: 3%', 'Other: 3%']);
+            radar1.Set('chart.tooltip.effect', 'expand');
+            radar1.Set('chart.zoom.vdir', 'center');
+            radar1.Set('chart.contextmenu', [['Zoom in', RGraph.Zoom]]);
+            radar1.Draw();
+
+            radar2 = new RGraph.Radar('radar2', [45,31,62,55,44]);
+            radar2.Set('chart.labels', ['Fred - 45Kg', 'Barney - 31Kg', 'Gill - 62Kg', 'Frank - 55Kg', 'Till - 44Kg']);
+            radar2.Set('chart.gutter', 30);
+            radar2.Set('chart.title', "Weight before lunch, (context, tooltips)");
+            radar2.Set('chart.key.background', 'rgba(255,255,255,0.5)');
+            radar2.Set('chart.contextmenu', [
+                                             ['Clear', function () {RGraph.Clear(radar2.canvas); radar2.Draw();}]
+                                            ]);
+            radar2.Set('chart.tooltips', ['Fred', 'Barney', 'Gill', 'Frank', 'Till']);
+            radar2.Draw();
+
+            radar3 = new RGraph.Radar('radar3', [45,43,41,64,44]);
+            radar3.Set('chart.title', "Widget production in 2008")
+            radar3.Set('chart.gutter', 30);
+            radar3.Set('chart.labels', ['John', 'Fred', 'Barry', 'Petra', 'Jay']);
+            radar3.Draw();
+            
+            radar4 = new RGraph.Radar('radar4', [45,120,45,60, 67,56]);
+            radar4.Set('chart.title', "Some random data")
+            radar4.Set('chart.gutter', 30);
+            radar4.Set('chart.labels', ['Lou', 'Kiffen', 'Terry', 'Hoolio', 'Frank', 'Charles']);
+            radar4.Set('chart.zoom.mode', 'thumbnail');
+            radar4.Draw();
+            
+            radar5 = new RGraph.Radar('radar5', [6,5,9,8,7]);
+            radar5.Set('chart.title', "Some more random data");
+            radar5.Set('chart.key.shadow', true);
+            radar5.Set('chart.gutter', 30);
+            radar5.Set('chart.labels', ['Fred', 'Barry', 'Richard', 'Cynthia', 'Marj']);
+            radar5.Draw();
+        }
+    </script>
+</head>
+<body>
+
+<div id="logo">
+    <a href="../index.html">RGraph: HTML5 canvas graph library</a>
+    >
+    <a href="./index.html">Examples</a>
+    >
+    Radar graph
+</div>
+
+<h1>RGraph: Radar chart</h1>
+
+    <script>
+        if (document.all) {
+            document.write('<div style="background-color: #fee; border: 2px dashed red; padding: 5px"><b>Important</b><br /><br /> Internet Explorer does not natively support the HTML5 canvas tag yet, so if you want to see the graphs, you can either:<ul><li>Install <a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a></li><li>Use another browser entirely. Your choices are Firefox, Chrome or Safari</li></ul></div>');
+        }
+    </script>
+    
+    <div>
+        <p>
+            The Radar chart is not a true Radar chart, but still accomplishes the same effect. For example, it's easy to see
+            here that Microsoft Internet Explorer has by far the greatest market share. The colours used are all configurable,
+            as are the labels and the title.
+        </p>
+    </div>
+
+    <div>
+        <ul>
+            <li><a href="../docs/radar.html">Radar chart API documentation</a></li>
+        </ul>
+    </div>
+
+    <canvas id="radar1" width="500" height="350" style="border: 1px solid gray"><div class="canvasfallback">[No canvas support]</div></canvas>
+    <canvas id="radar2" width="450" height="350"><div class="canvasfallback">[No canvas support]</div></canvas>
+    <canvas id="radar3" width="450" height="350"><div class="canvasfallback">[No canvas support]</div></canvas>
+    <canvas id="radar4" width="450" height="350"><div class="canvasfallback">[No canvas support]</div></canvas>
+    <canvas id="radar5" width="450" height="350"><div class="canvasfallback">[No canvas support]</div></canvas>
+</body>
+</html>

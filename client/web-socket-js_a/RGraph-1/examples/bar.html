@@ -1,0 +1,352 @@
+<?php ob_start('ob_gzhandler') ?>
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <!--
+        /**
+        * o------------------------------------------------------------------------------o
+        * | This file is part of the RGraph package - you can learn more at:             |
+        * |                                                                              |
+        * |                          http://www.rgraph.net                               |
+        * |                                                                              |
+        * | This package is licensed under the RGraph license. For all kinds of business |
+        * | purposes there is a small one-time licensing fee to pay and for personal,    |
+        * | charity and educational purposes it is free to use. You can read the full    |
+        * | license here:                                                                |
+        * |                      http://www.rgraph.net/LICENSE.txt                       |
+        * o------------------------------------------------------------------------------o
+        */
+    -->
+    <title>RGraph: HTML5 canvas graph library - bar chart</title>
+    <link rel="stylesheet" href="../css/website.css" type="text/css" media="screen" />
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <script src="../libraries/RGraph.common.js" ></script>
+    <script src="../libraries/RGraph.bar.js" ></script>
+
+    <script>
+        /**
+        * These are the callback functions for the context menu
+        */
+        function Callback1()
+        {
+            alert('Menu item 1 selected!');
+        }
+
+        function Callback2()
+        {
+            alert('Menu item 2 selected!');
+        }
+
+
+        /**
+        * The onload function creates the graph
+        */
+        window.onload = function ()
+        {
+            bar = new RGraph.Bar('bar2', [1.2, 1.3, 1.4, -1.5,-1.6,-1.9,2,2.1,2.5]);
+            bar.Set('chart.units.pre', '$');
+            bar.Set('chart.units.post', 'k');
+            bar.Set('chart.xaxispos', 'center');
+            bar.Set('chart.yaxispos', 'right');
+            bar.Set('chart.title', 'A bar chart (context menu, annotatable)');
+            bar.Set('chart.gutter', 35);
+            bar.Set('chart.colors', ['rgb(255,0,0)']);
+            bar.Set('chart.labels', ['John', 'Barry', 'Rich', 'Craig', 'Tom', 'Frank', 'Helen', 'Joyce', 'Fred'])
+            bar.Set('chart.background.grid.hsize', 20);
+            bar.Set('chart.background.grid.vsize', 20);
+            bar.Set('chart.background.barcolor1', 'white');
+            bar.Set('chart.background.barcolor2', 'white');
+            bar.Set('chart.text.angle', 45);
+            bar.Set('chart.labels.ingraph', [,,,,['Tom was poorly']]);
+            bar.Set('chart.contextmenu', [['Show palette', RGraph.Showpalette], ['Clear', function () {RGraph.Clear(bar.canvas); bar.Draw();}]]);
+            bar.Set('chart.labels.above', true);
+            bar.Set('chart.annotatable', true);
+            bar.Draw();
+
+
+            bar2 = new RGraph.Bar('bar1', [[23,25], [30,25], [27,28], [26,18], [31,20], [39,28], [27,29], [26,23]]);
+            bar2.Set('chart.tooltips', ['<b>2000</b><br />Girls only had an average<br />year in 2000',
+                                  '<b>2000</b><br />Boys had a slightly better<br />year in 2000',
+                                  '<b>2001</b><br />Girls had a good year',
+                                  '<b>2001</b><br />Boys had an average year',
+                                  '<b>2002</b><br />Both girls and boys had an average year',
+                                  '<b>2002</b><br />Both girls and boys had an average year',
+                                  '<b>2003</b><br />Girls had an average year in 2003',
+                                  '<b>2003</b><br />Boys had a rather poor showing in 2003',
+                                  '<b>2004</b><br />Girls had a good showing in 2004',
+                                  '<b>2004</b><br />Slightly better than than last year,<br />but still not good',
+                                  '<b>2005</b><br />Girls had a particularly good year',
+                                  '<b>2005</b><br />Boys got back up to par this year',
+                                  '<b>2006</b><br />Girls were back to average',
+                                  '<b>2006</b><br />Boys remained at an average level',
+                                  '<b>2007</b><br />Girls were more or less the same as last month',
+                                  '<b>2007</b><br />Boys were starting to drop again'
+                                 ]);
+            bar2.Set('chart.tooltip.effect', 'expand');
+            bar2.Set('chart.title', 'Population by gender (tooltips, context, zoom)');
+            bar2.Set('chart.title.color', '#1254A3');
+            bar2.Set('chart.gutter', 35);
+            bar2.Set('chart.background.barcolor1', '#fff');
+            bar2.Set('chart.background.barcolor2', '#fff');
+            bar2.Set('chart.background.grid.hsize', 20);
+            bar2.Set('chart.background.grid.vsize', 20);
+            bar2.Set('chart.colors', ['pink', 'blue']);
+            bar2.Set('chart.labels', ['2000', '2001', '2002', '2003', '2004', '2005', '2006', '2007']);
+            bar2.Set('chart.text.angle', 0);
+            bar2.Set('chart.units.post', 'm');
+            bar2.Set('chart.shadow', true);
+            bar2.Set('chart.strokecolor', 'rgba(0,0,0,0)');
+            bar2.Set('chart.labels.above', true);
+            bar2.Set('chart.zoom.vdir', 'center');
+            bar2.Set('chart.contextmenu', [['Zoom', RGraph.Zoom], null, ['Cancel', function () {}]]);
+            bar2.Draw();
+
+
+            var bar3 = new RGraph.Bar('bar3', [-22,30,41,-35,31,38,84,12,35]);
+            bar3.Set('chart.labels', ['Fred', 'Bob', 'Rich', 'Jack', 'Billy', 'Olga', 'Pete', 'Neil', 'Jake', 'Jim'])
+            bar3.Set('chart.title', 'An example of an arrow variant')
+            bar3.Set('chart.gutter', 25);
+            bar3.Set('chart.background.barcolor1', 'rgba(0,0,0,0)');
+            bar3.Set('chart.background.barcolor2', 'rgba(0,0,0,0)');
+            bar3.Set('chart.background.grid.hsize', 10);
+            bar3.Set('chart.background.grid.vsize', 10);
+            bar3.Set('chart.colors', ['blue']);
+            bar3.Set('chart.text.angle', 0);
+            bar3.Set('chart.xaxispos', 'center');
+            bar3.Set('chart.variant', 'arrow');
+            bar3.Set('chart.shadow', true);
+            bar3.Set('chart.shadow.blur', 25);
+            bar3.Set('chart.shadow.offsetx', 0);
+            bar3.Set('chart.shadow.offsety', 0);
+            bar3.Draw();
+            
+            var bar4 = new RGraph.Bar('bar4', [
+                                        [0.000092, 0.00008],
+                                        [0.000034, 0.000057],
+                                        [0.000056, 0.000062],
+                                        [0.000055, 0.000045],
+                                        [0.000036, 0.000012],
+                                        [0.000044, 0.000056],
+                                        [0.000051, 0.000066],
+                                        [0.000068, 0.000088]]);
+            bar4.Set('chart.title', 'A grouped bar chart (zoom, small values)');
+            bar4.Set('chart.gutter', 45);
+            bar4.Set('chart.zoom.mode', 'thumbnail');
+            bar4.Set('chart.background.barcolor1', 'white');
+            bar4.Set('chart.background.barcolor2', 'white');
+            bar4.Set('chart.labels', ['1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th']);
+            bar4.Set('chart.key', ['John', 'Bob']);
+            bar4.Set('chart.key.position', 'graph');
+            bar4.Set('chart.key.shadow', true);
+            bar4.Set('chart.colors', ['#00f', '#0f0']);
+            bar4.Set('chart.tooltips', [
+                                        'John', 'Bob', 'John', 'Bob',
+                                        'John', 'Bob', 'John', 'Bob',
+                                        'John', 'Bob', 'John', 'Bob',
+                                        'John', 'Bob', 'John', 'Bob'
+                                       ]);
+            bar4.Set('chart.shadow', true);
+            bar4.Set('chart.strokecolor', null);
+            bar4.Set('chart.yaxispos', 'right');
+            bar4.Draw();
+            
+            bar5 = new RGraph.Bar('bar5', [[23,25, 27, 30], [30,25,29, 32], [27,28,35,33], [26,18,29,30], [31,20,25,27], [39,28,28,35], [27,29,28,29], [26,23,26,27]]);
+            bar5.Set('chart.units.pre', '$');
+            bar5.Set('chart.title', 'Sales in the last 8 months (clickable bars)');
+            bar5.Set('chart.colors', ['red', 'yellow', 'green', 'orange']);
+            bar5.Set('chart.gutter', 40);
+            bar5.Set('chart.shadow', true);
+            bar5.Set('chart.background.barcolor1', '#fff');
+            bar5.Set('chart.background.barcolor2', '#fff');
+            bar5.Set('chart.background.grid.hsize', 5);
+            bar5.Set('chart.background.grid.vsize', 5);
+            bar5.Set('chart.grouping', 'stacked');
+            bar5.Set('chart.labels', ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep']);
+            bar5.Set('chart.labels.above', true);
+            bar5.Set('chart.tooltips', [
+                                  'Richard', 'Barbara', 'Johnny', 'Frederick',
+                                  'Richard', 'Barbara', 'Johnny', 'Frederick',
+                                  'Richard', 'Barbara', 'Johnny', 'Frederick',
+                                  'Richard', 'Barbara', 'Johnny', 'Frederick',
+                                  'Richard', 'Barbara', 'Johnny', 'Frederick',
+                                  'Richard', 'Barbara', 'Johnny', 'Frederick',
+                                  'Richard', 'Barbara', 'Johnny', 'Frederick',
+                                  'Richard', 'Barbara', 'Johnny', 'Frederick'
+                                 ]);
+            bar5.Set('chart.key', ['Richard', 'Barbara', 'Johnny', 'Frederick']);
+            bar5.Set('chart.key.background', 'rgba(255,255,255,0.7)');
+            bar5.Set('chart.key.position', 'gutter');
+            bar5.Set('chart.background.grid.width', 0.3); // Decimals are permitted
+            bar5.Set('chart.text.angle', 0);
+            bar5.Set('chart.strokecolor', null);
+            bar5.Draw();
+            
+            bar6 = new RGraph.Bar('bar6', [4,-5,-6,4,8,9,7,5,4,3,5,8]);
+            bar6.Set('chart.title', 'A dot chart with a centre X axis and decimals');
+            bar6.Set('chart.colors', ['red']);
+            bar6.Set('chart.gutter', 40);
+            bar6.Set('chart.background.barcolor1', '#fff');
+            bar6.Set('chart.background.barcolor2', '#fff');
+            bar6.Set('chart.background.grid.hsize', 20);
+            bar6.Set('chart.background.grid.vsize', 20);
+            bar6.Set('chart.background.hbars', [[0,20,'rgba(230,255,230,0.7)'], [0,-10,'rgba(255,230,230,0.7)']]);
+            bar6.Set('chart.labels', ['Q1', 'Q2', 'Q3', 'Q4']);
+            bar6.Set('chart.xaxispos', 'center');
+            bar6.Set('chart.yaxispos', 'right');
+            bar6.Set('chart.variant', 'dot');
+            bar6.Set('chart.key', ['Sales']);
+            bar6.Set('chart.key.background', 'rgba(255,255,255,0.5)');
+            bar6.Set('chart.scale.decimals', 1);
+            bar6.Draw();
+            
+            bar7 = new RGraph.Bar('bar7', [12,13,15,15,16,13,18,14,19,16,21,24,25,23,22]);
+            
+            // Work out the average
+            sum = RGraph.array_sum(bar7.data);
+            avg = (sum / bar7.data.length).toFixed(1);
+
+            bar7.Set('chart.title', 'Temperature in August (with post processing)');
+            bar7.Set('chart.labels', ['2nd','4th','6th','8th','10th','12th','14th','16th','18th','20th','22th','24th','26th','28th','30th']);
+            bar7.Set('chart.gutter', 33);
+            bar7.Set('chart.units.post', 'c');
+            bar7.Set('chart.background.barcolor1', '#fff');
+            bar7.Set('chart.background.barcolor2', '#fff');
+            bar7.Set('chart.background.grid.width', 1);
+            bar7.Set('chart.background.hbars', [
+                                                [20, null, 'rgba(255,0,0,0.4)'],
+                                                [15, 5, 'rgba(255,255,0,0.4)'],
+                                                [0, 5, 'rgba(0,0,255,0.4)'],
+                                                [5,10, 'rgba(0,255,0,0.4)'],
+                                                [avg - 0.1, 0.2, 'rgba(0,0,0,0.3)']
+                                               ]);
+            bar7.Set('chart.text.angle', 90);
+            bar7.Set('chart.text.size', 8);
+            bar7.Set('chart.hmargin', 2);
+            bar7.Set('chart.colors', ['white']);
+            bar7.Set('chart.variant', 'pyramid');
+            bar7.Draw();
+            
+                // Customise the temperature chart slightly by indicating the average (ie post processing)
+                RGraph.Text(bar7.context, 'Verdana', 10, bar7.Get('chart.gutter') + 10, bar7.grapharea -  ((avg / bar7.max) * bar7.grapharea) + bar7.Get('chart.gutter') - 3, 'Average', null, null, null, null, null, true);
+            
+            bar8 = new RGraph.Bar('bar8', [15,13,21,59,41,31,22,5,6,19]);
+            bar8.Set('chart.background.barcolor1', '#fff');
+            bar8.Set('chart.background.barcolor2', '#fff');
+            bar8.Set('chart.colors', ['red']);
+            bar8.Set('chart.shadow', true);
+            bar8.Set('chart.shadow.offsetx', 0);
+            bar8.Set('chart.shadow.offsety', 0);
+            bar8.Set('chart.shadow.blur', 5);
+            bar8.Set('chart.title', 'A graph with a custom maximum Y value (64)');
+            bar8.Set('chart.labels', ['John', 'Fred', 'Mabel', 'Dave', 'Alice', 'Peter', 'Rich', 'Lynn', 'Lou', 'Jim']);
+            bar8.Set('chart.ymax', 64);
+            bar8.Set('chart.labels.above', true);
+            bar8.Set('chart.units.pre', '$');
+            bar8.Set('chart.gutter', 30);
+            bar8.Draw();
+
+            bar9 = new RGraph.Bar('bar9', [45,23,22,61,41,52,43,31,42,32]);
+            bar9.Set('chart.title', 'An example of a 3D effect available to you');
+            bar9.Set('chart.variant', '3d');
+            bar9.Set('chart.labels', ['Rich', 'Io', 'Pan', 'Jo', 'Hurly', 'Lucy', 'Chip', 'Gay', 'Bob', 'John']);
+            bar9.Set('chart.colors', ['red']);
+            bar9.Set('chart.background.barcolor1', '#fff');
+            bar9.Set('chart.background.barcolor2', '#fff');
+            bar9.Set('chart.strokecolor', 'rgba(0,0,0,0)');
+            //bar9.Draw();
+
+            bar10 = new RGraph.Bar('bar10', [[1,2,3],[4,5,6],[7,8,9], [9,8,7],[6,5,4],[3,2,1]]);
+            bar10.Set('chart.title', 'Another example of the 3D effect');
+            bar10.Set('chart.variant', '3d');
+            bar10.Set('chart.labels', ['Rich', 'Io', 'Pan', 'Jo', 'Hurly', 'Lucy']);
+            bar10.Set('chart.colors', ['red', 'green', 'blue']);
+            bar10.Set('chart.background.barcolor1', '#eee');
+            bar10.Set('chart.background.barcolor2', '#eee');
+            bar10.Set('chart.strokecolor', 'rgba(0,0,0,0)');
+            bar10.Draw();
+
+            bar11 = new RGraph.Bar('bar11', [[12,36,45],[23,38,15],[12,65,22],[51,20,61],[45,68,41],[51,68,52],[12,29,43],[23,28,31],[43,78,42],[15,14,32]]);
+            bar11.Set('chart.title', 'A stacked chart with 3D effect');
+            bar11.Set('chart.grouping', 'stacked');
+            bar11.Set('chart.gutter', 30);
+            bar11.Set('chart.variant', '3d');
+            bar11.Set('chart.labels', ['Rich', 'Io', 'Pan', 'Jo', 'Hurly', 'Lucy', 'Chip', 'Gay', 'Bob', 'John']);
+            bar11.Set('chart.colors', ['red', 'green', 'blue']);
+            bar11.Set('chart.strokecolor', 'rgba(0,0,0,0)');
+            bar11.Draw();
+        }
+    </script>
+</head>
+<body>
+    <div id="logo">
+        <a href="../index.html">RGraph: HTML5 canvas graph library</a>
+        >
+        <a href="./index.html">Examples</a>
+        >
+        Bar chart
+    </div>
+
+    <h1>RGraph: Bar chart</h1>
+
+    <script>
+        if (document.all) {
+            document.write('<div style="background-color: #fee; border: 2px dashed red; padding: 5px"><b>Important</b><br /><br /> Internet Explorer does not natively support the HTML5 canvas tag yet, so if you want to see the graphs, you can either:<ul><li>Install <a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a></li><li>Use another browser entirely. Your choices are Firefox, Chrome or Safari</li></ul></div>');
+        }
+    </script>
+
+    <div>
+        <p>
+            The bar chart is probably one of the most widely used of charts, and also one of the most versatile. It's defined as a chart with
+            rectangular bars with lengths proportional to the values they represent. The var chart can be used to represent two
+            or more values. With grouped and stacked bar charts, you can visualise two or more sets of data. For example two years
+            worth of sales figures. Doing this you will be able to easily see differences, for example a better year when it comes
+            to sales. You can also show negative values by having the X axis in the center, like the example shown. If you use a
+            grouped or stacked bar chart, then a key will be helpful to your users.
+        </p>
+        
+        <p>
+            By using the tooltips feature, you can provide more detail about what a particular bar represents. The tooltips in
+            <b>RGraph</b> can contain wide range of HTML, so you can use them to show photos or movies for example.
+        </p>
+    
+        <div>
+            <ul>
+                <li><a href="../docs/bar.html">Bar chart API documentation</a></li>
+            </ul>
+        </div>
+
+        <table>
+            <tr>
+                <td>
+                    <canvas id="bar1" width="475" height="200"><div class="canvasfallback">[No canvas support]</div></canvas><br />
+                    <canvas id="bar2" width="475" height="200"><div class="canvasfallback">[No canvas support]</div></canvas><br />
+                    <canvas id="bar3" width="475" height="200"><div class="canvasfallback">[No canvas support]</div></canvas><br />
+                    <canvas id="bar8" width="475" height="200"><div class="canvasfallback">[No canvas support]</div></canvas>
+                    <canvas id="bar9" width="475" height="200"><div class="canvasfallback">[No canvas support]</div></canvas>
+                    <canvas id="bar11" width="475" height="200"><div class="canvasfallback">[No canvas support]</div></canvas>
+                </td>
+
+                <td>
+                    <canvas id="bar4" width="475" height="200"><div class="canvasfallback">[No canvas support]</div></canvas><br />
+                    <canvas id="bar5" width="475" height="200"><div class="canvasfallback">[No canvas support]</div></canvas><br />
+                    <canvas id="bar6" width="475" height="200"><div class="canvasfallback">[No canvas support]</div></canvas><br />
+                    <canvas id="bar7" width="475" height="200"><div class="canvasfallback">[No canvas support]</div></canvas><br />
+                    <canvas id="bar10" width="475" height="200"><div class="canvasfallback">[No canvas support]</div></canvas>
+                </td>
+            </tr>
+            
+            <tr>
+                <td class="code">
+                    The 3D effect is limited and just that - an effect - and not true 3D. Certain combinations of features
+                    will not work with it, eg right hand Y axes, center X axes.
+                </td>
+                <td></td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

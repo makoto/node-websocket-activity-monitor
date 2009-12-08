@@ -1,0 +1,878 @@
+<?php
+    require('common.php');
+    ob_start('ob_gzhandler');
+?>
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <!--
+        /**
+        * o------------------------------------------------------------------------------o
+        * | This file is part of the RGraph package - you can learn more at:             |
+        * |                                                                              |
+        * |                          http://www.rgraph.net                               |
+        * |                                                                              |
+        * | This package is licensed under the RGraph license. For all kinds of business |
+        * | purposes there is a small one-time licensing fee to pay and for personal,    |
+        * | charity and educational purposes it is free to use. You can read the full    |
+        * | license here:                                                                |
+        * |                      http://www.rgraph.net/LICENSE.txt                       |
+        * o------------------------------------------------------------------------------o
+        */
+    -->
+
+    <title>RGraph: A canvas graph library based on the HTML5 canvas tag</title>
+
+    <link rel="stylesheet" href="css/website.css" type="text/css" media="screen" />
+    <link rel="icon" type="image/png" href="images/favicon.png">
+
+    <meta name="verify-v1" content="5y8rHGO/NPFDYU8jBgyT3qI7CSiEoPaeB+4x2TXan+4=" />
+    <meta name="keywords" content="canvas graph html5 rgraph javascript chart line bar graphs" />
+    <meta name="description" content="RGraph: HTML5 canvas graph library for websites on all platforms" />
+
+    <script src="libraries/RGraph.common.js" ></script>
+    <script src="libraries/RGraph.bar.js" ></script>
+    <script src="libraries/RGraph.line.js" ></script>
+    <script src="libraries/RGraph.pie.js" ></script>
+    <script src="libraries/RGraph.funnel.js" ></script>
+
+</head>
+<body>
+    <table border="0" width="100%">
+        <tr>
+            <td width="70">
+                <br />
+                <img src="images/title.png" align="absmiddle" alt="RGraph: HTML5 canvas graphing library" width="64" height="64" />
+            </td>
+            
+            <td valign="top" colspan="2">
+
+                <img src="images/merry-christmas-snowman.png" width="128" height="128" alt="Merry Christmas!" style="float: right"/>
+
+                <div>
+                    <h1>RGraph: A canvas graph library based on the HTML5 canvas tag</h1>
+                    <i style="position: relative; top: -20px; left: 5px">Interactive javascript canvas graphs using the HTML5 canvas tag for all platforms</i>
+                </div>
+            </td>
+        </tr>
+        
+        <tr>
+            <td>&nbsp;</td>
+            <td colspan="2">
+                <img src="images/download-sml.png" width="32" height="32" alt="First release coming soon!" border="0" align="absmiddle" />
+                <b>First release coming soon!</b>
+
+                <a href="#download" style="text-decoration: none">
+                    <img src="images/download-beta-sml.png" width="32" height="32" alt="Download the beta version" border="0" align="absmiddle" />
+                    <b style="text-decoration: underline">Download the beta version</b>
+                </a>
+
+                &nbsp;
+
+                <a href="http://del.icio.us/post?v=4&noui&jump=close&url=http://www.rgraph.net" target="_blank">
+                    <img src="images/delicious.png" alt="Bookmark with delicious" width="22" height="22" border="0" align="absmiddle" />
+                </a>
+
+                <a href="http://www.stumbleupon.com/submit?url=http://www.rgraph.net" target="_blank">
+                    <img src="images/stumble.png" alt="Stumble! this site" width="22" height="22" border="0" align="absmiddle" />
+                </a>
+
+                <a href="http://twitter.com/home/?status=RGraph:%20A%20canvas%20graph%20library%20based%20on%20the%20HTML5%20canvas%20tag" target="_blank">
+                    <img src="images/twitter.png" alt="tweet this site" width="22" height="22" border="0" align="absmiddle" />
+                </a>
+            </td>
+        </tr>
+    </table>
+
+    <table border="0" style="float: right">
+        <tr>
+            <td style="text-align: right">
+                <canvas id="myLine" width="480" height="220">
+                    <div style="border: 2px dashed red; width: 475px; height: 200px; color: red; background-color: #fee; text-align: center; padding: 5px; padding-top: 90px"></div>
+                </canvas>
+            </td>
+        </tr>
+        
+        <tr><td>&nbsp;</td></tr>
+        
+        <tr>
+            <td style="text-align: center">
+                <canvas id="myBar" width="475" height="200">
+                    <div style="border: 2px dashed red; width: 475px; height: 200px; color: red; background-color: #fee; text-align: center; padding: 5px; padding-top: 90px"></div>
+                </canvas>
+            </td>
+        </tr>
+        
+        <tr>
+            <td style="text-align: center">
+                <canvas id="myPie" width="475" height="300">
+                    <div style="border: 2px dashed red; width: 475px; height: 200px; color: red; background-color: #fee; text-align: center; padding: 5px; padding-top: 90px"></div>
+                </canvas>
+            </td>
+        </tr>
+        
+        <tr>
+            <td style="text-align: center">
+                <canvas id="myFunnel" width="300" height="300">
+                    <div style="border: 2px dashed red; width: 475px; height: 200px; color: red; background-color: #fee; text-align: center; padding: 5px; padding-top: 90px"></div>
+                </canvas>
+            </td>
+        </tr>
+    </table>
+
+    <div id="warning">
+        <b>Important compatibility information</b>
+        <p>
+            This library uses <a href="http://dev.w3.org/html5/spec/Overview.html" target="_blank">HTML5</a> features which are
+            implemented in recent browsers. As such you will need to be using one of these latest browsers:
+            <a href="http://www.mozilla.com" target="_blank" rel="nofollow">Firefox 3.5+</a>,
+            <a href="http://www.google.com/chrome" target="_blank" rel="nofollow">Chrome 2+</a> or
+            <a href="http://www.apple.com/safari" target="_blank" rel="nofollow">Safari 4+</a>. You can also use the
+            <a href="http://code.google.com/chrome/chromeframe/" target="_blank">Google Chrome Frame</a> plugin for MSIE.
+            
+            <br /><br />
+            
+            <a href="http://www.opera.com" target="_blank">Opera</a> is now supported in a limited fashion. Because it doesn't yet support the shadow
+            or text APIs, these are not available. Text is simulated however.
+    </div>
+
+    <script>
+        /**
+        * Create the bar chart
+        */
+        bar = new RGraph.Bar('myBar', [
+                                [140,120,130], [150,130,130], [160,130,140],
+                                [150,140,130], [120,160,130], [150,160,140],
+                                [160,160,150], [140,110,120], [120,120,120],
+                                [160,110,140]
+                               ]);
+        bar.Set('chart.background.barcolor1', 'white');
+        bar.Set('chart.background.barcolor2', 'white');
+        bar.Set('chart.title', 'Sales last quarter (annotatable, context)');
+        bar.Set('chart.labels', ['Fred', 'Rich', 'Alex','John','Nick', 'Doug', 'Jaz', 'Pat', 'Baz', 'Bob']);
+        bar.Set('chart.gutter', 45);
+        bar.Set('chart.shadow', true);
+        bar.Set('chart.shadow.offsetx', 0);
+        bar.Set('chart.shadow.offsety', 0);
+        bar.Set('chart.shadow.blur', 15);
+        bar.Set('chart.shadow.color', '#000');
+        bar.Set('chart.colors', ['#08B5EF', '#FF7B21', '#E784FF']);
+        bar.Set('chart.key', ['January', 'February', 'March']);
+        bar.Set('chart.key.position', 'gutter');
+        bar.Set('chart.text.size', 10);
+        bar.Set('chart.text.font', 'Georgia');
+        bar.Set('chart.text.angle', 90);
+        bar.Set('chart.grouping', 'stacked');
+        bar.Set('chart.units.pre', '$');
+        bar.Set('chart.strokecolor', 'rgba(0,0,0,0)');
+        bar.Set('chart.contextmenu', [
+                                      ['Show palette', RGraph.Showpalette],
+                                      ['Clear', function () {RGraph.Clear(bar.canvas);bar.Draw();}],
+                                      null,
+                                      ['Cancel', function () {}]
+                                     ]);
+        bar.Set('chart.annotatable', true);
+        bar.Set('chart.annotate.color', 'black');
+        bar.Draw();
+
+
+        /**
+        * Create the line graph
+        */
+        data1 = [4,3,6,8,4,2,1,4,9,8,7,8];
+        data2 = [1,2,4,2,1,3,5,6,6,5,3,5];
+
+        line = new RGraph.Line('myLine', data1, data2);
+        line.Set('chart.title', 'Sales for Acme Inc. (zoom, context)');
+        line.Set('chart.title.vpos', 0.5);
+        line.Set('chart.colors', ['red', 'black']);
+        line.Set('chart.linewidth', 5);
+        line.Set('chart.units.post', '%');
+        line.Set('chart.yaxispos', false);
+        line.Set('chart.shadow', true);
+        line.Set('chart.shadow.offsetx', 3);
+        line.Set('chart.shadow.offsety', 3);
+        line.Set('chart.shadow.color', 'rgba(0,0,0,0.4)');
+        line.Set('chart.shadow.blur', 15);
+        line.Set('chart.key', ['2007', '2008']);
+        line.Set('chart.key.background', 'rgba(255,255,255,0.5)');
+        line.Set('chart.noaxes', true);
+        line.Set('chart.gutter', 35);
+        line.Set('chart.hmargin', 10);
+        line.Set('chart.background.barcolor1', 'white');
+        line.Set('chart.background.barcolor2', 'white');
+        line.Set('chart.zoom.mode', 'thumbnail');
+        line.Set('chart.zoom.factor', 2);
+        line.Set('chart.zoom.hdir', 'left');
+        line.Set('chart.zoom.vdir', 'center');
+        line.Set('chart.contextmenu', [['Zoom in', RGraph.Zoom], null, ['Cancel', function () {}]]);
+        line.Draw();
+
+        /**
+        * Create the pie chart
+        */
+        pie = new RGraph.Pie('myPie', [41,37,16,3,3]);
+        pie.Set('chart.tooltips', [
+                                   '<b>Internet Explorer 7 (41%)</b><br />Internet Explorer is still the most popular browser,<br />though with the release of Google Chrome, that may change',
+                                   '<b>Internet Explorer 6 (37%)</b><br />A particularly poor browser. Though I liked it at the time',
+                                   "<b>Firefox (16%)</b><br />Popularity is growing, but it's still only got ~16%<br />market share",
+                                   '<b>Safari (3%)</b><br />Not a particularly popular bowser',
+                                   '<b>Other (3%)</b><br />Other browsers, including Opera and Chrome<br />(at the moment)'
+                                  ]);
+        pie.Set('chart.tooltip.effect', 'expand');
+        pie.Set('chart.title', 'Browser share July 2008, (tooltips)');
+        pie.Set('chart.labels', ['MSIE 7 (41%)', 'MSIE 6 (37%)', 'Firefox (16%)', 'Safari (3%)', 'Other (3%)']);
+        pie.Set('chart.strokestyle', 'white');
+        pie.Set('chart.linewidth', 4);
+        pie.Set('chart.text.size', 10);
+        pie.Set('chart.colors', ['red', '#ddd', '#0f0', 'blue', 'black', 'white']);
+        pie.Draw();
+
+        /**
+        * Show the funnel chart
+        */
+        funnel = new RGraph.Funnel('myFunnel', [100,35,35,26,24,5]);
+        funnel.Set('chart.text.boxed', true);
+        funnel.Set('chart.title', 'A sales funnel (tooltips)');
+        funnel.Set('chart.labels', ['Initial contact', 'Established lead', 'Site visit', 'Order placed', 'Sale finalised', 'After sales visit']);
+        funnel.Set('chart.shadow', true);
+        funnel.Set('chart.shadow.offsetx', 3);
+        funnel.Set('chart.shadow.offsety', 3);
+        funnel.Set('chart.gutter', 36);
+        funnel.Set('chart.tooltips', [
+                                      '<b>Initial contact</b><br />Potential Customers were contacted<br />to gauge interest',
+                                      '<b>Established lead</b><br />Leads were collated and passed<br />to the follow up team',
+                                      '<b>Site visit</b><br />A site visit was arranged',
+                                      '<b>Order placed</b><br />An order was placed by the Customer',
+                                      '<b>Sale</b><br />The sale was finalised',
+                                      '<b>After sales followup</b><br />A follow up visit was arranged to ease<br />concerns'
+                                     ]);
+        funnel.Draw();
+    </script>
+
+    <h2>Contents</h2>
+
+    <ul>
+        <li><a href="#intro" title="A short description of RGraph">Introduction to RGraph</a></li>
+        <li><a href="#benefits" title="Benefits of using RGraph over more traditional server based graph/chart libraries">Benefits of HTML5 canvas graphs</a></li>
+        <li>
+            <a href="examples/index.html" title="Look at the examples">Examples</a><br />
+
+            <div style="padding-left: 20px">
+                <div class="list-item label">Bar chart</div>
+                <div class="list-item">
+                    [<a href="examples/bar.html">examples</a>]
+                    [<a href="docs/bar.html">documentation</a>]
+                </div>
+
+                <br />
+
+                <div class="list-item label">Bi-polar chart</div>
+                <div class="list-item link">
+                    [<a href="examples/bipolar.html">examples</a>]
+                    [<a href="docs/bipolar.html">documentation</a>]
+                </div>
+
+                <br />
+
+                <div class="list-item label">Donut chart</div>
+                <div class="list-item">
+                    [<a href="examples/donut.html">examples</a>]
+                    [<a href="docs/donut.html">documentation</a>]
+                </div>
+
+                <br />
+
+                <div class="list-item label">Funnel chart</div>
+                <div class="list-item">
+                    [<a href="examples/funnel.html">examples</a>]
+                    [<a href="docs/funnel.html">documentation</a>]
+                </div>
+
+                <br />
+
+                <div class="list-item label">Gantt chart</div>
+                <div class="list-item link">
+                    [<a href="examples/gantt.html">examples</a>]
+                    [<a href="docs/gantt.html">documentation</a>]
+                </div>
+
+                <br />
+
+                <div class="list-item label">Horizontal Bar chart</div>
+                <div class="list-item link">
+                    [<a href="examples/hbar.html">examples</a>]
+                    [<a href="docs/hbar.html">documentation</a>]
+                </div>
+
+                <br />
+
+                <div class="list-item label">LED grid</div>
+                <div class="list-item link">
+                    [<a href="examples/led.html">examples</a>]
+                    [<a href="docs/led.html">documentation</a>]
+                </div>
+
+                <br />
+
+                <div class="list-item label">Line chart</div>
+                <div class="list-item link">
+                    [<a href="examples/line.html">examples</a>]
+                    [<a href="docs/line.html">documentation</a>]
+                </div>
+
+                <br />
+
+                <div class="list-item label">Odometer</div>
+                <div class="list-item link">
+                    [<a href="examples/odo.html">examples</a>]
+                    [<a href="docs/odo.html">documentation</a>]
+                </div>
+
+                <br />
+
+                <div class="list-item label">Pie chart</div>
+                <div class="list-item link">
+                    [<a href="examples/pie.html">examples</a>]
+                    [<a href="docs/pie.html">documentation</a>]
+                </div>
+
+                <br />
+
+                <div class="list-item label">Progress bar</div>
+                <div class="list-item link">
+                    [<a href="examples/progress.html">examples</a>]
+                    [<a href="docs/progress.html">documentation</a>]
+                </div>
+
+                <br />
+
+                <div class="list-item label">Pseudo radar chart</div>
+                <div class="list-item link">
+                    [<a href="examples/radar.html">examples</a>]
+                    [<a href="docs/radar.html">documentation</a>]
+                </div>
+
+                <br />
+
+                <div class="list-item label">Scatter chart</div>
+                <div class="list-item link">
+                    [<a href="examples/scatter.html">examples</a>]
+                    [<a href="docs/scatter.html">documentation</a>]
+                </div>
+
+                <br />
+
+                <div class="list-item label">Traditional radar chart</div>
+                <div class="list-item link">
+                    [<a href="examples/tradar.html">examples</a>]
+                    [<a href="docs/tradar.html">documentation</a>]
+                </div>
+
+                <br /><br />
+
+                <div class="list-item" style="width: 300px"><a href="docs/zoom.html">Zooming your graphs</a></div><br />
+                <div class="list-item" style="width: 300px"><a href="docs/annotating.html">Annotating your graphs</a></div><br />
+                <div class="list-item" style="width: 300px"><a href="docs/combine.html">Combining charts</a></div><br />
+                <div class="list-item" style="width: 300px"><a href="docs/external.html">Integrating RGraph with external libraries</a></div>
+                
+                <br />
+
+                <div class="list-item"><a href="docs/animation.html">Animating your graphs</a></div>
+                
+                <br />
+
+                <div class="list-item"><a href="examples/basic.html">A basic example</a></div>
+                
+                <br />
+
+                <div class="list-item"><a href="docs/css.html">Available CSS classes</a></div>
+                
+                <br />
+
+                <div class="list-item"><a href="docs/color.html">About canvas color definitions</a></div>
+
+                <br />
+
+                <div class="list-item"><a href="docs/context.html">About context menus</a></div>
+
+                <br />
+
+                <div class="list-item"><a href="docs/misc.html">Miscellaneous documentation</a></div>
+
+                <br />
+
+                <div class="list-item"><a href="docs/api.html">API documentation</a></div>
+            </div>
+        </li>
+
+        <br />
+
+        <li><a href="#browser" title="Information about browser support">Browser support</a></li>
+        <li><a href="#performance" title="Things you may want to look at concerning performance">Improving the performance of your graphs</a></li>
+        <li><a href="#implementation" title="Implementing RGraph on your website">Implementing RGraph</a></li>
+        <li><a href="#structure" title="Suggested structure for RGraph">Suggested structure for RGraph</a></li>
+        <li><a href="#integration" title="Information on integrating RGraph with server side scripting">Integration with server side scripting</a></li>
+        <li><a href="docs/issues.html" title="If you're having trouble, have a look through these">Common issues</a></li>
+        <li><a href="#support" title="Need support? Get it here">Support forum</a></li>
+        <li><a href="#download" title="Download the RGraph archives"><b>Download</b></a></li>
+        <li><a href="#license" title="The license under which RGraph is issued">License</a> (<a href="docs/licensing.html">Licensing FAQs</a>)</li>
+    </ul>
+
+    <a name="intro"></a>
+    <h2>Introduction to RGraph</h2>
+
+    <p>
+        RGraph is a HTML5 canvas graph library. It uses features that became available in HTML5 (specifically, the CANVAS tag)
+        to produce a wide variety of graph types: bar chart, bi-polar chart (also known as an age frequency chart), donut chart,
+        funnel chart, gantt chart, horizontal bar chart, LED display, line graph, odometer, pie chart, progress bar, pseudo radar chart,
+        scatter graph and traditional radar chart. RGraph is covered by the <a href="#license">RGraph License</a>.
+    </p>
+
+    <a name="benefits"></a>
+    <h2>Benefits of HTML5 canvas graphs</h2>
+    
+    <p>
+        HTML5 introduces a new HTML element - the CANVAS tag. This tag allows for two dimensional drawing easily using Javascript.
+        This makes it perfect for producing graphs. Because Javascript runs on your users computer, none of the stress on your server
+        normally associated with producing graphs (as is currently the norm) is incurred. Not only that but because
+        of the greater processing power that is typically available on users' computers, they will appear to be much, much faster. And,
+        because the code can be both compressed (for example if you're using Apache, mod_gzip will do this automatically for you) and
+        cached, bandwidth usage can be massively reduced. This makes it economically attractive to employ, (ie <b>it can save you
+        money...</b>).
+    </p>
+
+    <p>
+        Imagine, you are creating 100,000 graphs a day and the data is such that the resulting graphs cannot be cached. With the RGraph
+        library you can reduce that figure to zero. All the processing and graph creation is done by each individual client, much like
+        rendering the HTML you send to them. So you don't have to send any images, you simply send the Javascript libraries once.
+        So, much lower bandwidth bills and far less strain on your webserver.
+    </p>
+    
+    <p>
+        And if that wasn't enough, because the graphs are created using Javascript, they will work offline if you view a .html page
+        on your own PC. Download the archive and see! Useful if you need to do a presentation for example and want to use the same
+        graph(s) as your website.
+    </p>
+    
+    <div>
+        <div style="width: 45%; background-color: #fff; display: inline; display: inline-block">
+            <ul>
+                <li>Cross browser support</li>
+                <li>14 Different base graph types (<a href="examples/index.html">Examples</a>)</li>
+                <li>Graphs work on and off-line</li>
+                <li>Interactive features</li>
+            </ul>
+        </div>
+
+        <div style="width: 45%; display: inline; display: inline-block">
+            <ul>
+                <li>Graphs are created on the client - no server load</li>
+                <li>Very easy setup (see <a href="#implementation">Implementing RGraph</a>)</li>
+                <li>Fully documented (<a href="docs/index.html">Documentation</a>)</li>
+                <li>Very easy to learn</li>
+            </ul>
+        </div>
+    </div>
+
+
+    <a name="browser"></a>
+    <h2>Browser support</h2>
+    
+    <p>
+        Since the graphs are produced using HTML5 features (the new <b>canvas</b> tag), client support is currently limited to:
+    </p>
+    
+    <ul>
+        <li>Mozilla Firefox 3.5+</li>
+        <li>Google Chrome 2+</li>
+        <li>Apple Safari 4+</li>
+    </ul>
+    
+    <p>
+        The HTML5 canvas tag is part of the <a href="http://www.w3.org/html/wg/html5/" target="_blank">HTML5 specification</a>,
+        and all of the above browsers support it, so it's just a matter of time before MSIE has support. Perhaps.
+    </p>
+    
+    <p>
+        <b>Canvas &amp; Internet Explorer (MSIE)</b><br />
+        Microsoft Internet Explorer doesn't yet have support for the HTML5 canvas tag. Future versions will presumably
+        support it. However, if you can't change your web browser, you can use the Google plug-in
+        <a href="http://code.google.com/chrome/chromeframe/" target="_blank">Google Chrome Frame</a>.
+    </p>
+
+    <p>
+        <b>RGraph and Opera</b><br />
+        Opera is now (as of 28th November 2009) supported in a limited fashion. This is due to Opera not supporting the shadow or text
+        APIs of the canvas. Text support is simulated, and not all graph types will work with it, (namely the traditional radar chart).
+    </p>
+
+    <a name="performance"></a>
+    <h2>Improving the performance of your graphs</h2>
+    
+    <p>
+        Although performance is excellent, (traditionally your webserver has been
+        producing all of your graphs, and now the client produces them, and typically only one at a time), you may still want to tune
+        RGraph further. The biggest thing you can do is use compression, which reduces the initial download time of the libraries, but
+        there are a number of things you can do:
+    </p>
+    
+    <ul>
+        <li>
+            <b>Compression</b><br />HTTP compression can dramatically reduce your bandwidth bills and increase the speed
+            of your website. The RGraph.common.js file for example is over 90k, but with compression this can be reduced to around 17k.
+            Over a fifth of the original size! <span style="color: red">If you do only one thing to aid performance, then it should
+            be this.</span>
+            
+            <p>
+                To achieve this with Apache you have a few options:
+            </p>
+            
+            <ul style="list-style-type: disc">
+                <li>You can use the Apache module mod_gzip which compresses the libraries on the fly.</li>
+                <li>
+                    You can compress the libraries manually using the gzip command, rename them to remove the .gz suffix
+                    and add the header using an Apache directive
+                    (eg <span style="background-color: #C5FFC5; padding: 1px">AddEncoding gzip .js</span>). If you have some sort of
+                    release process/script, it would make sense to add this to it to automate the procedure.
+                </li>
+            </ul>
+            <p>
+        </li>
+
+        <li>
+            <b>Minification</b><br />
+            Minification reduces the size of the library before compression takes effect, removing unnecessary spaces and comments etc.
+            A combination of minification and compression will give superb results. For example, minification combined with
+            compression can reduce the common library from over 90k to roughly 9k (!). There is a PHP shell script that you can use
+            to minify the libraries in the scripts directory.
+
+            <p>
+                You can get pre-minified versions of the libraries <a href="http://www.rgraph.net/RGraph.minified.zip">here</a>.
+            </p>
+        </li>
+        
+        <p>
+
+        <li>
+            <b>Pre-emptive caching</b><br />
+            Slightly different to caching itself, is pre-emptive caching. This involves downloading the libraries before the page that requires
+            them is shown. This way, they're already in the users browser cache and the graph will subsequently appear to be much much
+            quicker. An example of this would be having the library included at the bottom of your index page of your website (optionally
+            with the <b>defer="defer"</b> attribute). The script can be downloaded at will because the page doesn't actually use it, but
+            for subsequent pages it will already be in the users browser cache.
+            
+            <p>
+        </li>
+
+        <li>
+            <b>Caching</b><br />
+            Since the libraries you're using won't change that often, you can set distant Expires: headers on them, or appropriate
+            Cache-Control: headers, and the client will not even have to contact your server for it. When you want to make sure
+            the library is re-downloaded (eg. you update the library), then simply change the filename.
+            
+            <p>
+        </li>
+
+        <li>
+            <b>Script tag placement</b><br />
+            According to <a href="http://developer.yahoo.com/performance/" target="_blank">Yahoo! guidelines</a> placing the &lt;SCRIPT&gt;
+            tag at the bottom of the page can increase the percieved load time. If you do this, then your graphs should be
+            created in the windows onload event, otherwise the browser may try to create them without the library
+            having been loaded, and will therefore subsequently fail.
+
+            <p>
+
+            You should also consider the effect that this has when your page is rather weighty. If the page is weighty there
+            will be a small delay before the onload event fires, and therefore creates the graph. This is not so bad if the
+            graph is not immediately visible, however if it is then you should carefully consider using the onload event. You
+            may wish to define the canvas tag and then immediately define the javascript that creates the graph. This way
+            the graph will be created and shown, and then the rest of the page loads. The end result is that your graph
+            appears to be much faster.
+        </li>
+        
+        <li>
+            <b>Combining libraries</b><br />
+            If your performance requirements are extreme, then you may wish to consider combining the libraries into a single file.
+            This won't save on the size of the individual libraries, but will save on the headers that are sent as part of the response.
+            If a typical response sends 500 bytes worth of headers, and you send four graph libraries, then combining the libraries
+            would save 1500 bytes. Multiple factors need to be considered though, including things like caching, which can circumvent
+            the unneccessary repeated downloading of the libraries.
+        </li>
+    </ul>
+    
+    <p>
+        
+    </p>
+    
+    <a name="implementation"></a>
+    <h2>Implementing RGraph</h2>
+    
+    <p>
+        Getting RGraph up and running is very easy and consists of three steps. If you're having trouble I suggest you get hold of a copy of
+        <a href="http://www.mozilla.com" target="_blank">Firefox</a> along with <a href="http://www.getfirebug.com" target="_blank">Firebug</a> - its
+        Javascript error console will make debugging your issue much easier. Many problems are down to a library not having been included or
+        not using the onload event when you need to. You might also benefit from using the <a href="https://addons.mozilla.org/en-US/firefox/addon/60" target="_blank">Web Developer toolbar</a>
+        for Firefox. This allows you to easily disable caching, thus eliminating any problems that that causes.
+    </p>
+
+    <ol>
+        <li>
+            Include the libraries (put this in your documents &lt;HEAD&gt;):
+<pre class="code">
+&lt;script src="RGraph.common.js"&gt;&lt;/script&gt;<br />
+&lt;script src="RGraph.bar.js"&gt;&lt;/script&gt;      &lt;!-- Just needed for bar graphs --&gt;
+&lt;script src="RGraph.bipolar.js"&gt;&lt;/script&gt;  &lt;!-- Just needed for bi-polar graphs --&gt;
+&lt;script src="RGraph.donut.js"&gt;&lt;/script&gt;    &lt;!-- Just needed for donut charts --&gt;
+&lt;script src="RGraph.funnel.js"&gt;&lt;/script&gt;   &lt;!-- Just needed for funnel charts --&gt;
+&lt;script src="RGraph.gantt.js"&gt;&lt;/script&gt;    &lt;!-- Just needed for gantt charts --&gt;
+&lt;script src="RGraph.hbar.js"&gt;&lt;/script&gt;     &lt;!-- Just needed for horizontal bar charts --&gt;
+&lt;script src="RGraph.led.js"&gt;&lt;/script&gt;      &lt;!-- Just needed for LED charts --&gt;
+&lt;script src="RGraph.line.js"&gt;&lt;/script&gt;     &lt;!-- Just needed for line graphs --&gt;
+&lt;script src="RGraph.odo.js"&gt;&lt;/script&gt;      &lt;!-- Just needed for odometers --&gt;
+&lt;script src="RGraph.pie.js"&gt;&lt;/script&gt;      &lt;!-- Just needed for pie charts AND donut charts --&gt;
+&lt;script src="RGraph.progress.js"&gt;&lt;/script&gt; &lt;!-- Just needed for progress bars --&gt;
+&lt;script src="RGraph.radar.js"&gt;&lt;/script&gt;    &lt;!-- Just needed for radar charts --&gt;
+&lt;script src="RGraph.scatter.js"&gt;&lt;/script&gt;  &lt;!-- Just needed for scatter graphs --&gt;
+&lt;script src="RGraph.tradar.js"&gt;&lt;/script&gt;   &lt;!-- Just needed for traditional radar charts --&gt;
+</pre>
+        </li>
+
+        <li>
+            Add the canvas tag (put it where you want the graph to appear):
+<pre class="code">
+&lt;canvas id="myCanvas" width="600" height="250"&gt;[No canvas support]&lt;/canvas&gt;
+</pre>
+        </li>
+
+        <li>
+            Create the graph (since it is using the onload event, you can put this anywhere):
+            
+<pre class="code">
+&lt;script&gt;
+    window.onload = function ()
+    {
+        var data = [280, 45, 133, 166, 84, 259, 266, 960, 219, 311, 67, 89];
+
+        bar = new RGraph.Bar('myCanvas', data);
+        bar.Set('chart.labels', ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']);
+        bar.Set('chart.gutter', 35);
+        bar.Draw();
+    }
+&lt;/script&gt;
+</pre>
+        </li>
+    </ol>
+
+    <p>
+        There's also a very <a href="examples/basic.html">basic example</a> of using RGraph, that does very little. It can be helpful to
+        illustrate how you can get RGraph up and running.
+    </p>
+    
+    <a name="structure"></a>
+    <h2>Suggested structure for RGraph</h2>
+    
+    <img src="images/structure.png" width="175" height="205" alt="Suggested structure for RGraph" style="float: right" />
+    
+    <p>
+        The suggested layout structure for the RGraph libraries is shown on the right. The <b>www.example.com</b> folder represents
+        the root/top level of your website with the <b>javascript</b> directory beneath that. The <b>css</b> and <b>images</b>
+        folders are shown for
+        illustrative purposes only. If you follow this layout then your URLs to the RGraph libraries would be:
+    </p>
+    
+    <p>
+        <b>/javascript/rgraph/RGraph.common.js</b><br />
+        <b>/javascript/rgraph/RGraph.bar.js</b><br />
+        etc
+    </p>
+    
+    <p>
+        By using this structure you make RGraph easy to update should you need to, and also keep all the RGraph libraries in
+        one, easy to find, place.
+    </p>
+
+    <br clear="all" />
+
+    <a name="integration"></a>
+    <h2>Integration with server side scripting</h2>
+    
+    <p>
+        This is a very easy process, as easy as sending content to the browser. All you need to do is make the <i>data</i> variable contain
+        the data you want to be displayed. Eg:
+    </p>
+
+    <pre class="code">
+&lt;script src="RGraph.common.js"&gt;&lt;/script&gt;
+&lt;script src="RGraph.line.js"&gt;&lt;/script&gt;
+
+&lt;canvas id="myCanvasTag" width="600" height="200"&gt;[No canvas support]&lt;/canvas&gt;
+
+&lt;script&gt;
+    var data = [78,16,26,23,25,51,34,64,84,84];
+    var line = new RGraph.Line("myCanvasTag", data);
+    line.Set("chart.labels", ["Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov"]);
+    line.Draw();
+&lt;/script&gt;
+</pre>
+    
+    <p>
+        To get the above using PHP you could do this:
+    </p>
+    
+    <pre class="code">&lt;?php
+    $myData = join(',', array(78,16,26,23,25,51,34,64,84,84));
+
+    print('&lt;script src="RGraph.common.js"&gt;&lt;/script&gt;' . "\n");
+    print('&lt;script src="RGraph.line.js"&gt;&lt;/script&gt;' . "\n\n");
+    print('&lt;canvas id="myCanvasTag" width="600" height="200"&gt;[No canvas support]&lt;/canvas&gt;' . "\n\n");
+    print('&lt;script&gt;' . "\n");
+    print('    var data = [' . $myData . '];' . "\n");
+    print('    var line = new RGraph.Line("myCanvasTag", data);' . "\n");
+    print('    line.Set("chart.labels", ["Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov"]);' . "\n");
+    print('    line.Draw();' . "\n");
+    print('&lt;/script&gt;');
+?&gt;
+</pre>
+
+    <p>
+        Strictly speaking the <span style="font-family: Monospace">var</span> isn't necessary, however if you put the code inside a function (like window.onload), it's probably best to
+        as using <span style="font-family: Monospace">var</span> will make the variable local, and not global. So doing so will help prevent naming clashes.
+    </p>
+
+
+    <a name="support"></a>
+    <h2>Support</h2>
+
+    <!-- Google Groups code -->
+        <table border="0" style="float: right; background-color: #eee; border: 2px dashed gray; padding: 5px" cellspacing=0>
+            <tr>
+                <td>
+                    <img src="images/googlegroups.png" height="26" width="132" alt="Google Groups" />
+                </td>
+            </tr>
+  
+            <tr>
+                <td style="padding-left: 5px">
+                    <b>Subscribe to RGraph support</b>
+                </td>
+            </tr>
+
+            <tr>
+                <td style="padding-left: 5px;">
+                    <form action="http://groups.google.com/group/rgraph/boxsubscribe" method="get">
+                        Email: <input type=text name=email>
+                        <input type=submit name="sub" value="Subscribe">
+                    </form>
+                </td>
+            </tr>
+
+            <tr>
+                <td align="right">
+                    <a href="http://groups.google.com/group/rgraph/topics?gvc=2" target="_blank">Visit this group</a>
+                </td>
+            </tr>
+        </table>
+    <!-- End of Google Groups code -->
+    
+    <p>
+        Support is available via a Google Groups forum. If you think that the issue you have is common, try the <a href="docs/issues.html">issues</a>
+        page first, and then try searching the forum in case your question has been answered previously. If that all yields nothing,
+        post a question to the forum.
+    </p>
+    
+    <p>
+        If you want to keep abreast of RGraph then you should subscribe too, as I post update notifications here.
+        If you have a feature request you can post them here too.
+    </p>
+    
+    <br clear="all" />
+
+    <a name="download"></a>
+    <h2>Download</h2>
+    
+    <?if($_SERVER['SERVER_NAME'] == 'www.rgraph.net' OR $_SERVER['SERVER_NAME'] == 'www.rgraph.org'):?>
+    
+        <p>
+            The latest download is below. It's a .zip file which you will be able to download to your computer and open with Winzip
+            (or equivalent).
+        </p>
+    
+        <?ShowDownloadLinks()?>
+
+    <?else:?>
+
+        <span style="color: red">
+            [Only available on <a href="http://www.rgraph.net#download">http://www.rgraph.net</a>]
+        </span>
+    <?endif?>
+
+
+    <a name="license"></a>
+    <h2>License</h2>
+
+    <div style="float: right; padding-left: 15px; padding-right: 40px">
+        
+        <div style="float: right">
+            <form action="https://checkout.google.com/api/checkout/v2/checkoutForm/Merchant/456239608328156" id="BB_BuyButtonForm" method="post" name="BB_BuyButtonForm">
+                <input name="item_name_1" type="hidden" value="RGraph License" />
+                <input name="item_description_1" type="hidden" value="License for RGraph: HTML5 graphing library" />
+                <input name="item_quantity_1" type="hidden" value="1" />
+                <input name="item_price_1" type="hidden" value="49.0" />
+                <input name="item_currency_1" type="hidden" value="GBP" />
+                <input name="_charset_" type="hidden" value="utf-8" />
+                <input alt="" width="116" height="61" src="images/buy.png" type="image" />
+            </form>
+        </div>
+    </div>
+
+    <p>
+        RGraph is covered by the RGraph license. A summary is that for commercial/business use
+        there is a small one-time licensing fee to pay. For non-commercial purposes it's freely usable.
+        
+        There are some
+        <a href="docs/licensing.html"><b>licensing FAQs</b></a> that should help to answer any
+        questions you might have. If you need one, you can <a href="http://www.rgraph.net/invoice.html">get an invoice here</a>.
+    </p>
+
+    <p>
+        If you have any questions about RGraph licensing, you can send your question to: <a href="mailto:licensing@rgraph.net">licensing@rgraph.net</a>.
+        If your question is of a support nature though, please use the <a href="http://groups.google.com/group/rgraph/topics?gvc=2" target="_blank">support forum</a>.
+    </p>
+    
+    <iframe width="100%" height="300" src="LICENSE.txt"></iframe>
+
+    <p>
+
+    <span style="font-size: 8pt">Icons from: <a href="http://dryicons.com" target="_blank" rel="nofollow">http://dryicons.com</a></span>
+    
+    <div id="rgraph"></div>
+    
+    <script>
+        if (location.host == 'dev.rgraph.org' || location.host == 'www.rgraph-dev.org' || location.host == 'dev.rgraph.net') {
+            document.getElementById("rgraph").innerHTML = '<div id="devtag">DEVELOPMENT<br /><a href="http://www.rgraph.net">Go to the live version &raquo;</a></div>';
+        }
+    </script>
+
+    <script>
+        if (location.host == 'www.rgraph.net') {
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+        }
+    </script>
+        
+    <script>
+    
+        if (location.host == 'www.rgraph.net') {
+            try {
+                var pageTracker = _gat._getTracker("UA-54706-2");
+                pageTracker._trackPageview();
+            } catch(err) {}
+        }
+    </script>
+
+</body>
+</html>

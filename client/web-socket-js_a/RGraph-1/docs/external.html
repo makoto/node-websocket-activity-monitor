@@ -1,0 +1,142 @@
+<?php ob_start('ob_gzhandler') ?>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <!--
+        /**
+        * o------------------------------------------------------------------------------o
+        * | This file is part of the RGraph package - you can learn more at:             |
+        * |                                                                              |
+        * |                          http://www.rgraph.net                               |
+        * |                                                                              |
+        * | This package is licensed under the RGraph license. For all kinds of business |
+        * | purposes there is a small one-time licensing fee to pay and for personal,    |
+        * | charity and educational purposes it is free to use. You can read the full    |
+        * | license here:                                                                |
+        * |                      http://www.rgraph.net/LICENSE.txt                       |
+        * o------------------------------------------------------------------------------o
+        */
+    -->
+    <title>RGraph: HTML5 canvas graph library - Integrating RGraph with external libraries</title>
+    <link rel="stylesheet" href="../css/website.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../css/ModalDialog.css" type="text/css" media="screen" />
+    <link rel="icon" type="image/png" href="../favicon.png">
+
+    <script src="../libraries/RGraph.modaldialog.js" ></script>
+    <script src="../libraries/RGraph.common.js" ></script>
+    <script src="../libraries/RGraph.line.js" ></script>
+    
+    <script>
+        window.onload = function ()
+        {
+            /**
+            * Draw the line graph
+            */
+            var line = new RGraph.Line('myLine', [45,12,16,18,44,54,23,21,56,58,33,47]);
+            line.Set('chart.background.barcolor1', '#fff');
+            line.Set('chart.background.barcolor2', '#fff');
+            line.Set('chart.tickmarks', null);
+            line.Set('chart.hmargin', 10);
+            line.Set('chart.linewidth', 3);
+            line.Set('chart.shadow', true);
+            line.Set('chart.shadow.offset', 2);
+            line.Set('chart.labels', ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']);
+            line.Set('chart.title', 'A line graph with context menu');
+
+            // This defines a context menu which calls the "ShowDialog" function (defined below).
+            // This function in turn shows the dialog
+            line.Set('chart.contextmenu', [['Show dialog', function () {ModalDialog.Show('myDialog', 300);}]]);
+
+            line.Draw();
+        }
+    </script>
+</head>
+<body>
+    <div id="logo">
+        <a href="../index.html">RGraph: HTML5 canvas graph library</a>
+        >
+        <a href="index.html">Documentation</a>
+        >
+        Integrating RGraph with external libraries
+    </div>
+
+    <h1>RGraph: Integrating RGraph with external libraries</h1>
+
+    <script>
+        if (document.all) {
+            document.write('<div style="background-color: #fee; border: 2px dashed red; padding: 5px"><b>Important</b><br /><br /> Internet Explorer does not natively support the HTML5 canvas tag yet, so if you want to see the graphs, you can either:<ul><li>Install <a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a></li><li>Use another browser entirely. Your choices are Firefox, Chrome or Safari</li></ul></div>');
+        }
+    </script>
+
+    <canvas id="myLine" width="400" height="200" style="float: right">[No canvas support]</canvas>
+
+    <p>
+        This page shows you how you can easily integrate the graphs with other external Javascript libraries. This particular example
+        attaches a context menu to the graph, of which one of the options is to show a dialog. This could, for example, be used to
+        confirm actions before taking them.
+    </p>
+    
+    <p>
+        The dialog doesn't need to require user input - it could just be a static "Please wait..." type dialog, which is shown while a
+        subsequent page loads that takes a few seconds.
+    </p>
+        
+    <p>
+        The ModalDialog was originally an external library, however I've now incorporated it into RGraph for ease. It's also covered by the
+        RGraph license - so if you have an <a href="licensing.html">RGraph license</a>, then the ModalDialog is included.
+    </p>
+
+    <br /><br />
+
+    <pre class="code">
+&lt;script&gt;
+    window.onload = function ()
+    {
+        /**
+        * Draw the line graph
+        */
+        var line = new RGraph.Line('myLine', [45,12,16,18,44,54,23,21,56,58,33,47]);
+        line.Set('chart.background.barcolor1', '#fff');
+        line.Set('chart.background.barcolor2', '#fff');
+        line.Set('chart.tickmarks', null);
+        line.Set('chart.hmargin', 10);
+        line.Set('chart.linewidth', 3);
+        line.Set('chart.shadow', true);
+        line.Set('chart.shadow.offset', 2);
+        line.Set('chart.labels', ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']);
+        line.Set('chart.title', 'A line graph with context menu');
+
+        // This defines a context menu which calls the given function. This function in turn shows the dialog
+        line.Set('chart.contextmenu', [['Show dialog', function () {ModalDialog.Show('myDialog', 300);}]]);
+
+        line.Draw();
+    }
+&lt;/script&gt;</pre>
+
+    <p>
+        If you're interested in using this modal dialog, then you'll probably also want the CSS that styles it. This can be found in the
+        &quot;css&quot; directory.
+    </p>
+
+    <!-- This is the popup dialog-->
+
+        <div id="myDialog" class="modalDialog">
+            
+            <img src="../images/alex.png" width="48" height="48" alt="A picture" style="float: left; margin-top: 15px; margin-right: 5px" />
+            <b>An example dialog</b>
+            <p>
+                This is an example of combining the graphs, the context menu and external libraries. You
+                could use this ModalDialog, for example, to prompt the user for further information or to confirm
+                actions.
+            </p>
+            
+            <div style="text-align: center">
+                <button onclick="ModalDialog.Close()">Close</button>
+            </div>
+        </div>
+
+    <!-- End of dialog -->
+
+</body>
+</html>

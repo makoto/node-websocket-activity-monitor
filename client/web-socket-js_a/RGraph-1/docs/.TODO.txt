@@ -1,0 +1,14 @@
+TODO
+====
+ o [WEBSITE] Look at using ASYNC attribute on site (at least the front page)
+ 
+ MSIE Compatibility
+ ==================
+ o Tooltips should:
+    a) Work
+    b) Mouse pointer should change to the hand when hovering over a hotspot
+ o Add e.stopPropagation wherever e.cancelBubble is
+ o Check ModalDialog
+ o Check tooltips
+ o Check Contextmenu functionality
+ o Possible conflict when Opera supports text/shadow APIs - left mouse button for both tooltips AND context menu

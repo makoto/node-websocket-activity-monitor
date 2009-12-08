@@ -1,0 +1,234 @@
+<?php ob_start('ob_gzhandler') ?>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <!--
+        /**
+        * o------------------------------------------------------------------------------o
+        * | This file is part of the RGraph package - you can learn more at:             |
+        * |                                                                              |
+        * |                          http://www.rgraph.net                               |
+        * |                                                                              |
+        * | This package is licensed under the RGraph license. For all kinds of business |
+        * | purposes there is a small one-time licensing fee to pay and for personal,    |
+        * | charity and educational purposes it is free to use. You can read the full    |
+        * | license here:                                                                |
+        * |                      http://www.rgraph.net/LICENSE.txt                       |
+        * o------------------------------------------------------------------------------o
+        */
+    -->
+    <title>RGraph: HTML5 canvas graph library - gantt chart</title>
+    <link rel="stylesheet" href="../css/website.css" type="text/css" media="screen" />
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <script src="../libraries/RGraph.common.js" ></script>
+    <script src="../libraries/RGraph.gantt.js" ></script>
+    
+    <style type="text/css">
+        .RGraph_tooltip {
+            color: #00a ! important;
+        }
+        
+        .RGraph_tooltip b {
+            color: black ! important;
+        }
+    </style>
+
+    <script>
+        window.onload = function ()
+        {
+            var gantt1 = new RGraph.Gantt('gantt1');
+            gantt1.Set('chart.xmax', 122);
+            gantt1.Set('chart.gutter', 35);
+            gantt1.Set('chart.labels', ['January', 'February', 'March', 'April']);
+            gantt1.Set('chart.title', 'Work schedule for Xyz Ltd (tooltips, context, zoom)');
+            gantt1.Set('chart.defaultcolor', '#faa');
+            gantt1.Set('chart.tooltips', ["<b>John Noval</b><br />Working through adding something<br /> to the website.",
+                                          "<b>Fred Bloggs</b><br />Building a new drive",
+                                          "<b>Barney Rubble</b><br />Not started adding the new garden",
+                                          "<b>Gloria Honeyford</b><br />Just started dinner",
+                                          "<b>Paul O'Grady</b><br />Nearly finished the front garden",
+                                          "<b>Harry Secombe</b><br />Roughly half way through the bible reading",
+                                          "<b>Shane Ritchy</b><br />Trying desparately to be funny. Failing",
+                                          "<b>Barry McGuigan</b><br />Beating up the gardener",
+                                          "<b>Cynthia Frances</b><br />Not entirely sure what shes's doing",
+                                          "<b>Graham Taylor</b><br />Prepping the midday activities. Nearly finished",
+                                           "<b>Paul McKenna</b><br />Putting everyone off their work"]);
+
+            gantt1.Set('chart.events', [
+                                 [31, 28, 75, 'Richard'],
+                                 [12, 28, 67, 'Fred'],
+                                 [59, 14, 0, 'Barney'],
+                                 [59, 21, 5, 'Gloria'],
+                                 [46, 31, 92, 'Paul', 'red', 'yellow'],
+                                 [80, 21, 46, 'Harry'],
+                                 [94, 17, 84, 'Shane'],
+                                 [34, 14, 32, 'Barry'],
+                                 [64, 14, 28, 'Cynthia'],
+                                 [13, 61, 74, 'Mabel'],
+                                 [84, 31, 16, 'Paul']
+                                ]);
+            
+            // These are example day index numbers. Basically, the 1st of January starts at zero
+            //
+            //   0 - 1st January    31 - 1st February
+            //  59 - 1st March      90 - 1st April
+            // 120 - 1st May       151 - 1st June
+            // 181 - 1st July      212 - 1st August
+            // 243 - 1st September 273 - 1st October
+            // 304 - 1st November  334 - 1st December
+
+            var color = 'rgba(192,255,192,0.5)';
+
+            gantt1.Set('chart.vbars', [
+                                [0, 31, color],
+                                [59, 31, color]
+                               ]);
+            gantt1.Set('chart.zoom.hdir', 'center');
+            gantt1.Set('chart.zoom.vdir', 'center');
+            gantt1.Set('chart.contextmenu', [['Zoom in', RGraph.Zoom]]);
+            gantt1.Draw();
+            
+            gantt2 = new RGraph.Gantt('gantt2');
+            gantt2.Set('chart.xmax', 7);
+            gantt2.Set('chart.gutter', 30);
+            gantt2.Set('chart.labels', ['Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun']);
+            gantt2.Set('chart.defaultcolor', 'red');
+            gantt2.Set('chart.title', 'This weeks schedule (context menu, annotatable)');
+            gantt2.Set('chart.annotatable', true);
+
+            gantt2.Set('chart.zoom.mode', 'thumbnail');
+
+            gantt2.Set('chart.events', [
+                                  [0, 7, null, 'Richard', 'pink'],
+                                  [0, 5, null, 'Greg', 'red'],
+                                  [3, 4, null, 'David', 'green'],
+                                  [5, 2, null, 'Alice', 'blue']
+                                 ]);
+            gantt2.Set('chart.contextmenu', [
+                                       ['Clear', function () {RGraph.Clear(gantt2.canvas); gantt2.Draw();}]
+                                      ]);
+            gantt2.Draw();
+
+
+            gantt3 = new RGraph.Gantt('gantt3');
+            gantt3.Set('chart.xmax', 365);
+            gantt3.Set('chart.title', 'Training completion (clickable bars)');
+            gantt3.Set('chart.gutter', 35);
+            gantt3.Set('chart.color', '#fdd');
+            gantt3.Set('chart.background.grid.hsize', 5);
+            gantt3.Set('chart.background.grid.vsize', 5);
+            gantt3.Set('chart.defaultcolor', '#fdd');
+            gantt3.Set('chart.labels', ['Q1', 'Q2', 'Q3', 'Q4']);
+            gantt3.Set('chart.tooltips', ['<b>Richard</b><br />Richard is a top geezer. Guvnor.', '<b>Pete</b><br />Pete likes going out clubbing', '<b>Gary</b><br />Gary is a top geezer too', '<b>Sean</b><br />Sean is very good at what he does.<br />Backgammon.', '<b>Michael</b><br />Michael is a secret ninja']);
+            gantt3.Set('chart.events', [
+                                 [0, 98, 78, 'Richard'],
+                                 [30, 130, 50, 'Pete'],
+                                 [65, 114, 5, 'Gary'],
+                                 [88, 210, 97, 'Sean'],
+                                 [183, 75, 36, 'Michael', 'red']
+                                ]);
+            gantt3.Draw();
+            
+            gantt4 = new RGraph.Gantt('gantt4');
+            gantt4.Set('chart.xmax', 61);
+            gantt4.Set('chart.title', 'September and October schedule');
+            gantt4.Set('chart.gutter', 35);
+            gantt4.Set('chart.color', '#fdd');
+            gantt4.Set('chart.background.grid.hsize', 15);
+            gantt4.Set('chart.background.grid.vsize', 15);
+            gantt4.Set('chart.defaultcolor', '#00f');
+            gantt4.Set('chart.labels', ['September', 'October']);
+            gantt4.Set('chart.tooltips', ['<b>Fred</b><br />Fred is out for the entirety of the season', '<b>John</b><br />John has 7 days holiday', '<b>Harry</b><br />Harry is away for two weeks<br />', '<b>Roger</b><br />Roger is away for three days', '<b>Frank</b><br />Frank is away for four weeks']);
+            gantt4.Set('chart.tooltip.effect', 'expand');
+
+            gantt4.Set('chart.events', [
+                                  [0, 61, null, 'Fred'],
+                                  [30, 7, null, 'John'],
+                                  [14, 14, null, 'Harry'],
+                                  [28, 3, null, 'Roger'],
+                                  [14, 28, null, 'Frank']
+                                 ]);
+            gantt4.Draw();
+            
+            gantt5 = new RGraph.Gantt('gantt5');
+            gantt5.Set('chart.xmax', 7);
+            gantt5.Set('chart.title', 'Schedule for week commencing 1st Jan');
+            gantt5.Set('chart.gutter', 35);
+            gantt5.Set('chart.defaultcolor', '#dd0');
+            gantt5.Set('chart.background.grid.hsize', 15);
+            gantt5.Set('chart.background.grid.vsize', 15);
+            gantt5.Set('chart.labels', ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']);
+
+            gantt5.Set('chart.events', [
+                                  [0, 5, null, 'Work', 'red'],
+                                  [5, 2, null, 'Weekend', 'green'],
+                                  [2, 5, null, 'Fred is coming', 'blue'],
+                                  [3, 4, null, 'Cynthia, camp', 'blue']
+                                 ]);
+            gantt5.Draw();
+            
+            gantt6 = new RGraph.Gantt('gantt6');
+            gantt6.Set('chart.title', '(Another) Schedule for week commencing 1st Jan');
+            gantt6.Set('chart.xmax', 7);
+            gantt6.Set('chart.events', [
+                                        [0,5,,'Work', 'red'],
+                                        [5,2,, 'Home', 'blue'],
+                                        [2,5,, 'Squash', 'pink'],
+                                        [3,4,, 'Croquet', 'green']
+                                       ]);
+            gantt6.Draw();
+        }
+    </script>
+</head>
+<body>
+
+<div id="logo">
+    <a href="../index.html">RGraph: HTML5 canvas graph library</a>
+    >
+    <a href="./index.html">Examples</a>
+    >
+    Gantt chart
+</div>
+
+    <h1>RGraph: Gantt chart</h1>
+
+    <script>
+        if (document.all) {
+            document.write('<div style="background-color: #fee; border: 2px dashed red; padding: 5px"><b>Important</b><br /><br /> Internet Explorer does not natively support the HTML5 canvas tag yet, so if you want to see the graphs, you can either:<ul><li>Install <a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a></li><li>Use another browser entirely. Your choices are Firefox, Chrome or Safari</li></ul></div>');
+        }
+    </script>
+
+    <div>
+        <p>
+            A Gantt chart is used to show scheduling information. It is commonly used in project management but can also be used,
+            for example, to show holiday schedule information. In this case it would be easy to see when someone is unavailable.
+            The Gantt chart can have clickable bars  that can be used to provide more detail. It can also show vertical bars
+            that can be used to indicate events, or as in the case on the right, can be decorative.
+        </p>
+        
+        <p>
+            The chart is made of "units", in this case 365. This represents days in a year. The labels are separate, being equally
+            spaced across the chart. This means you can use more meaningful labels, which are easier to comprehend. As in the
+            example charts.
+        </p>
+    </div>
+
+    <div>
+        <ul>
+            <li><a href="../docs/gantt.html">Gantt chart API documentation</a></li>
+        </ul>
+    </div>
+
+    <div style="text-align: center">
+        <canvas id="gantt1" width="700" height="300"><div class="canvasfallback">[No canvas support]</div></canvas>
+        <canvas id="gantt2" width="700" height="200"><div class="canvasfallback">[No canvas support]</div></canvas>
+        <canvas id="gantt3" width="700" height="200"><div class="canvasfallback">[No canvas support]</div></canvas>
+        <canvas id="gantt4" width="700" height="200"><div class="canvasfallback">[No canvas support]</div></canvas>
+        <canvas id="gantt5" width="700" height="200"><div class="canvasfallback">[No canvas support]</div></canvas>
+        <canvas id="gantt6" width="700" height="200"><div class="canvasfallback">[No canvas support]</div></canvas>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,160 @@
+<?php ob_start('ob_gzhandler') ?>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <!--
+        /**
+        * o------------------------------------------------------------------------------o
+        * | This file is part of the RGraph package - you can learn more at:             |
+        * |                                                                              |
+        * |                          http://www.rgraph.net                               |
+        * |                                                                              |
+        * | This package is licensed under the RGraph license. For all kinds of business |
+        * | purposes there is a small one-time licensing fee to pay and for personal,    |
+        * | charity and educational purposes it is free to use. You can read the full    |
+        * | license here:                                                                |
+        * |                      http://www.rgraph.net/LICENSE.txt                       |
+        * o------------------------------------------------------------------------------o
+        */
+    -->
+    <title>RGraph: HTML5 canvas graph library - LED Grid documentation</title>
+    <link rel="stylesheet" href="../css/website.css" type="text/css" media="screen" />
+    <link rel="icon" type="image/png" href="/favicon.png">
+</head>
+<body>
+    <div id="logo">
+        <a href="../index.html">RGraph: HTML5 canvas graph library</a>
+        >
+        <a href="index.html">Documentation</a>
+        >
+        LED Grid
+    </div>
+
+    <h1>RGraph: LED Grid documentation</h1>
+
+    <script>
+        if (document.all) {
+            document.write('<div style="background-color: #fee; border: 2px dashed red; padding: 5px"><b>Important</b><br /><br /> Internet Explorer does not natively support the HTML5 canvas tag yet, so if you want to see the graphs, you can either:<ul><li>Install <a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a></li><li>Use another browser entirely. Your choices are Firefox, Chrome or Safari</li></ul></div>');
+        }
+    </script>
+
+    <p>
+        The LED grid can be used to represent simple letters and numbers.
+    </p>
+    
+    <p> 
+        The example file is <a href="../examples/led.html">here</a>.
+    </p> 
+    
+    <pre class="code">
+&lt;script&gt;
+    window.onload = function ()
+    {
+        var led = new RGraph.LED('myCanvas', '456461');
+        led.Set('chart.dark', '#666');
+        led.Set('chart.light', 'rgba(255,255,255,1)');
+        led.Draw();
+    }
+&lt;/script&gt;
+</pre>
+
+    <h2>Available properties</h2>
+    
+    <p>
+        You can use these properties to control how the LED grid apears.
+    </p>
+    
+    <!--
+        <PROPERTIES>
+            chart.dark :: Color of the darkened (ie unlit) lights<br /><i>Default: #eee</i>
+            chart.light :: Color of lit lights<br /><i>Default: #f66</i>
+            chart.background :: The color of the background.<br /><i>Default: white</i>
+            chart.zoom.mode :: Can be used to control whether the zoom is in thumbnail or canvas mode. Possible values are: <i>thumbnail</i> and <i>canvas</i>.<br /><i>Default: canvas</i>
+            chart.zoom.factor :: This is the factor that the graph will be zoomed by (bigger values means more zoom)<br /><i>Default: 1.5</i>
+            chart.zoom.fade.in :: Whether the zoomed canvas fades in or not. This also can be used to control the fade in for the zoom in thumbnail mode.<br /><i>Default: true</i>
+            chart.zoom.fade.out :: Whether the zoomed canvas fades out or not. This also can be used to control the fade in for the zoom in thumbnail mode.<br /><i>Default: true</i>
+            chart.zoom.hdir :: The horizontal direction of the zoom. Possible values are: <i>left</i>, <i>center</i>, <i>right</i><br /><i>Default: right</i>
+            chart.zoom.vdir :: The vertical direction of the zoom. Possible values are: <i>up</i>, <i>center</i>, <i>down</i><br /><i>Default: down</i>
+            chart.zoom.delay :: The delay (in milliseconds) between frames.<br /><i>Default: 50</i>
+            chart.zoom.frames :: The number of frames in the zoom animation.<br /><i>Default: 10</i>
+            chart.zoom.shadow :: Whether or not the zoomed canvas has a shadow or not.<br /><i>Default: true</i>
+            chart.zoom.thumbnail.width :: When the zoom is in thumbnail mode, this is the width (in pixels) of the thumbnail.<br /><i>Default: 75</i>
+            chart.zoom.thumbnail.height :: When the zoom is in thumbnail mode, this is the height (in pixels) of the thumbnail.<br /><i>Default: 75</i>
+        </PROPERTIES>
+    -->
+
+    <!-- DOCS -->
+
+    <table border="0" id="docs">
+        <tr>
+            <th>chart.dark</th>
+            <td>Color of the darkened (ie unlit) lights<br /><i>Default: #eee</i></td>
+            <th>chart.light</th>
+            <td>Color of lit lights<br /><i>Default: #f66</i></td>
+        </tr>
+        <tr>
+            <th>chart.background</th>
+            <td>The color of the background.<br /><i>Default: white</i></td>
+            <th>chart.zoom.mode</th>
+            <td>Can be used to control whether the zoom is in thumbnail or canvas mode. Possible values are: <i>thumbnail</i> and <i>canvas</i>.<br /><i>Default: canvas</i></td>
+        </tr>
+        <tr>
+            <th>chart.zoom.factor</th>
+            <td>This is the factor that the graph will be zoomed by (bigger values means more zoom)<br /><i>Default: 1.5</i></td>
+            <th>chart.zoom.fade.in</th>
+            <td>Whether the zoomed canvas fades in or not. This also can be used to control the fade in for the zoom in thumbnail mode.<br /><i>Default: true</i></td>
+        </tr>
+        <tr>
+            <th>chart.zoom.fade.out</th>
+            <td>Whether the zoomed canvas fades out or not. This also can be used to control the fade in for the zoom in thumbnail mode.<br /><i>Default: true</i></td>
+            <th>chart.zoom.hdir</th>
+            <td>The horizontal direction of the zoom. Possible values are: <i>left</i>, <i>center</i>, <i>right</i><br /><i>Default: right</i></td>
+        </tr>
+        <tr>
+            <th>chart.zoom.vdir</th>
+            <td>The vertical direction of the zoom. Possible values are: <i>up</i>, <i>center</i>, <i>down</i><br /><i>Default: down</i></td>
+            <th>chart.zoom.delay</th>
+            <td>The delay (in milliseconds) between frames.<br /><i>Default: 50</i></td>
+        </tr>
+        <tr>
+            <th>chart.zoom.frames</th>
+            <td>The number of frames in the zoom animation.<br /><i>Default: 10</i></td>
+            <th>chart.zoom.shadow</th>
+            <td>Whether or not the zoomed canvas has a shadow or not.<br /><i>Default: true</i></td>
+        </tr>
+        <tr>
+            <th>chart.zoom.thumbnail.width</th>
+            <td>When the zoom is in thumbnail mode, this is the width (in pixels) of the thumbnail.<br /><i>Default: 75</i></td>
+            <th>chart.zoom.thumbnail.height</th>
+            <td>When the zoom is in thumbnail mode, this is the height (in pixels) of the thumbnail.<br /><i>Default: 75</i></td>
+        </tr>
+        <tr>
+        </tr>
+    </table><br /><br />
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</body>
+</html>

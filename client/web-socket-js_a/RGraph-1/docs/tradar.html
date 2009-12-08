@@ -1,0 +1,234 @@
+<?php ob_start('ob_gzhandler') ?>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <!--
+        /**
+        * o------------------------------------------------------------------------------o
+        * | This file is part of the RGraph package - you can learn more at:             |
+        * |                                                                              |
+        * |                          http://www.rgraph.net                               |
+        * |                                                                              |
+        * | This package is licensed under the RGraph license. For all kinds of business |
+        * | purposes there is a small one-time licensing fee to pay and for personal,    |
+        * | charity and educational purposes it is free to use. You can read the full    |
+        * | license here:                                                                |
+        * |                      http://www.rgraph.net/LICENSE.txt                       |
+        * o------------------------------------------------------------------------------o
+        */
+    -->
+    <title>RGraph: HTML5 canvas graph library - Traditional radar chart documentation</title>
+    <link rel="stylesheet" href="../css/website.css" type="text/css" media="screen" />
+    <link rel="icon" type="image/png" href="/favicon.png">
+</head>
+<body>
+    <div id="logo">
+        <a href="../index.html">RGraph: HTML5 canvas graph library</a>
+        >
+        <a href="index.html">Documentation</a>
+        >
+        Traditional radar chart
+    </div>
+
+    <h1>RGraph: Traditional radar chart documentation</h1>
+
+    <script>
+        if (document.all) {
+            document.write('<div style="background-color: #fee; border: 2px dashed red; padding: 5px"><b>Important</b><br /><br /> Internet Explorer does not natively support the HTML5 canvas tag yet, so if you want to see the graphs, you can either:<ul><li>Install <a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a></li><li>Use another browser entirely. Your choices are Firefox, Chrome or Safari</li></ul></div>');
+        }
+    </script>
+
+    <p>
+        A traditional radar chart.
+    </p>
+    
+    <p>
+        The example file is <a href="../examples/tradar.html">here</a>.
+    </p>
+    
+    <pre class="code">
+&lt;script&gt;
+    window.onload = function ()
+    {
+        var data = [3, 3, 41, 37, 16];
+    
+        var tradar = new RGraph.Tradar('myTradar', data);
+        tradar.Set('chart.background.circles', true);
+        tradar.Set('chart.color', 'rgba(255,0,0,0.5)');
+        tradar.Set('chart.circle', 20);
+        tradar.Set('chart.circle.fill', 'rgba(200,255,200,0.5)');
+        tradar.Set('chart.labels', ['Safari (3%)', 'Other (3%)', 'MSIE 7 (41%)', 'MSIE 6 (37%)', 'Firefox (16%)']);
+        tradar.Set('chart.key', ['Market share', 'A made up figure']);
+        tradar.Draw();
+    }
+&lt;/script&gt;
+</pre>
+
+
+    <h2>Available properties</h2>
+    
+    <p>
+        You can use these properties to control how the chart apears. You can set these properties by using the Set() method. Eg:
+    </p>
+    
+    <p>
+        <b>myTradar.Set('color', 'rgba(255,0,0,0.5)');</b>
+    </p>
+    
+    <!--
+        <PROPERTIES>
+            chart.gutter :: The gutter that the chart uses. This is effectively the margin.<br /><i>Default: 25</i>
+            chart.color :: The color of the radar chart.<br /><i>Default: rgba(255,0,0,0.5)</i>
+            chart.circle :: What value to draw a circle at. Defaults to zero (off). You could use this to represent a limit of some sort.<br /><i>Default: 0</i>
+            chart.circle.fill :: What color to fill the circle with.<br /><i>Default: Not set</i>
+            chart.title :: The title, if any, of the chart.<br /><i>Default: Not set</i>
+            chart.title.color :: The color of the title.<br /> <i>Default: black</i>
+            chart.title.vpos :: This allows you to completely override the vertical positioning of the title. It should be a number between 0 and 1, and is multiplied with the gutter and then used as the vertical position. It can be useful if you need to have a large gutter.<br /><i>Default: null</i>
+            chart.labels :: The labels to use for the chart.<br /><i>Default: An empty array</i>
+            chart.text.font :: The font used to render the text.<br /><i>Default: Verdana</i>
+            chart.text.color :: The color of the labels. <br /><i>Default: black</i>
+            chart.text.size :: The size of the text (in points).<br /><i>Default: 10</i>
+            chart.background.circles :: Whether to draw the grey background circles.<br /><i>Default: true</i>
+            chart.linewidth :: The width of the outline.<br /><i>Default: 1</i>
+            chart.key :: An array of two descriptions. The actual radar, and the indicated limit circle.<br /><i>Default: Not set</i>
+            chart.key.shadow :: Whether a small drop shadow is applied to the key.<br /><i>Default: false</i>
+            chart.key.background :: The background color of the key. If the key covers too much, you can use a semi-transparent colour - eg. <b>rgba(255,255,255,0.7)</b>.<br /><i>Default: #fff</i>
+            chart.contextmenu :: An array of context menu items. More information on context menus is <a href="context.html">here</a>.<br /><i>Default: [] (An empty array)</i>
+            chart.annotatable :: Whether annotations are enabled for the chart (ie you can draw on the chart interactively.<br /><i>Default: false</i>
+            chart.annotate.color :: If you do not allow the use of the palette, then this will be the only colour allowed for annotations.<br /><i>Default: black</i>
+            chart.zoom.mode :: Can be used to control whether the zoom is in thumbnail or canvas mode. Possible values are: <i>thumbnail</i> and <i>canvas</i>.<br /><i>Default: canvas</i>
+            chart.zoom.factor :: This is the factor that the graph will be zoomed by (bigger values means more zoom)<br /><i>Default: 1.5</i>
+            chart.zoom.fade.in :: Whether the zoomed canvas fades in or not. This also can be used to control the fade in for the zoom in thumbnail mode.<br /><i>Default: true</i>
+            chart.zoom.fade.out :: Whether the zoomed canvas fades out or not. This also can be used to control the fade in for the zoom in thumbnail mode.<br /><i>Default: true</i>
+            chart.zoom.hdir :: The horizontal direction of the zoom. Possible values are: <i>left</i>, <i>center</i>, <i>right</i><br /><i>Default: right</i>
+            chart.zoom.vdir :: The vertical direction of the zoom. Possible values are: <i>up</i>, <i>center</i>, <i>down</i><br /><i>Default: down</i>
+            chart.zoom.delay :: The delay (in milliseconds) between frames.<br /><i>Default: 50</i>
+            chart.zoom.frames :: The number of frames in the zoom animation.<br /><i>Default: 10</i>
+            chart.zoom.shadow :: Whether or not the zoomed canvas has a shadow or not.<br /><i>Default: true</i>
+            chart.zoom.thumbnail.width :: When the zoom is in thumbnail mode, this is the width (in pixels) of the thumbnail.<br /><i>Default: 75</i>
+            chart.zoom.thumbnail.height :: When the zoom is in thumbnail mode, this is the height (in pixels) of the thumbnail.<br /><i>Default: 75</i>
+        </PROPERTIES>
+    -->
+
+    <!-- DOCS -->
+
+    <table border="0" id="docs">
+        <tr>
+            <th>chart.gutter</th>
+            <td>The gutter that the chart uses. This is effectively the margin.<br /><i>Default: 25</i></td>
+            <th>chart.color</th>
+            <td>The color of the radar chart.<br /><i>Default: rgba(255,0,0,0.5)</i></td>
+        </tr>
+        <tr>
+            <th>chart.circle</th>
+            <td>What value to draw a circle at. Defaults to zero (off). You could use this to represent a limit of some sort.<br /><i>Default: 0</i></td>
+            <th>chart.circle.fill</th>
+            <td>What color to fill the circle with.<br /><i>Default: Not set</i></td>
+        </tr>
+        <tr>
+            <th>chart.title</th>
+            <td>The title, if any, of the chart.<br /><i>Default: Not set</i></td>
+            <th>chart.title.color</th>
+            <td>The color of the title.<br /> <i>Default: black</i></td>
+        </tr>
+        <tr>
+            <th>chart.title.vpos</th>
+            <td>This allows you to completely override the vertical positioning of the title. It should be a number between 0 and 1, and is multiplied with the gutter and then used as the vertical position. It can be useful if you need to have a large gutter.<br /><i>Default: null</i></td>
+            <th>chart.labels</th>
+            <td>The labels to use for the chart.<br /><i>Default: An empty array</i></td>
+        </tr>
+        <tr>
+            <th>chart.text.font</th>
+            <td>The font used to render the text.<br /><i>Default: Verdana</i></td>
+            <th>chart.text.color</th>
+            <td>The color of the labels. <br /><i>Default: black</i></td>
+        </tr>
+        <tr>
+            <th>chart.text.size</th>
+            <td>The size of the text (in points).<br /><i>Default: 10</i></td>
+            <th>chart.background.circles</th>
+            <td>Whether to draw the grey background circles.<br /><i>Default: true</i></td>
+        </tr>
+        <tr>
+            <th>chart.linewidth</th>
+            <td>The width of the outline.<br /><i>Default: 1</i></td>
+            <th>chart.key</th>
+            <td>An array of two descriptions. The actual radar, and the indicated limit circle.<br /><i>Default: Not set</i></td>
+        </tr>
+        <tr>
+            <th>chart.key.shadow</th>
+            <td>Whether a small drop shadow is applied to the key.<br /><i>Default: false</i></td>
+            <th>chart.key.background</th>
+            <td>The background color of the key. If the key covers too much, you can use a semi-transparent colour - eg. <b>rgba(255,255,255,0.7)</b>.<br /><i>Default: #fff</i></td>
+        </tr>
+        <tr>
+            <th>chart.contextmenu</th>
+            <td>An array of context menu items. More information on context menus is <a href="context.html">here</a>.<br /><i>Default: [] (An empty array)</i></td>
+            <th>chart.annotatable</th>
+            <td>Whether annotations are enabled for the chart (ie you can draw on the chart interactively.<br /><i>Default: false</i></td>
+        </tr>
+        <tr>
+            <th>chart.annotate.color</th>
+            <td>If you do not allow the use of the palette, then this will be the only colour allowed for annotations.<br /><i>Default: black</i></td>
+            <th>chart.zoom.mode</th>
+            <td>Can be used to control whether the zoom is in thumbnail or canvas mode. Possible values are: <i>thumbnail</i> and <i>canvas</i>.<br /><i>Default: canvas</i></td>
+        </tr>
+        <tr>
+            <th>chart.zoom.factor</th>
+            <td>This is the factor that the graph will be zoomed by (bigger values means more zoom)<br /><i>Default: 1.5</i></td>
+            <th>chart.zoom.fade.in</th>
+            <td>Whether the zoomed canvas fades in or not. This also can be used to control the fade in for the zoom in thumbnail mode.<br /><i>Default: true</i></td>
+        </tr>
+        <tr>
+            <th>chart.zoom.fade.out</th>
+            <td>Whether the zoomed canvas fades out or not. This also can be used to control the fade in for the zoom in thumbnail mode.<br /><i>Default: true</i></td>
+            <th>chart.zoom.hdir</th>
+            <td>The horizontal direction of the zoom. Possible values are: <i>left</i>, <i>center</i>, <i>right</i><br /><i>Default: right</i></td>
+        </tr>
+        <tr>
+            <th>chart.zoom.vdir</th>
+            <td>The vertical direction of the zoom. Possible values are: <i>up</i>, <i>center</i>, <i>down</i><br /><i>Default: down</i></td>
+            <th>chart.zoom.delay</th>
+            <td>The delay (in milliseconds) between frames.<br /><i>Default: 50</i></td>
+        </tr>
+        <tr>
+            <th>chart.zoom.frames</th>
+            <td>The number of frames in the zoom animation.<br /><i>Default: 10</i></td>
+            <th>chart.zoom.shadow</th>
+            <td>Whether or not the zoomed canvas has a shadow or not.<br /><i>Default: true</i></td>
+        </tr>
+        <tr>
+            <th>chart.zoom.thumbnail.width</th>
+            <td>When the zoom is in thumbnail mode, this is the width (in pixels) of the thumbnail.<br /><i>Default: 75</i></td>
+            <th>chart.zoom.thumbnail.height</th>
+            <td>When the zoom is in thumbnail mode, this is the height (in pixels) of the thumbnail.<br /><i>Default: 75</i></td>
+        </tr>
+        <tr>
+        </tr>
+    </table><br /><br />
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+</body>
+</html>

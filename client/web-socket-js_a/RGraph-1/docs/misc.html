@@ -1,0 +1,112 @@
+<?php ob_start('ob_gzhandler') ?>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <!--
+        /**
+        * o------------------------------------------------------------------------------o
+        * | This file is part of the RGraph package - you can learn more at:             |
+        * |                                                                              |
+        * |                          http://www.rgraph.net                               |
+        * |                                                                              |
+        * | This package is licensed under the RGraph license. For all kinds of business |
+        * | purposes there is a small one-time licensing fee to pay and for personal,    |
+        * | charity and educational purposes it is free to use. You can read the full    |
+        * | license here:                                                                |
+        * |                      http://www.rgraph.net/LICENSE.txt                       |
+        * o------------------------------------------------------------------------------o
+        */
+    -->
+    <title>RGraph: HTML5 canvas graph library - Miscellaneous</title>
+    <link rel="stylesheet" href="../css/website.css" type="text/css" media="screen" />
+    <link rel="icon" type="image/png" href="/favicon.png">
+</head>
+<body>
+    <div id="logo">
+        <a href="../index.html">RGraph: HTML5 canvas graph library</a>
+        >
+        <a href="index.html">Documentation</a>
+        >
+        Miscellaneous documentation
+    </div>
+
+    <h1>RGraph: Miscellaneous documentation</h1>
+
+    <script>
+        if (document.all) {
+            document.write('<div style="background-color: #fee; border: 2px dashed red; padding: 5px"><b>Important</b><br /><br /> Internet Explorer does not natively support the HTML5 canvas tag yet, so if you want to see the graphs, you can either:<ul><li>Install <a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a></li><li>Use another browser entirely. Your choices are Firefox, Chrome or Safari</li></ul></div>');
+        }
+    </script>
+
+    <h4>Canvas fallback content and visually impaired users</h4>
+
+    <p>
+        When using the canvas element you should be aware of the accessibility of your graphs, for example where vision limited users are
+        concerned. Screen readers, for example, may not be able to convert a graph into something that is reasonable, so you should
+        consider
+        doing this yourself, possibly using the canvas fallback content (ie the content in between canvas tags). A possible example
+        would be to put a table of data inside the canvas tag that the graph on the canvas represents. Doing this goes a long way
+        towards making the data available to everyone.
+    </p>
+
+    <h4>Using a DIVs contents as a tooltip</h4>
+
+    <p>
+        Instead of supplying the HTML in your Javascript, which may get a little unwieldy, you can also specify the ID of a DIV
+        that should be used as the tooltip. Instead of giving the HTML, simply specify (for example) <b>id:myDiv</b> as your tooltip,
+        and RGraph will attempt to use that DIVs contents as the tooltip. Eg:
+    </p>
+    
+    <pre class="code">myBar.Set('chart.tooltips', ['id:myDiv', ...])</pre>
+    
+    <p>
+        Only the content of the DIV is used (ie the .innerHTML), not the DIV itself. So any CSS that you apply to it will be ignored.
+        This does mean however that you can safely set <i>display: none</i> on it, so that it's not visible to the user. An example of
+        this method in action is the first <a href="../examples/line.html">line chart</a>.
+    </p>
+
+    <h4>Upper and lower limits for horizontal bars</h4>
+
+    <p>
+        If you don't wish to specify an upper or lower limit for horizontal bars, and you just want them to extend to the upper or lower
+        limits of the graph, whatever they may be, you can specify null for the value determining how far they extend. For cases where
+        the X axis is in the middle and you're specifying a negative start value, or you want the bar to extend all the way to the
+        bottom, you can simply specify an arbitrary length (eg -999999). Eg:
+    </p>
+    
+    <pre class="code">myBar.Set('chart.background.hbars', [[0, null, 'green'], [0,-999999,'red']]);</pre>
+    
+    <h4>Setting the canvas width and height</h4>
+    
+    <p>
+        To set the canvas width and height you must use the HTML width/height attributes and NOT CSS. If you do use CSS, the canvas
+        will be scaled, and not enlarged, to fit the new width/height. Eg:
+    </p>
+    
+    <pre class="code">&lt;canvas id="myCanvas" width="200" height="100"&gt;[No canvas support]&lt;canvas&gt;</pre>
+    
+    <p />
+    
+    <h4>RGraph and Opera</h4>
+    
+    <p>
+        While Opera supports the canvas tag, it doesn't yet support the shadow or text APIs. Your graphs will therefore be displayed,
+        albeit without any shadows. Text is now emulated. Overall, Opera support is less than perfect.
+    </p>
+    
+    <h4>Debugging tips</h4>
+
+    <p>
+        If you're having a hard time debugging your graph, try these:
+    </p>
+    
+    <ul>
+        <li>Ensure you have only one graph on the page</li>
+        <li>Make sure you have disabled your web browsers cache (the Firefox <a href="https://addons.mozilla.org/en-US/firefox/addon/60" target="_blank">Web Developer toolbar</a> can do this for Firefox)</li>
+        <li>Try using <a href="http://www.getfirebug.com" target="_blank">Firebug</a> (for Firefox)</li>
+    </ul>
+
+    <p />
+</body>
+</html>

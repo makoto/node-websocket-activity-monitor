@@ -1,0 +1,122 @@
+<?php ob_start('ob_gzhandler') ?>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <!--
+        /**
+        * o------------------------------------------------------------------------------o
+        * | This file is part of the RGraph package - you can learn more at:             |
+        * |                                                                              |
+        * |                          http://www.rgraph.net                               |
+        * |                                                                              |
+        * | This package is licensed under the RGraph license. For all kinds of business |
+        * | purposes there is a small one-time licensing fee to pay and for personal,    |
+        * | charity and educational purposes it is free to use. You can read the full    |
+        * | license here:                                                                |
+        * |                      http://www.rgraph.net/LICENSE.txt                       |
+        * o------------------------------------------------------------------------------o
+        */
+    -->
+    <title>RGraph: HTML5 canvas graph library - donut chart</title>
+    <link rel="stylesheet" href="../css/website.css" type="text/css" media="screen" />
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <script src="../libraries/RGraph.common.js" ></script>
+    <script src="../libraries/RGraph.pie.js" ></script>
+    <script src="../libraries/RGraph.donut.js" ></script>
+    
+    <script>
+        window.onload = function ()
+        {
+            donut = new RGraph.Donut('donut1', [41,37,16,3,3], [20,5,60,7,3], [17,3,68,6,3]);
+            donut.Set('chart.linewidth', 5);
+            donut.Set('chart.strokestyle', 'white');
+            donut.Set('chart.gutter', 45);
+            donut.Set('chart.contextmenu', [['Zoom', RGraph.Zoom], ['Clear', function () {RGraph.Clear(donut.canvas); donut.Draw();}], null, ['Cancel', function () {}]]);
+            donut.Set('chart.title', "Browser share (context, annotatable, zoom)");
+            donut.Set('chart.key', ['MSIE 7', 'MSIE 6', 'Firefox', 'Safari', 'Other']);
+            donut.Set('chart.key.shadow', true);
+            donut.Set('chart.key.position', 'gutter');
+            donut.Set('chart.annotatable', true);
+            donut.Draw();
+
+            donut2 = new RGraph.Donut('donut2', [8,6,5,3,8,9,9,4]);
+            donut2.Set('chart.labels', ['Flipper', 'Harry', 'Ben', 'Richard', 'Keith', 'Ben', 'George', 'Barry']);
+            donut2.Set('chart.title', "Sales figures for week 43 (zoom)");
+            donut2.Set('chart.gutter', 35);
+            donut2.Set('chart.zoom.mode', 'thumbnail');
+            donut2.Draw();
+
+            donut3 = new RGraph.Donut('donut3', [41,37,16,3,3]);
+            donut3.Set('chart.tooltips', ['MISE 7', 'MSIE 6', 'Firefox', 'Safari', 'Other']);
+            donut3.Set('chart.labels', ['MISE 7', 'MSIE 6', 'Firefox', 'Safari', 'Other']);
+            donut3.Set('chart.strokestyle', 'white');
+            donut3.Set('chart.linewidth', 5);
+            donut3.Set('chart.title', "Browser market share (tooltips)");
+            donut3.Draw();
+
+            donut4 = new RGraph.Donut('donut4', [5,4,3,5,2,1], [3,1,1,2,1,1]);
+            donut4.Set('chart.linewidth', 5);
+            donut4.Set('chart.strokestyle', '#fff');
+            donut4.Set('chart.linewidth', 5);
+            donut4.Set('chart.labels', ['Bob', 'Charles', 'Fred', 'Julian', 'Mark', 'Gary']);
+            donut4.Draw();
+
+            donut5 = new RGraph.Donut('donut5', [5,4,3,5,2,1]);
+            donut5.Set('chart.align', 'left');
+            donut5.Set('chart.linewidth', 5);
+            donut5.Set('chart.strokestyle', '#fff');
+            donut5.Set('chart.linewidth', 5);
+            donut5.Set('chart.tooltips', ['Bob', 'Charles', 'Fred', 'Julian', 'Mark', 'Gary']);
+            donut5.Set('chart.key', ['Bob', 'Charles', 'Fred', 'Julian', 'Mark', 'Gary']);
+            donut5.Set('chart.key.shadow', true);
+            donut5.Set('chart.title', 'A left aligned donut chart');
+            donut5.Draw();
+        }
+    </script>
+</head>
+<body>
+
+<div id="logo">
+    <a href="../index.html">RGraph: HTML5 canvas graph library</a>
+    >
+    <a href="./index.html">Examples</a>
+    >
+    Donut chart
+</div>
+
+<h1>RGraph: Donut chart</h1>
+
+    <script>
+        if (document.all) {
+            document.write('<div style="background-color: #fee; border: 2px dashed red; padding: 5px"><b>Important</b><br /><br /> Internet Explorer does not natively support the HTML5 canvas tag yet, so if you want to see the graphs, you can either:<ul><li>Install <a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a></li><li>Use another browser entirely. Your choices are Firefox, Chrome or Safari</li></ul></div>');
+        }
+    </script>
+
+    <div>
+
+        <p>
+            Much like the Pie chart, this is a variation useful for comparing mutiple data sets. It's basically a Pie chart with a
+            presentational difference, allowing the multiple data sets. You could also consider a grouped or stacked bar chart, or
+            a multi-line line graph. These types may be better for making direct comparisons.
+        </p>
+
+        <div>
+            <ul>
+                <li><a href="../docs/donut.html">Donut chart API documentation</a></li>
+            </ul>
+        </div>
+
+        <div>
+            <canvas id="donut1" width="450" height="350"><div class="canvasfallback">[No canvas support]</div></canvas>
+            <canvas id="donut2" width="450" height="350"><div class="canvasfallback">[No canvas support]</div></canvas>
+            <canvas id="donut3" width="450" height="350"><div class="canvasfallback">[No canvas support]</div></canvas>
+            <canvas id="donut4" width="450" height="350"><div class="canvasfallback">[No canvas support]</div></canvas>
+            <canvas id="donut5" width="450" height="350" style="border: 1px dashed gray"><div class="canvasfallback">[No canvas support]</div></canvas>
+        </div>
+    </div>
+
+
+</body>
+</html>

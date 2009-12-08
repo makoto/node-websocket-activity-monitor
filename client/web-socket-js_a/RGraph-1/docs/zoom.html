@@ -1,0 +1,172 @@
+<?php ob_start('ob_gzhandler') ?>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <!--
+        /**
+        * o------------------------------------------------------------------------------o
+        * | This file is part of the RGraph package - you can learn more at:             |
+        * |                                                                              |
+        * |                          http://www.rgraph.net                               |
+        * |                                                                              |
+        * | This package is licensed under the RGraph license. For all kinds of business |
+        * | purposes there is a small one-time licensing fee to pay and for personal,    |
+        * | charity and educational purposes it is free to use. You can read the full    |
+        * | license here:                                                                |
+        * |                      http://www.rgraph.net/LICENSE.txt                       |
+        * o------------------------------------------------------------------------------o
+        */
+    -->
+    <title>RGraph: HTML5 canvas graph library - Zooming your graphs</title>
+    <link rel="stylesheet" href="../css/website.css" type="text/css" media="screen" />
+    <link rel="icon" type="image/png" href="../favicon.png">
+    
+    <script src="../libraries/RGraph.common.js" ></script>
+    <script src="../libraries/RGraph.bar.js" ></script>
+    <script src="../libraries/RGraph.line.js" ></script>
+</head>
+
+<body>
+    <div id="logo">
+        <a href="../">RGraph: HTML5 canvas graph library</a>
+        >
+        <a href="index.html">Documentation</a>
+        >
+        Zoom
+    </div>
+
+    <h1>RGraph: Zooming your graphs</h1>
+    
+    <h2>Canvas mode</h2>
+
+    <table border="0" width="100%">
+        <tr>
+            <td>
+                <p>
+                    As of November 2009 RGraph has had the ability to provide a zoom facility. It's designed to be used in
+                    conjunction with a context menu as in the example to the right.
+                </p>
+
+                <p>
+                    You can control the zoom using these properties:
+                </p>
+                
+                <ul>
+                    <li>chart.zoom.factor<i>Default: 1.5</i></li>
+                    <li>chart.zoom.fade.in <i>Default: true</i></li>
+                    <li>chart.zoom.fade.out <i>Default: true</i></li>
+                    <li>chart.zoom.hdir <i>Default: right</i></li>
+                    <li>chart.zoom.vdir <i>Default: down</i></li>
+                    <li>chart.zoom.delay <i>Default: 50</i></li>
+                    <li>chart.zoom.frames <i>Default: 10</i></li>
+                    <li>chart.zoom.shadow <i>Default: true</i></li>
+                    <li>chart.zoom.mode <i>Default: canvas</i></li>
+                    <li>chart.zoom.thumbnail.width <i>Default: 75</i></li>
+                    <li>chart.zoom.thumbnail.height <i>Default: 75</i></li>
+                </ul>
+            </td>
+
+            <td style="text-align: center">
+                <canvas width="500" height="250" id="myc">[No canvas support]</canvas>
+            </td>
+        </tr>
+        
+        <tr>
+            <td colspan="2">
+                The possible values of <i>chart.zoom.hdir</i> are: <i>left</i>, <i>center</i>, <i>right</i>.
+                The possible values of <i>chart.zoom.vdir</i> are: <i>up</i>, <i>center</i>, <i>down</i>. <i>chart.zoom.delay</i>
+                is the delay in between frames (in milliseconds) and <i>chart.zoom.frames</i> is the number of frames in the zoom. <i>chart.zoom.shadow</i>
+                is whether the zoomed canvas has a shadow or not. The possible values of <i>chart.zoom.mode</i> are <i>canvas</i> (default)
+                and <i>thumbnail</i>.
+            </td>
+        </tr>
+    </table>
+
+    <script>
+        graph = new RGraph.Bar('myc', [4,6,8,7,9,4,3,8,7,4,5,5,5]);
+        graph.Set('chart.colors', ['#9f9']);
+        graph.Set('chart.labels', ['Fry','Hav','Jim','Moo','Io','Olga','Tim','Gaz','Jake','Pippa','Lou','Fred','John']);
+        graph.Set('chart.contextmenu', [
+                                        ['Clear annotations', function () {RGraph.Clear(graph.canvas); graph.Draw();}],
+                                        ['Zoom in', RGraph.Zoom]
+                                       ]);
+        graph.Set('chart.title', 'Chart with zoom (context, annotatable)');
+        graph.Set('chart.shadow', true);
+        graph.Set('chart.shadow.color', '#666');
+        graph.Set('chart.annotatable', true);
+        graph.Set('chart.zoom.hdir', 'left');
+        graph.Set('chart.zoom.vdir', 'top');
+        graph.Set('chart.zoom.frames', 50); // Number of frames
+        graph.Set('chart.zoom.delay', 15);  // Delay between each frame
+        graph.Set('chart.zoom.shadow', 'rgba(0,0,0,0.5)');  // Show a shadow on the zoomed graph
+        graph.Draw();
+    </script>
+
+    <br clear="all" />
+
+    <pre class="code">
+&lt;script&gt;
+    graph = new RGraph.Line('myc', [4,6,8,7,9,4,3,8,7,4,5,5,5]);
+    graph.Set('chart.labels', ['Fry','Hav','Jim','Moo','Io','Olga','Tim','Gaz','Jake','Pippa','Lou','Fred','John']);
+    graph.Set('chart.contextmenu', [
+                                    ['Clear annotations', function () {RGraph.Clear(graph.canvas); graph.Draw();}],
+                                    ['Zoom in', RGraph.Zoom]
+                                   ]);
+    graph.Set('chart.title', 'Chart with zoom (context, annotatable)');
+    graph.Set('chart.shadow', true);
+    graph.Set('chart.annotatable', true);
+    graph.Draw();
+&lt;/script&gt;
+</pre>
+    
+    <h2>Thumbnail mode</h2>
+    
+    <canvas id="myc2" width="600" height="250" style="float: left">[No canvas support]</canvas>
+    
+    <script>
+        myLine = new RGraph.Line('myc2', [40,48,45,64,34,22,23,56,56,54,84,44], [4,5,6,7,20,21,1,9,9,8,5,4]);
+        myLine.Set('chart.labels', ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']);
+        myLine.Set('chart.hmargin', 10);
+        myLine.Set('chart.linewidth', 3);
+        myLine.Set('chart.title', 'A sample line chart');
+        myLine.Set('chart.zoom.mode', 'thumbnail');
+        myLine.Set('chart.zoom.vdir', 'center');
+        myLine.Set('chart.zoom.thumbnail.width', 100);
+        myLine.Set('chart.zoom.thumbnail.height', 100);
+        myLine.Set('chart.colors', ['red', 'black']);
+        myLine.Set('chart.shadow', true);
+        myLine.Set('chart.contextmenu', [['Zoom entire graph', RGraph.Zoom]]);
+        myLine.Draw();
+    </script>
+
+    <p>
+        The zoom has an alternative thumbnail mode, which displays a small thumbnail zoom instead of zooming the entire canvas.
+        The graph to the left shows an example of this.
+    </p>
+
+    <p>
+        It uses some of the same properties as the regular zoom, eg <i>chart.fade.in</i>, <i>chart.fade.out</i>, <i>chart.zoom.shadow</i>
+    </p>
+
+    <br clear="all" />
+
+    <pre class="code">
+&lt;script&gt;
+    myLine = new RGraph.Line('myc2', [40,48,45,64,34,22,23,56,56,54,84,44], [4,5,6,7,20,21,1,9,9,8,5,4]);
+    myLine.Set('chart.labels', ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']);
+    myLine.Set('chart.hmargin', 10);
+    myLine.Set('chart.linewidth', 3);
+    myLine.Set('chart.title', 'A sample line chart');
+    myLine.Set('chart.zoom.mode', 'thumbnail');
+    myLine.Set('chart.zoom.vdir', 'center');
+    myLine.Set('chart.zoom.thumbnail.width', 100);
+    myLine.Set('chart.zoom.thumbnail.height', 100);
+    myLine.Set('chart.colors', ['red', 'black']);
+    myLine.Set('chart.shadow', true);
+    myLine.Set('chart.contextmenu', [['Zoom entire graph', RGraph.Zoom]]);
+&lt;/script&gt;
+</pre>
+
+</body>
+</html>

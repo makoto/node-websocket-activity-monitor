@@ -1,0 +1,165 @@
+<?php ob_start('ob_gzhandler') ?>
+<!DOCTYPE html>
+
+<html>
+<head>
+
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <!--
+        /**
+        * o------------------------------------------------------------------------------o
+        * | This file is part of the RGraph package - you can learn more at:             |
+        * |                                                                              |
+        * |                          http://www.rgraph.net                               |
+        * |                                                                              |
+        * | This package is licensed under the RGraph license. For all kinds of business |
+        * | purposes there is a small one-time licensing fee to pay and for personal,    |
+        * | charity and educational purposes it is free to use. You can read the full    |
+        * | license here:                                                                |
+        * |                      http://www.rgraph.net/LICENSE.txt                       |
+        * o------------------------------------------------------------------------------o
+        */
+    -->
+    <title>RGraph: HTML5 canvas graph library - bi-polar chart</title>
+    <link rel="stylesheet" href="../css/website.css" type="text/css" media="screen" />
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <script src="../libraries/RGraph.common.js"></script>
+    <script src="../libraries/RGraph.bipolar.js"></script>
+
+    <script>
+        window.onload = function ()
+        {
+            left  = [5,6,8,9,12,13,4,9];
+            right = [5,8,4,11,15,26,13,16];
+           
+            bipolar1 = new RGraph.Bipolar('bipolar1', left, right);
+            
+            gradient = bipolar1.context.createLinearGradient(0,0,475,0);
+            gradient.addColorStop(0, 'blue');
+            gradient.addColorStop(0.5, 'white');
+            gradient.addColorStop(1, 'blue');
+        
+            bipolar1.Set('chart.colors', [gradient]);
+            bipolar1.Set('chart.labels', ['Barry', 'John', 'Fred', 'George', 'Rich', 'Larry', 'John', 'Mike']);
+            bipolar1.Set('chart.title.left', '2007');
+            bipolar1.Set('chart.title.right', '2008');
+            bipolar1.Set('chart.title', 'Sales (tooltips, context, zoom)');
+            bipolar1.Set('chart.tooltips', ['Barry', 'John', 'Fred', 'George', 'Rich', 'Larry', 'John', 'Mike', 'Barry', 'John', 'Fred', 'George', 'Rich', '<b>Larry</b><br />Larry showed the most improvement<br />year on year, with 13 sales in 2007<br />and 26 sales in 2008', 'John', 'Mike']);
+            bipolar1.Set('chart.units.post', 'k');
+            bipolar1.Set('chart.contextmenu', [['Zoom', RGraph.Zoom], null, ['Cancel', function () {}]]);
+            bipolar1.Set('chart.xmax', 35);
+            bipolar1.Set('chart.scale.decimals', 1);
+            bipolar1.Draw();
+
+            bipolar2 = new RGraph.Bipolar('bipolar2', left, right);
+            bipolar2.Set('chart.labels', ['Fezza', 'Porka', 'CRX', 'RX8', 'DB9', 'Aston', 'F430', 'BMX']);
+            bipolar2.Set('chart.title.left', 'July')
+            bipolar2.Set('chart.title.right', 'August');
+            bipolar2.Set('chart.title', 'Vehicles (context, annotatable)');
+            bipolar2.Set('chart.contextmenu', [['Show palette', function (e) {RGraph.Showpalette(e)}], ['Clear', function () {RGraph.Clear(bipolar2.canvas); bipolar2.Draw()}]]);
+            bipolar2.Set('chart.units.post', 'k');
+            bipolar2.Set('chart.annotatable', true);
+            bipolar2.Draw();
+
+            bipolar3 = new RGraph.Bipolar('bipolar3', [1,2,3,4,5,6,7], [1,2,3,4,5,6,7]);
+            
+            var gradient = bipolar3.context.createLinearGradient(0,0,475,0);
+            gradient.addColorStop(0,'red');
+            gradient.addColorStop(0.5,'white');
+            gradient.addColorStop(1,'red');
+            
+            bipolar3.Set('chart.labels', ['First', 'Second', 'Third', 'Fourth', 'Fifth', 'Sixth', 'Seventh']);
+            bipolar3.Set('chart.title.left', '2007');
+            bipolar3.Set('chart.title.right', '2008');
+            bipolar3.Set('chart.title', 'A red chart');
+            bipolar3.Set('chart.colors', [gradient]);
+            bipolar3.Set('chart.zoom.mode', 'thumbnail');
+            bipolar3.Set('chart.gutter', 20);
+            bipolar3.Draw();
+
+            bipolar4 = new RGraph.Bipolar('bipolar4', [45,43,46,78,41,42,35], [31,21,25,26,26,26,12]);
+            bipolar4.Set('chart.labels', ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']);
+            bipolar4.Set('chart.title.left', 'January');
+            bipolar4.Set('chart.title.right', 'February');
+            bipolar4.Set('chart.title', 'A bi-polar chart');
+            bipolar4.Set('chart.colors', ['#ff0']);
+            bipolar4.Set('chart.gutter', 20);
+            bipolar4.Draw();
+
+            bipolar5 = new RGraph.Bipolar('bipolar5', [1,5,4,3,6,7,8,4,9,1,2,4], [5,4,4,5,6,7,8,4,8,6,3,4]);
+            bipolar5.Set('chart.labels', ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']);
+            bipolar5.Set('chart.title.left', '2007');
+            bipolar5.Set('chart.title.right', '2008');
+            bipolar5.Set('chart.title', 'Sales figures comparison');
+            bipolar5.Set('chart.colors', ['red']);
+            bipolar5.Set('chart.gutter', 20);
+            bipolar5.Set('chart.units.pre', '$');
+            bipolar5.Draw();
+            
+            bipolar6 = new RGraph.Bipolar('bipolar6', [8,5,6,5,3,2,1,4,5,5,6,7], [8,5,6,5,3,2,1,4,5,5,6,7]);
+            bipolar6.Set('chart.title.left', 'Male');
+            bipolar6.Set('chart.title.right', 'Female');
+            bipolar6.Set('chart.title', 'Gender comparison of sales');
+            bipolar6.Set('chart.units.pre', '$');
+            bipolar6.Set('chart.units.post', 'k');
+            bipolar6.Set('chart.labels', ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']);
+            bipolar6.Draw();
+        }
+    </script>
+</head>
+<body>
+
+<div id="logo">
+    <a href="../index.html">RGraph: HTML5 canvas graph library</a>
+    >
+    <a href="./index.html">Examples</a>
+    >
+    Bi-polar chart
+</div>
+
+
+<h1>RGraph: Bi-polar chart</h1>
+
+    <script>
+        if (document.all) {
+            document.write('<div style="background-color: #fee; border: 2px dashed red; padding: 5px"><b>Important</b><br /><br /> Internet Explorer does not natively support the HTML5 canvas tag yet, so if you want to see the graphs, you can either:<ul><li>Install <a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a></li><li>Use another browser entirely. Your choices are Firefox, Chrome or Safari</li></ul></div>');
+        }
+    </script>
+    
+    <div>
+        <p>
+            The Bi-polar chart is also (possibly more commonly) known as an age-frequency chart or a population pyramid. It allows you to very straight forwardly
+            compare two sets of data. For example two years worth of sales figues. Using this type of chart abnormalities will become
+            apparent. Other charts that would also be comparable, include a grouped bar chart, a stacked bar chart, and a multiple
+            line graph.
+        </p>
+        
+        <p>
+            The first example uses a gradient with three color stops as the fill:
+<pre class="code">gradient = chart.context.createLinearGradient(0,0,500,0);
+gradient.addColorStop(0, 'blue');
+gradient.addColorStop(0.5, 'white');
+gradient.addColorStop(1, 'blue');
+</pre>
+
+        <div>
+            <ul>
+                <li><a href="../docs/bipolar.html">Bi-polar chart API documentation</a></li>
+            </ul>
+        </div>
+        
+        
+        <div>
+            <canvas id="bipolar1" width="475" height="250"><div class="canvasfallback">[No canvas support]</div></canvas>
+            <canvas id="bipolar2" width="475" height="250"><div class="canvasfallback">[No canvas support]</div></canvas>
+            <canvas id="bipolar3" width="475" height="250"><div class="canvasfallback">[No canvas support]</div></canvas>
+            <canvas id="bipolar4" width="475" height="250"><div class="canvasfallback">[No canvas support]</div></canvas>
+            <canvas id="bipolar5" width="475" height="250"><div class="canvasfallback">[No canvas support]</div></canvas>
+            <canvas id="bipolar6" width="475" height="250"><div class="canvasfallback">[No canvas support]</div></canvas>
+        </div>
+    </div>
+
+</body>
+</html>

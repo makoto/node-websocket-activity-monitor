@@ -1,0 +1,363 @@
+<?php ob_start('ob_gzhandler') ?>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <!--
+        /**
+        * o------------------------------------------------------------------------------o
+        * | This file is part of the RGraph package - you can learn more at:             |
+        * |                                                                              |
+        * |                          http://www.rgraph.net                               |
+        * |                                                                              |
+        * | This package is licensed under the RGraph license. For all kinds of business |
+        * | purposes there is a small one-time licensing fee to pay and for personal,    |
+        * | charity and educational purposes it is free to use. You can read the full    |
+        * | license here:                                                                |
+        * |                      http://www.rgraph.net/LICENSE.txt                       |
+        * o------------------------------------------------------------------------------o
+        */
+    -->
+    <title>RGraph: HTML5 canvas graph library - gantt chart documentation</title>
+    <link rel="stylesheet" href="../css/website.css" type="text/css" media="screen" />
+    <link rel="icon" type="image/png" href="/favicon.png">
+</head>
+<body>
+    <div id="logo">
+        <a href="../index.html">RGraph: HTML5 canvas graph library</a>
+        >
+        <a href="index.html">Documentation</a>
+        >
+        Gantt chart
+    </div>
+
+    <h1>RGraph: Gantt chart documentation</h1>
+
+    <script>
+        if (document.all) {
+            document.write('<div style="background-color: #fee; border: 2px dashed red; padding: 5px"><b>Important</b><br /><br /> Internet Explorer does not natively support the HTML5 canvas tag yet, so if you want to see the graphs, you can either:<ul><li>Install <a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a></li><li>Use another browser entirely. Your choices are Firefox, Chrome or Safari</li></ul></div>');
+        }
+    </script>
+
+    <p>
+        The Gantt chart can be used to easily represent schedules, making visualising this information far more straightfoward.
+    </p>
+
+    <ul>
+        <li><a href="#events">Adding events to your Gantt chart</a></li>
+        <li><a href="#vbars">Adding vertical bars to your Gantt chart</a></li>
+    </ul>
+
+    <h2>Example</h2>
+    
+    <p> 
+        The example file is <a href="../examples/gantt.html">here</a>.
+    </p> 
+    
+    <pre class="code">
+&lt;script&gt;
+    window.onload = function ()
+    {
+        var gantt = new RGraph.Gantt('gantt');
+        gantt.Set('chart.xmax', 365);
+        gantt.Set('chart.gutter', 35);
+        gantt.Set('chart.labels', ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']);
+        gantt.Set('chart.title', 'Holiday schedule for Xyz Ltd');
+        gantt.Set('chart.defaultcolor', 'rgba(255,0,0,1)');
+        gantt.Set('chart.tooltips', ["&lt;b&gt;Richard&lt;/b&gt;&lt;br /&gt;Richard is going on holiday to Malta.&lt;br /&gt;He'll be away for 28 days.",
+                                     "&lt;b&gt;Fred&lt;/b&gt;&lt;br /&gt;Fred is also going away for 28 days",
+                                     "&lt;b&gt;Barney&lt;/b&gt;&lt;br /&gt;Barney is off work for two weeks",
+                                     "&lt;b&gt;Gloria&lt;/b&gt;&lt;br /&gt;Gloria is off for 3 weeks",
+                                     "&lt;b&gt;Paul&lt;/b&gt;&lt;br /&gt; Away for 31 days",
+                                     "&lt;b&gt;Harry&lt;/b&gt;&lt;br /&gt;Away for three weeks",
+                                     "&lt;b&gt;Shane&lt;/b&gt;&lt;br /&gt;Away for one week",
+                                     "&lt;b&gt;Barry&lt;/b&gt;&lt;br /&gt;Away for two weeks",
+                                     "&lt;b&gt;Cynthia&lt;/b&gt;&lt;br /&gt;Away for two weeks",
+                                     "&lt;b&gt;Graham&lt;/b&gt;&lt;br /&gt;Away for August and September",
+                                     "&lt;b&gt;Paul&lt;/b&gt;&lt;br /&gt;Away for 31 days"]);
+        gantt.Set('chart.events'[
+                                 [31, 28, null, 'Richard'],
+                                 [31, 28, null, 'Fred'],
+                                 [59, 14, null, 'Barney'],
+                                 [59, 21, null, 'Gloria'],
+                                 [59, 31, null, 'Paul'],
+                                 [80, 21, null, 'Harry'],
+                                 [94, 7, null, 'Shane'],
+                                 [120, 14, null, 'Barry'],
+                                 [130, 14, null, 'Cynthia'],
+                                 [211, 61, null, 'Graham'],
+                                 [334, 31, null, 'Paul'],
+                                ]);
+        gantt.Set('chart.vbars', [
+                                  [0, 31, 'rgba(192,255,192,0.5)'],
+                                  [59, 31, 'rgba(192,255,192,0.5)'],
+                                  [120, 31, 'rgba(192,255,192,0.5)'],
+                                  [181, 31, 'rgba(192,255,192,0.5)'],
+                                  [243, 30, 'rgba(192,255,192,0.5)'],
+                                  [304, 30, 'rgba(192,255,192,0.5)'],
+                                 ]);
+    
+        gantt.Draw();
+    }
+&lt;/script&gt;
+</pre>
+
+    <!--
+        <PROPERTIES>
+            chart.xmax :: Required. This determines how many "units" wide the Gantt chart is. For example to represent a year, you would use 365. Giving a granularity of one day.<br /><i>Default: none</i>
+            chart.background.barcolor1 :: Color of the background bars<br /><i>Default: white</i>
+            chart.background.barcolor2 :: Color of the background bars<br /><i>Default: white</i>
+            chart.background.grid :: Whether a grid is shown as part of the background<br /><i>Default: true</i>
+            chart.background.grid.color :: The color of the background grid.<br /><i>Default: #eee</i>
+            chart.background.grid.hsize :: The size of the horizontal grid.<br /><i>Default: 20</i>
+            chart.background.grid.vsize :: The size of the vertical grid.<br /><i>Default: 20</i>
+            chart.background.grid.width :: The line width of the background grid.<br /><i>Default: 1</i>
+            chart.gutter :: How big the gutter is. This is the top, bottom and right gutters. The left gutter is three times the gutter wide, to accomodate the labels.<br /><i>Default: 25</i>
+            chart.text.size :: The size of the text (in points).<br /><i>Default: 10</i>
+            chart.text.font :: The font used to render the text.<br /><i>Default: Verdana</i>
+            chart.text.color :: The color of the labels. <br /><i>Default: black</i>
+            chart.title :: The title of the chart.<br /><i>Default: not set</i>
+            chart.title.color :: The color of the title.<br /> <i>Default: black</i>
+            chart.title.vpos :: This allows you to completely override the vertical positioning of the title. It should be a number between 0 and 1, and is multiplied with the gutter and then used as the vertical position. It can be useful if you need to have a large gutter.<br /><i>Default: null</i>
+            chart.labels :: An array of the labels which are applied to the chart.<br /><i>Default: [] (An empty array)</i>
+            chart.tooltips :: An array of tooltips that are shown when the bars are clicked. They can contain HTML.<br /><i>Default: [] (An empty array)</i>
+            chart.tooltip.effect :: The animated effect used for showing tooltips. Can be either <i>fade</i> or <i>expand</i>.<br /><i>Default: fade</i>
+            chart.borders :: Whether a border is shown on the event bars<br /><i>Default: true</i>
+            chart.defaultcolor :: The default color of bars. If you don't specify a color for the event, this will be used.<br /><i>Default: white</i>
+            chart.events :: An array of event information that is displayed on the gantt. See below for further information.<br /><i>Default: [] (An empty array)</i>
+            chart.vbars :: Vertical bars used for decorative purposes, or for marking something on the chart (an event for example). See below for further information.<br /><i>Default: [] (An empty array)</i>
+            chart.contextmenu :: An array of context menu items. Cannot be used in conjunction with tooltips.<br /><i>Default: [] (An empty array)</i>
+            chart.annotatable :: Whether annotations are enabled for the chart (ie you can draw on the chart interactively.<br /><i>Default: false</i>
+            chart.annotate.color :: If you do not allow the use of the palette, then this will be the only colour allowed for annotations.<br /><i>Default: black</i>
+            chart.zoom.mode :: Can be used to control whether the zoom is in thumbnail or canvas mode. Possible values are: <i>thumbnail</i> and <i>canvas</i>.<br /><i>Default: canvas</i>
+            chart.zoom.factor :: This is the factor that the graph will be zoomed by (bigger values means more zoom)<br /><i>Default: 1.5</i>
+            chart.zoom.fade.in :: Whether the zoomed canvas fades in or not. This also can be used to control the fade in for the zoom in thumbnail mode.<br /><i>Default: true</i>
+            chart.zoom.fade.out :: Whether the zoomed canvas fades out or not. This also can be used to control the fade in for the zoom in thumbnail mode.<br /><i>Default: true</i>
+            chart.zoom.hdir :: The horizontal direction of the zoom. Possible values are: <i>left</i>, <i>center</i>, <i>right</i><br /><i>Default: right</i>
+            chart.zoom.vdir :: The vertical direction of the zoom. Possible values are: <i>up</i>, <i>center</i>, <i>down</i><br /><i>Default: down</i>
+            chart.zoom.delay :: The delay (in milliseconds) between frames.<br /><i>Default: 50</i>
+            chart.zoom.frames :: The number of frames in the zoom animation.<br /><i>Default: 10</i>
+            chart.zoom.shadow :: Whether or not the zoomed canvas has a shadow or not.<br /><i>Default: true</i>
+            chart.zoom.thumbnail.width :: When the zoom is in thumbnail mode, this is the width (in pixels) of the thumbnail.<br /><i>Default: 75</i>
+            chart.zoom.thumbnail.height :: When the zoom is in thumbnail mode, this is the height (in pixels) of the thumbnail.<br /><i>Default: 75</i>
+        </PROPERTIES>
+    -->
+
+    <h2>Available properties</h2>
+    
+    <p>
+        You can use these properties to control how the bar graph apears.
+    </p>
+
+    <!-- DOCS -->
+
+    <table border="0" id="docs">
+        <tr>
+            <th>chart.xmax</th>
+            <td>Required. This determines how many "units" wide the Gantt chart is. For example to represent a year, you would use 365. Giving a granularity of one day.<br /><i>Default: none</i></td>
+            <th>chart.background.barcolor1</th>
+            <td>Color of the background bars<br /><i>Default: white</i></td>
+        </tr>
+        <tr>
+            <th>chart.background.barcolor2</th>
+            <td>Color of the background bars<br /><i>Default: white</i></td>
+            <th>chart.background.grid</th>
+            <td>Whether a grid is shown as part of the background<br /><i>Default: true</i></td>
+        </tr>
+        <tr>
+            <th>chart.background.grid.color</th>
+            <td>The color of the background grid.<br /><i>Default: #eee</i></td>
+            <th>chart.background.grid.hsize</th>
+            <td>The size of the horizontal grid.<br /><i>Default: 20</i></td>
+        </tr>
+        <tr>
+            <th>chart.background.grid.vsize</th>
+            <td>The size of the vertical grid.<br /><i>Default: 20</i></td>
+            <th>chart.background.grid.width</th>
+            <td>The line width of the background grid.<br /><i>Default: 1</i></td>
+        </tr>
+        <tr>
+            <th>chart.gutter</th>
+            <td>How big the gutter is. This is the top, bottom and right gutters. The left gutter is three times the gutter wide, to accomodate the labels.<br /><i>Default: 25</i></td>
+            <th>chart.text.size</th>
+            <td>The size of the text (in points).<br /><i>Default: 10</i></td>
+        </tr>
+        <tr>
+            <th>chart.text.font</th>
+            <td>The font used to render the text.<br /><i>Default: Verdana</i></td>
+            <th>chart.text.color</th>
+            <td>The color of the labels. <br /><i>Default: black</i></td>
+        </tr>
+        <tr>
+            <th>chart.title</th>
+            <td>The title of the chart.<br /><i>Default: not set</i></td>
+            <th>chart.title.color</th>
+            <td>The color of the title.<br /> <i>Default: black</i></td>
+        </tr>
+        <tr>
+            <th>chart.title.vpos</th>
+            <td>This allows you to completely override the vertical positioning of the title. It should be a number between 0 and 1, and is multiplied with the gutter and then used as the vertical position. It can be useful if you need to have a large gutter.<br /><i>Default: null</i></td>
+            <th>chart.labels</th>
+            <td>An array of the labels which are applied to the chart.<br /><i>Default: [] (An empty array)</i></td>
+        </tr>
+        <tr>
+            <th>chart.tooltips</th>
+            <td>An array of tooltips that are shown when the bars are clicked. They can contain HTML.<br /><i>Default: [] (An empty array)</i></td>
+            <th>chart.tooltip.effect</th>
+            <td>The animated effect used for showing tooltips. Can be either <i>fade</i> or <i>expand</i>.<br /><i>Default: fade</i></td>
+        </tr>
+        <tr>
+            <th>chart.borders</th>
+            <td>Whether a border is shown on the event bars<br /><i>Default: true</i></td>
+            <th>chart.defaultcolor</th>
+            <td>The default color of bars. If you don't specify a color for the event, this will be used.<br /><i>Default: white</i></td>
+        </tr>
+        <tr>
+            <th>chart.events</th>
+            <td>An array of event information that is displayed on the gantt. See below for further information.<br /><i>Default: [] (An empty array)</i></td>
+            <th>chart.vbars</th>
+            <td>Vertical bars used for decorative purposes, or for marking something on the chart (an event for example). See below for further information.<br /><i>Default: [] (An empty array)</i></td>
+        </tr>
+        <tr>
+            <th>chart.contextmenu</th>
+            <td>An array of context menu items. Cannot be used in conjunction with tooltips.<br /><i>Default: [] (An empty array)</i></td>
+            <th>chart.annotatable</th>
+            <td>Whether annotations are enabled for the chart (ie you can draw on the chart interactively.<br /><i>Default: false</i></td>
+        </tr>
+        <tr>
+            <th>chart.annotate.color</th>
+            <td>If you do not allow the use of the palette, then this will be the only colour allowed for annotations.<br /><i>Default: black</i></td>
+            <th>chart.zoom.mode</th>
+            <td>Can be used to control whether the zoom is in thumbnail or canvas mode. Possible values are: <i>thumbnail</i> and <i>canvas</i>.<br /><i>Default: canvas</i></td>
+        </tr>
+        <tr>
+            <th>chart.zoom.factor</th>
+            <td>This is the factor that the graph will be zoomed by (bigger values means more zoom)<br /><i>Default: 1.5</i></td>
+            <th>chart.zoom.fade.in</th>
+            <td>Whether the zoomed canvas fades in or not. This also can be used to control the fade in for the zoom in thumbnail mode.<br /><i>Default: true</i></td>
+        </tr>
+        <tr>
+            <th>chart.zoom.fade.out</th>
+            <td>Whether the zoomed canvas fades out or not. This also can be used to control the fade in for the zoom in thumbnail mode.<br /><i>Default: true</i></td>
+            <th>chart.zoom.hdir</th>
+            <td>The horizontal direction of the zoom. Possible values are: <i>left</i>, <i>center</i>, <i>right</i><br /><i>Default: right</i></td>
+        </tr>
+        <tr>
+            <th>chart.zoom.vdir</th>
+            <td>The vertical direction of the zoom. Possible values are: <i>up</i>, <i>center</i>, <i>down</i><br /><i>Default: down</i></td>
+            <th>chart.zoom.delay</th>
+            <td>The delay (in milliseconds) between frames.<br /><i>Default: 50</i></td>
+        </tr>
+        <tr>
+            <th>chart.zoom.frames</th>
+            <td>The number of frames in the zoom animation.<br /><i>Default: 10</i></td>
+            <th>chart.zoom.shadow</th>
+            <td>Whether or not the zoomed canvas has a shadow or not.<br /><i>Default: true</i></td>
+        </tr>
+        <tr>
+            <th>chart.zoom.thumbnail.width</th>
+            <td>When the zoom is in thumbnail mode, this is the width (in pixels) of the thumbnail.<br /><i>Default: 75</i></td>
+            <th>chart.zoom.thumbnail.height</th>
+            <td>When the zoom is in thumbnail mode, this is the height (in pixels) of the thumbnail.<br /><i>Default: 75</i></td>
+        </tr>
+        <tr>
+        </tr>
+    </table><br /><br />
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    <a name="events"></a>
+    <h2>Adding events to your Gantt chart</h2>
+    
+    <p>
+        To add events, you specify them using the <i>chart.events</i> property. You could use the following to set some events on your gantt chart:
+    </p>
+    
+    <pre class="code">gantt.Set('chart.events', [
+                       [31, 28, 75, 'Richard'],
+                       [12, 28, 67, 'Fred'],
+                       [59, 14, 0, 'Barney'],
+                       [59, 21, 5, 'Gloria'],
+                       [46, 31, 94, 'Paul'],
+                       [80, 21, 46, 'Harry'],
+                       [94, 17, 84, 'Shane'],
+                       [34, 14, 32, 'Barry'],
+                       [64, 14, 28, 'Cynthia', 'red', 'yellow'],
+                       [13, 61, 74, 'Graham'],
+                       [84, 31, 16, 'Paul']
+                      ]);
+</pre>
+
+    <p>
+        The first value is the (zero indexed) start number relative to your <i>chart.xmax</i>. So if you have set your <i>chart.xmax</i> to 62, (to represent
+        two months), and this value is 31, the start will be the start of the second month. In this case you could give two labels -
+        <i>['July', 'August']</i>.
+    </p>
+    
+    <p>
+        The second value is the duration. So using the previous example, if you set this to 7, you would have an event lasting a week.
+    </p>
+    
+    <p>
+        The third value is the "percentage complete" indicator. This is shown to the right of the event, and is optional - you can
+        specify <i>null</i> if you wish.
+    </p>
+    
+    <p>
+        The fourth value is the label that is used on the left hand side.
+    </p>
+    
+    <p>
+        The optional fifth value stipulates the background colour that the bar is. Default is white.
+    </p>
+    
+    <p>
+        And the last optional 6th value is the foreground color of the bar. Defaulting to #0c0.
+    </p>
+    
+    <a name="vbars"></a>
+    <h2>Adding vertical bars to your Gantt chart</h2>
+    
+    <p>
+        You can add decorative vertical bars like so:
+    </p>
+    
+    <pre class="code">gantt.Set('chart.vbars', [
+                    [0, 31, 'rgba(192,255,192,0.5)'],
+                    [59, 31, 'rgba(192,255,192,0.5)'],
+                    [120, 31, 'rgba(192,255,192,0.5)'],
+                    [181, 31, 'rgba(192,255,192,0.5)'],
+                    [243, 30, 'rgba(192,255,192,0.5)'],
+                    [304, 30, 'rgba(192,255,192,0.5)'],
+                   ]);
+</pre>
+
+    <p>
+        You can use these for decorative purposes, or to mark events/limits. The first value is the start index, as above.
+        The second value is the unit length, again as above. The third value is the color of the vertical bar.
+    </p>
+
+</body>
+</html>

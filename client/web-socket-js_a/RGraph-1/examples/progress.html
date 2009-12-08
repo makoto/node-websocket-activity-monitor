@@ -1,0 +1,132 @@
+<?php ob_start('ob_gzhandler') ?>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <!--
+        /**
+        * o------------------------------------------------------------------------------o
+        * | This file is part of the RGraph package - you can learn more at:             |
+        * |                                                                              |
+        * |                          http://www.rgraph.net                               |
+        * |                                                                              |
+        * | This package is licensed under the RGraph license. For all kinds of business |
+        * | purposes there is a small one-time licensing fee to pay and for personal,    |
+        * | charity and educational purposes it is free to use. You can read the full    |
+        * | license here:                                                                |
+        * |                      http://www.rgraph.net/LICENSE.txt                       |
+        * o------------------------------------------------------------------------------o
+        */
+    -->
+    <title>RGraph: HTML5 canvas graph library - progress bar</title>
+
+    <link rel="stylesheet" href="../css/website.css" type="text/css" media="screen" />
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <script src="../libraries/RGraph.common.js"></script>
+    <script src="../libraries/RGraph.progress.js"></script>
+
+    <script>
+        window.onload = function ()
+        {
+            var progress1 = new RGraph.Progress('progress1', 63, 100);
+            progress1.Set('chart.shadow', false);
+            progress1.Set('chart.title', 'Disk usage (context, annotatable, zoom)');
+            progress1.Set('chart.contextmenu', [['Zoom in', RGraph.Zoom], ['Show the palette', RGraph.Showpalette], ['Clear', function () {RGraph.Clear(progress1.canvas, '#fff'); progress1.Draw();}]]);
+            progress1.Set('chart.units.post', '%');
+            progress1.Set('chart.annotatable', true);
+            progress1.Draw();
+
+            /**
+            * This draws the sdecond progress bar
+            */
+            var gradient = progress1.context.createLinearGradient(0,0,450,0);
+            gradient.addColorStop(0, 'red');
+            gradient.addColorStop(0.3, 'yellow');
+            gradient.addColorStop(1, '#6f6');
+
+            var progress2 = new RGraph.Progress('progress2', 96, 100);
+            progress2.Set('chart.color', gradient);
+            progress2.Set('chart.shadow', true);
+            progress2.Set('chart.shadow.offsety', -3);
+            progress2.Set('chart.title', 'Disk usage (tooltip, context menu)');
+            progress2.Set('chart.units.post', 'Gb');
+            progress2.Set('chart.tooltips', ['<b>Warning!</b><br />Disk usage is high. It might be time to delete<br /> some of your files']);
+            progress2.Set('chart.contextmenu', [['A sample context menu', function () {}]]);
+            progress2.Draw();
+
+            var progress3 = new RGraph.Progress('progress3', 9, 10);
+            progress3.Set('chart.color', 'rgb(123,215,155)');
+            progress3.Set('chart.units.post', 'l');
+            progress3.Set('chart.orientation', 'vertical');
+            progress3.Set('chart.shadow', true);
+            progress3.Set('chart.shadow.offsetx', -3);
+            progress3.Draw();
+
+            var progress4 = new RGraph.Progress('progress4', 1, 10);
+            progress4.Set('chart.color', 'red');
+            progress4.Set('chart.gutter', 30);
+            progress4.Set('chart.orientation', 'vertical');
+            progress4.Set('chart.tooltips', ['<b>Danger</b><br />The water tank is getting very low!']);
+            progress4.Draw();
+
+            var progress5 = new RGraph.Progress('progress5', 14, 50);
+            progress5.Set('chart.color', 'yellow');
+            progress5.Set('chart.gutter', 30);
+            progress5.Set('chart.orientation', 'vertical');
+            progress5.Draw();
+        }
+    </script>
+</head>
+<body>
+
+<div id="logo">
+    <a href="../index.html">RGraph: HTML5 canvas graph library</a>
+    >
+    <a href="./index.html">Examples</a>
+    >
+    Progress bar
+</div>
+
+    <h1>RGraph: Progress bar</h1>
+
+    <script>
+        if (document.all) {
+            document.write('<div style="background-color: #fee; border: 2px dashed red; padding: 5px"><b>Important</b><br /><br /> Internet Explorer does not natively support the HTML5 canvas tag yet, so if you want to see the graphs, you can either:<ul><li>Install <a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a></li><li>Use another browser entirely. Your choices are Firefox, Chrome or Safari</li></ul></div>');
+        }
+    </script>
+
+    <p>
+        This is a Progress Bar for showing, well, progress. Though you can show anything with it - use it to show load on your server,
+        or percentage space free on your servers disk drive. You could even incorporate it with some AJAX to retrieve status information
+        from your webserver dynamically, making the Progress Bar realtime. To redraw the progress bar simply call <i>RGraph.Clear()</i>
+        (which clears the canvas) and then call <i>myProgress.Draw()</i> again.
+    </p>
+        
+    <p>
+        The colours, title and scale are configurable, allowing you to represent a wide range of values.
+    </p>
+
+    <div>
+        <ul>
+            <li><a href="../docs/progress.html">Progress bar API documentation</a></li>
+        </ul>
+    </div>
+
+    <table border="0">
+        <tr>
+            <td width="450">
+                <canvas width="450" height="75" id="progress1"><div class="canvasfallback">[No canvas support]</div></canvas>
+                <canvas width="450" height="75" id="progress2"><div class="canvasfallback">[No canvas support]</div></canvas>
+            </td>
+
+            <td width="450">
+                <canvas width="100" height="370" id="progress3"><div class="canvasfallback">[No canvas support]</div></canvas>
+                <canvas width="100" height="370" id="progress4"><div class="canvasfallback">[No canvas support]</div></canvas>
+                <canvas width="100" height="370" id="progress5"><div class="canvasfallback">[No canvas support]</div></canvas>
+            </td>
+        </tr>
+    </table>
+
+</body>
+</html>

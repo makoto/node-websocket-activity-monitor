@@ -1,0 +1,137 @@
+<?php ob_start('ob_gzhandler') ?>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <!--
+        /**
+        * o------------------------------------------------------------------------------o
+        * | This file is part of the RGraph package - you can learn more at:             |
+        * |                                                                              |
+        * |                          http://www.rgraph.net                               |
+        * |                                                                              |
+        * | This package is licensed under the RGraph license. For all kinds of business |
+        * | purposes there is a small one-time licensing fee to pay and for personal,    |
+        * | charity and educational purposes it is free to use. You can read the full    |
+        * | license here:                                                                |
+        * |                      http://www.rgraph.net/LICENSE.txt                       |
+        * o------------------------------------------------------------------------------o
+        */
+    -->
+    <title>RGraph: HTML5 canvas graph library - Traditional radar chart</title>
+    <link rel="stylesheet" href="../css/website.css" type="text/css" media="screen" />
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <script src="../libraries/RGraph.common.js" ></script>
+    <script src="../libraries/RGraph.tradar.js" ></script>
+
+    <script>
+        window.onload = function ()
+        {
+            var tradar = new RGraph.Tradar('tradar1', [3, 3, 41, 37, 16]);
+            tradar.Set('chart.background.circles', true);
+            tradar.Set('chart.color', '#fdd');//'rgba(255,0,0,0.5)');
+            tradar.Set('chart.circle.fill', 'rgba(200,255,200,0.9)');
+            tradar.Set('chart.labels', ['Safari (3%)', 'Other (3%)', 'MSIE 7 (41%)', 'MSIE 6 (37%)', 'Firefox (16%)']);
+            tradar.Set('chart.title', "Browser share (annotatable, context, zoom)" );
+            tradar.Set('chart.linewidth', 2);
+            tradar.Set('chart.zoom.vdir', 'center');
+            tradar.Set('chart.contextmenu', [['Zoom in', RGraph.Zoom], ['Clear', function () {RGraph.Clear(tradar.canvas); tradar.Draw()}]]);
+            tradar.Set('chart.annotatable', true);
+            tradar.Draw();
+
+            var tradar2 = new RGraph.Tradar('tradar2', [11,17,16,14,12,15,15,16,14,15,9,12]);
+            tradar2.Set('chart.color', '#0f0');
+            tradar2.Set('chart.circle', 13);
+            tradar2.Set('chart.circle.fill', 'rgba(255,0,0,0.5)');
+            tradar2.Set('chart.labels', ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']);
+            tradar2.Set('chart.title', 'Sales by month in 2008');
+            tradar2.Set('chart.key', ['Actual sales', 'Sales target']);
+            tradar2.Set('chart.key.position', 'gutter');
+            tradar2.Set('chart.key.shadow', true);
+            tradar2.Set('chart.zoom.mode', 'thumbnail');
+            tradar2.Set('chart.gutter', 40);
+            tradar2.Draw();
+
+            var tradar3 = new RGraph.Tradar('tradar3', [3, 3, 41, 37, 16]);
+            tradar3.Set('chart.background.circles', true);
+            tradar3.Set('chart.color', '#f00');
+            tradar3.Set('chart.circle', 35); // Can be used to illustrate a limit of some sort
+            tradar3.Set('chart.circle.fill', 'rgba(200,255,200,0.5)');
+            tradar3.Set('chart.labels', ['Other', 'Safari', 'MSIE 7', 'MSIE 6', 'Firefox']);
+            tradar3.Set('chart.gutter', 22);
+            tradar3.Set('chart.title', "Browser market share");
+            tradar3.Draw();
+
+            var tradar4 = new RGraph.Tradar('tradar4', [0.4, 4.6, 44, 32, 19]);
+            tradar4.Set('chart.background.circles', true);
+            tradar4.Set('chart.color', 'rgba(0,0,255,0.7)');
+            tradar4.Set('chart.circle', 35); // Can be used to illustrate a limit of some sort
+            tradar4.Set('chart.circle.fill', 'rgba(200,200,255,0.5)');
+            tradar4.Set('chart.labels', ['Other (0.4%)', 'Safari (4.6%)', 'MSIE 7 (44%)', 'MSIE 6 (32%)', 'Firefox (19%)']);
+            tradar4.Set('chart.gutter', 40);
+            tradar4.Set('chart.key', ['Market share', 'Target share']);
+            tradar4.Set('chart.title', "Browser market share (different source)");
+            tradar4.Draw();
+
+            var tradar5 = new RGraph.Tradar('tradar5', [11,17,16,15,12,15,15,16,13,14,12,13]);
+            tradar5.Set('chart.color', 'rgba(0, 255,255,0.5)');
+            tradar5.Set('chart.labels', ['January (11)', 'February (17)', 'March (16)', 'April (15)', 'May (12)', 'June (15)', 'July (15)', 'August (16)', 'September (13)', 'October (10)', 'November (12)', 'December (13)']);
+            tradar5.Set('chart.title', 'Sales by month');
+            tradar5.Set('chart.title.vpos', 1);
+            tradar5.Set('chart.key', ['Sales achieved', 'Sales target']);
+            tradar5.Set('chart.gutter', 35);
+            tradar5.Draw();
+        }
+    </script>
+</head>
+<body>
+
+<div id="logo">
+    <a href="../index.html">RGraph: HTML5 canvas graph library</a>
+    >
+    <a href="./index.html">Examples</a>
+    >
+    Traditional radar chart
+</div>
+
+<h1>RGraph: Traditional radar chart</h1>
+
+    <script>
+        if (document.all) {
+            document.write('<div style="background-color: #fee; border: 2px dashed red; padding: 5px"><b>Important</b><br /><br /> Internet Explorer does not natively support the HTML5 canvas tag yet, so if you want to see the graphs, you can either:<ul><li>Install <a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a></li><li>Use another browser entirely. Your choices are Firefox, Chrome or Safari</li></ul></div>');
+        }
+    </script>
+
+    <div style="float: right; width: 450px">
+    </div>
+    
+    <p>
+        A more traditional radar chart, that is similar to the Pseudo radar chart, but is more recognisable. Each of the data points is
+        arranged equally in terms of angle, whilst the magnitude of each point is shown by the distance from the centre. Thus,
+        data points of a higher magnitude can be seen as they are more distant from the centre.
+    </p>
+    
+    <p>
+        Suitable for many datasets, but not all. If not, then the pseudo radar chart may be more apt.
+    </p>
+    
+    <p>
+        The circle, as can be seen in the second example, could be used to indicate a threshold of sorts. In the example,
+        it could be minimum sales required for a particular month. Months that fall below this threshold can be clearly seen.
+    </p>
+
+    <div>
+        <ul>
+            <li><a href="../docs/tradar.html">Traditional radar chart API documentation</a></li>
+            <li><a href="radar.html">Pseudo radar chart example</a></li>
+        </ul>
+    </div>
+
+    <canvas id="tradar1" width="475" height="350"><div class="canvasfallback">[No canvas support]</div></canvas>
+    <canvas id="tradar2" width="450" height="350"><div class="canvasfallback">[No canvas support]</div></canvas>
+    <canvas id="tradar3" width="450" height="350"><div class="canvasfallback">[No canvas support]</div></canvas>
+    <canvas id="tradar4" width="450" height="350"><div class="canvasfallback">[No canvas support]</div></canvas>
+    <canvas id="tradar5" width="475" height="350"><div class="canvasfallback">[No canvas support]</div></canvas>
+</body>
+</html>

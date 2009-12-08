@@ -1,0 +1,512 @@
+<?php ob_start('ob_gzhandler') ?>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <!--
+        /**
+        * o------------------------------------------------------------------------------o
+        * | This file is part of the RGraph package - you can learn more at:             |
+        * |                                                                              |
+        * |                          http://www.rgraph.net                               |
+        * |                                                                              |
+        * | This package is licensed under the RGraph license. For all kinds of business |
+        * | purposes there is a small one-time licensing fee to pay and for personal,    |
+        * | charity and educational purposes it is free to use. You can read the full    |
+        * | license here:                                                                |
+        * |                      http://www.rgraph.net/LICENSE.txt                       |
+        * o------------------------------------------------------------------------------o
+        */
+    -->
+    <title>RGraph: HTML5 canvas graph library - line chart</title>
+
+    <link rel="stylesheet" href="../css/website.css" type="text/css" media="screen" />
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <script src="../libraries/RGraph.common.js" ></script>
+    <script src="../libraries/RGraph.line.js" ></script>
+
+    <script>
+        window.onload = function ()
+        {
+            line1 = new RGraph.Line('line1', [56,52,48,47,46,40,35,34,39,53], [0,5,15,16,19,24,29,30,35,42]);
+            line1.Set('chart.ymax', 100);
+            line1.Set('chart.title', 'A line chart (tooltips, labels, context, no axes, zoom)');
+            line1.Set('chart.colors', ['red', 'green']);
+            line1.Set('chart.tickmarks', 'dot');
+            line1.Set('chart.linewidth', 1);
+            line1.Set('chart.background.barcolor1', '#fff');
+            line1.Set('chart.background.barcolor2', '#fff');
+            line1.Set('chart.tooltips', ['id:tooltip_china',      'id:tooltip_la',         'id:tooltip_plymouth',
+                                         'id:tooltip_meadowhall', 'id:tooltip_sydney',     'id:tooltip_toronto',
+                                         'id:tooltip_france',     'id:tooltip_norway',     'id:tooltip_sweden',
+                                         'id:tooltip_spain',      'id:tooltip_deli',       'id:tooltip_congo',
+                                         'id:tooltip_brazil',     'id:tooltip_california', 'id:tooltip_newyork',
+                                         'id:tooltip_paris',      'id:tooltip_uk',         'id:tooltip_antartica',
+                                         'id:tooltip_sahara', 'id:tooltip_zagreb']);
+            line1.Set('chart.text.angle', 45);
+            line1.Set('chart.gutter', 45);
+            line1.Set('chart.hmargin', 10);
+            line1.Set('chart.units.post', '%');
+            line1.Set('chart.labels.ingraph', [,,,'Meadowhall (48)']);
+            line1.Set('chart.contextmenu', [['Zoom in', RGraph.Zoom], ['Cancel', function () {}]]);
+            line1.Set('chart.noaxes', true);
+            line1.Set('chart.background.grid', true);
+            line1.Set('chart.yaxispos', 'right');
+            line1.Draw();
+            
+            line2 = new RGraph.Line('line2', [51,61,31,420,55,71,12,44,152]);
+            line2.Set('chart.labels', ['16th', '17th', '18th', '19th', '24th', '20th', '21st', '22nd', '23rd']);
+            line2.Set('chart.stepped', true);
+            line2.Set('chart.filled', true);
+            line2.Set('chart.gutter', 40);
+            line2.Set('chart.title', 'A graph with no title. Wait... (context, annotatable)');
+            line2.Set('chart.annotatable', true);
+            line2.Set('chart.contextmenu', [
+                                      ['Clear', function () {RGraph.Clear(line2.canvas); line2.Draw();}]
+                                     ]);
+            line2.Set('chart.background.barcolor1', '#fff');
+            line2.Set('chart.background.barcolor2', '#fff');
+            line2.Set('chart.background.grid.vsize', 10);
+            line2.Set('chart.background.grid.hsize', 10);
+            line2.Set('chart.fillstyle', ['#ff0']);
+            line2.Set('chart.colors', ['#000']);
+            line2.Set('chart.linewidth', 2);
+            line2.Draw();
+
+            // Multiple lines. Add as many as you want, but keep in mind you may need to add colours for them
+            line3 = new RGraph.Line(
+                             'line3',
+                             [-156,-2,133,150,252],
+                             [125,151,99,26,-184],
+                             [-256,-56,23,56,61]
+                            );
+            line3.Set('chart.title', 'Multiple lines, center X axis, right Y axis, crosshairs');
+            line3.Set('chart.background.grid', true);
+            line3.Set('chart.background.barcolor1', '#fff');
+            line3.Set('chart.background.barcolor2', '#fff');
+            line3.Set('chart.colors', ['#f00', '#0f0', '#12f']);
+            line3.Set('chart.key', ['Kudzu', 'Jerry', 'Fatima']);
+            line3.Set('chart.key.background', 'rgba(255,255,255,0.7)');
+            line3.Set('chart.key.position', 'gutter');
+            line3.Set('chart.linewidth', 2);
+            line3.Set('chart.tickmarks', 'arrow');
+            line3.Set('chart.xaxispos', 'center');
+            line3.Set('chart.yaxispos', 'right');
+            line3.Set('chart.gutter', 40);
+            line3.Set('chart.hmargin', 10);
+            line3.Set('chart.background.hbars', [
+                                                 [-160,-999, 'rgba(255,0,0,0.3)'],
+                                                 [0, -160, 'rgba(255,255,0,0.3)'],
+                                                 [0, null, 'rgba(128,255,128,0.3)']
+                                                ]);
+            line3.Set('chart.crosshairs', true);
+            line3.Draw();
+
+            line4 = new RGraph.Line('line4', [0,300,500,600,100,200,400,500,700,800,400,100],
+                                      [500,400,500,700,300,300,500,600,700,800,600,300],
+                                      [400,200,400,500,300,300,400,500,400,100,400,300]);
+            line4.Set('chart.key', ['2008', '2007', '2006']);
+            line4.Set('chart.key.background', '#fff');
+            line4.Set('chart.key.shadow', true);
+            line4.Set('chart.gutter', 45);
+            line4.Set('chart.zoom.mode', 'thumbnail');
+            line4.Set('chart.filled', true);
+            line4.Set('chart.tickmarks', null);
+            line4.Set('chart.background.barcolor1', '#fff');
+            line4.Set('chart.background.barcolor2', '#fff');
+            line4.Set('chart.title', 'A line chart (zoom, Y axis on the right)');
+            line4.Set('chart.colors', ['rgba(169, 222, 244, 0.7)', 'red', '#ff0']);
+            line4.Set('chart.fillstyle', ['#daf1fa', '#faa', '#ffa']);
+            line4.Set('chart.labels', ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']);
+            line4.Set('chart.yaxispos', 'right');
+            line4.Set('chart.linewidth', 5);
+            line4.Draw();
+    
+            line5 = new RGraph.Line('line5',  [5,4,3,2,1,1,4,2,2,2,3,6], [5,3,1,1,2,3,6,5,8,7,7,4], [6,5,4,2,2,3,7,8,9,10,12,11]);
+            line5.Set('chart.labels', ['1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th', '9th', '10th', '11th', '12th']);
+            line5.Set('chart.colors', ['#D1DD9F', '#8CC540', '#3060A2']);
+            line5.Set('chart.tickmarks', null);
+            line5.Set('chart.background.grid', false);
+            line5.Set('chart.background.grid.hsize', 15);
+            line5.Set('chart.background.grid.vsize', 15);
+            line5.Set('chart.linewidth', 1);
+            line5.Set('chart.title', 'A filled line chart (custom maximum Y value)');
+            line5.Set('chart.filled', true);
+            line5.Set('chart.linewidth', 0);
+            line5.Set('chart.ymax', 30);
+            line5.Draw();
+
+
+            line6 = new RGraph.Line('line6', [45,34,65,62,20,32,28,37],
+                                      [12,13,15,16,29,12,19,26],
+                                      [45,34,65,62,13,34,35,36],
+                                      [45,34,65,62,45,30,40,35],
+                                      [54,39,54,12,19,28,31,32]);
+            line6.Set('chart.title', 'A filled line graph with multiple lines');
+            line6.Set('chart.key', ['2010', '2005', '2000', '1995', '1990']);
+            line6.Set('chart.key.background', '#fff');
+            line6.Set('chart.background.grid', 1);
+            line6.Set('chart.background.barcolor1', '#fff');
+            line6.Set('chart.background.barcolor2', '#fff');
+            line6.Set('chart.colors', ['red', 'blue', '#0f0', 'pink', 'yellow']);
+            line6.Set('chart.tickmarks', null);
+            line6.Set('chart.labels', ['Mark', 'Rich', 'Pete', 'Jezza', 'Drake', 'Ripley', 'Barry', 'Fred']);
+            line6.Set('chart.gutter', 40);
+            line6.Set('chart.filled', true);
+            line6.Set('chart.background.grid.width', 1); // Decimals are permitted
+            line6.Set('chart.units.post', 'pt');
+            line6.Set('chart.key.shadow', true);
+            line6.Draw();
+
+            data_2008 = [4,3,6,8,4,2,1,4,9,8,7,8];
+            data_2007 = [-1,-2,-4,-2,-1,-3,-3,-5,-4,-5,-3,-4];
+    
+            line7 = new RGraph.Line('line7', data_2008, data_2007);
+            line7.Set('chart.background.barcolor1', '#fff');
+            line7.Set('chart.background.barcolor2', '#fff');
+            line7.Set('chart.key', ['2008', '2007']);
+            line7.Set('chart.key.background', 'rgba(255,255,255,0.5)');
+            line7.Set('chart.labels', ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']);
+            line7.Set('chart.colors', ['red', 'black']);
+            line7.Set('chart.tickmarks', null);
+            line7.Set('chart.shadow', true);
+            line7.Set('chart.shadow.offset', 2);
+            line7.Set('chart.linewidth', 2);
+            line7.Set('chart.title', 'A line chart with two data sets');
+            line7.Set('chart.xaxispos', 'center');
+            line7.Set('chart.tickmarks', 'arrow');
+            line7.Set('chart.hmargin', 10);
+            line7.Draw();
+            
+            line8 = new RGraph.Line('line8', [8,9,7,6,5,6,12,13,8,12,13,12], [9,4,4,5,6,2,4,8,9,1,1,2]);
+            line8.Set('chart.background.hbars', [[85, 15, 'rgba(255,0,0,0.3)'], [60,25,'rgba(255,255,0,0.3)'], [0,60, 'rgba(0,255,0,0.3)']]);
+            line8.Set('chart.title', 'Main webserver loads');
+            line8.Set('chart.labels', ['12am', '6am', '12pm', '6pm', '12am']);
+            line8.Set('chart.colors', ['blue', 'black']);
+            line8.Set('chart.hmargin', 10);
+            line8.Set('chart.key', ['Webserver A', 'Webserver B']);
+            line8.Set('chart.key.shadow', true);
+            line8.Set('chart.gutter', 40);
+            line8.Set('chart.linewidth', 3);
+            line8.Set('chart.tickmarks', null);
+            line8.Set('chart.background.barcolor1', '#fff');
+            line8.Set('chart.background.barcolor2', '#fff');
+            line8.Set('chart.ymax', 100);
+            line8.Set('chart.units.post', '%');
+            line8.Draw();
+            
+            /**
+            * Create the 9th graphs data
+            */
+            var data1 = [];
+            var data2 = [];
+            var data3 = [];
+
+            for (var i=0; i <=360; i++) {
+                data1.push(Math.sin(i / 57.3));
+                data2.push(Math.cos(i / 57.3));
+                data3.push(Math.tan(i / 57.3));
+            }
+
+            line9 = new RGraph.Line('line9', data1, data2, data3);
+            line9.Set('chart.background.barcolor1', '#fff');
+            line9.Set('chart.background.barcolor2', '#fff');
+            line9.Set('chart.background.grid', true);
+            line9.Set('chart.linewidth', 10);
+            line9.Set('chart.labels', [0,90,180,270,360]);
+            line9.Set('chart.title', 'Sine, cosine & tangent curves (context, thick lines)');
+            line9.Set('chart.gutter', 35);
+            line9.Set('chart.tickmarks', null);
+            line9.Set('chart.ymax', 2);
+            line9.Set('chart.scale.decimals', 1);
+            line9.Set('chart.xticks', 8);
+            line9.Set('chart.colors', ['red', 'green', 'blue']);
+            line9.Set('chart.key', ['sin(x)', 'cos(x)', 'tan(x)']);
+            line9.Set('chart.key.shadow', true);
+            line9.Set('chart.xaxispos', 'center');
+            line9.Set('chart.shadow', 1);
+            line9.Set('chart.shadow.blur', 5);
+            line9.Set('chart.shadow.offsetx', 1);
+            line9.Set('chart.shadow.offsety', 1);
+
+            // Define a context menu that allows you to toggle the background grid. The two options simply:
+            //  1. Set the appropriate setting on the object
+            //  2. Clear the canvas
+            //  3. Draw the graph again
+            line9.Set('chart.contextmenu', [
+                                            ['Show background grid', function () {line9.Set('chart.background.grid', true); RGraph.Clear(line9.canvas); line9.Draw();}],
+                                            ['Hide background grid', function () {line9.Set('chart.background.grid', false); RGraph.Clear(line9.canvas); line9.Draw();}],
+                                            null,
+                                            ['Increase maximum Y value', function () {RGraph.Clear(line9.canvas); line9.Set('chart.ymax', line9.Get('chart.ymax') + 0.5); line9.Draw();}],
+                                            ['Decrease maximum Y value', function () {RGraph.Clear(line9.canvas); line9.Set('chart.ymax', line9.Get('chart.ymax') - 0.5); line9.Draw();}],
+                                            ['Reset maximum Y value', function () {RGraph.Clear(line9.canvas); line9.Set('chart.ymax', 2); line9.Draw();}]
+                                           ]);
+            line9.Draw();
+
+            var data1 = [3,5,6,6,4,4,5,7,3,2,3,4,5,6];
+            var data2 = [4,5,4,3,4,3,6,4,3,2,4,4,4,4];
+            var data3 = [1,1,2,2,1,2,1,2,2,1,2,1,2,1];
+    
+            line10 = new RGraph.Line('line10', data1, data2, data3);
+            line10.Set('chart.colors', ['#07c', 'red', 'green']);
+            line10.Set('chart.fillstyle', 'rgb(230,242,250)');
+            line10.Set('chart.xticks', 12);
+            line10.Set('chart.labels', ['', 'Q1', '', '', 'Q2', '', '', 'Q3', '', '', 'Q4', '']);
+            line10.Set('chart.background.barcolor1', '#fff');
+            line10.Set('chart.background.barcolor2', '#fff');
+            line10.Set('chart.filled', true);
+            line10.Set('chart.gutter', 30);
+            line10.Set('chart.linewidth', 7);
+            line10.Set('chart.title', 'Website activity in 2007/8/9');
+            line10.Set('chart.yaxispos', 'right');
+            line10.Draw();
+
+            var data = [667.08,873.86,1169.86,1270.95,1252.95,1411.96,1868.15,2079.34,1942.34,2233.68,2557.28,2964.90,7161.31,7203.89,3417.41,3356.44,3497.77,3344.07,3902.65,4040.94,4025.86,226.28,285.50,232.25,229.71,110.30,145.32];
+
+            // Change the data so it's 1000 times smaller (so it fits with the scale)
+            for (var i=0; i<data.length; ++i) {
+                data[i] /= 1000;
+            }
+
+            // Create a gradient using the previous graphs context
+            gradient = line10.context.createLinearGradient(0,0,0,350);
+            gradient.addColorStop(1, 'red');
+            gradient.addColorStop(0, 'black');
+
+            line11 = new RGraph.Line('line11', data);
+            line11.Set('chart.labels', ['6th Apr', '13th Apr', '20th Apr', '27th Apr', '4th May', '11th May', '18th May', '25th May', '1st Jun', '8th Jun', '15th Jun', '22nd Jun', '29th Jun', '2nd Jul', '9th Jul', '16th Jul', '23rd Jul', '30th Jul','6th Aug', '13th Aug','20th Aug', '27th Aug', '3rd Sep', '10th Sep', '17th Sep', '24th Sep', '1st Oct']);
+            line11.Set('chart.labels', ['Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct']);
+            line11.Set('chart.title', 'Xyz Corps ongoing costs');
+            line11.Set('chart.text.angle', 45);
+            line11.Set('chart.colors', [gradient]);
+            line11.Set('chart.key.position', 'gutter');
+            line11.Set('chart.gutter', 40);
+            line11.Set('chart.ymax', 7.5);
+            line11.Set('chart.scale.decimals', 1);
+            line11.Set('chart.units.pre', '$');
+            line11.Set('chart.units.post', 'k');
+            line11.Set('chart.linewidth', 2);
+            line11.Set('chart.hmargin', 10);
+            line11.Set('chart.tickmarks', 'arrow');
+            line11.Set('chart.variant', '3d');
+            line11.Set('chart.shadow', true);
+            line11.Set('chart.shadow.offsetx', 1);
+            line11.Set('chart.shadow.offsety', -2);
+            line11.Draw();
+        
+            line12 = new RGraph.Line('line12', [6,5,4,6,5,6,6,3,4,5,5,5,4,6,4,3,5,8,4,7,4,5,6,3,4,5,6,4,4,2]);
+            line12.Set('chart.gutter', 0);
+            line12.Set('chart.noaxes', true);
+            line12.Set('chart.ylabels', false);
+            line12.Set('chart.background.grid', false);
+            line12.Set('chart.background.barcolor1', '#fff');
+            line12.Set('chart.background.barcolor2', '#fff');
+            line12.Set('chart.colors', '#000');
+            line12.Draw();
+            
+            line13 = new RGraph.Line('line13', [6,5,4,5,6,4,1,2,3], [7,8,9,9,8,7,8,7,6]);
+            line13.Set('chart.labels', ['13th','14th','15th','16th','15th','16th','17th','18th','19th']);
+            line13.Set('chart.title', 'A range chart');
+            line13.Set('chart.gutter', 25);
+            line13.Set('chart.background.barcolor1', '#fff');
+            line13.Set('chart.background.barcolor2', '#fff');
+            line13.Set('chart.filled', true);
+            line13.Set('chart.filled.range', true);
+            line13.Set('chart.fillstyle', 'rgba(128,255,128,0.5)');
+            line13.Set('chart.linewidth', 2);
+            line13.Set('chart.colors', ['green']);
+            line13.Set('chart.hmargin', 5);
+            line13.Draw();
+            
+            line14 = new RGraph.Line('line13', [1,1.5,1.8,1.1,1.2,1.3,1.5,1,0.7], [3.4,3.1,3,4.1,3.9,3.3,4.1,2.9,3]);
+            line14.Set('chart.background.grid', false);
+            line14.Set('chart.filled', true);
+            line14.Set('chart.filled.range', true);
+            line14.Set('chart.background.barcolor1', 'rgba(0,0,0,0)');
+            line14.Set('chart.background.barcolor2', 'rgba(0,0,0,0)');
+            line14.Set('chart.noaxes', true);
+            line14.Set('chart.ylabels', false);
+            line14.Set('chart.ymax', 10);
+            line14.Set('chart.colors', ['red']);
+            line14.Set('chart.fillstyle', 'rgba(255,0,0,0.5)');
+            line14.Set('chart.linewidth', 2);
+            line14.Set('chart.hmargin', 5);
+            line14.Draw();
+            
+            line15 = new RGraph.Line('line15', [56,46,36,26,35,46,45,43,31,35,46,42],[1,2,3,4,6,4,7,9,4,7,16], [1,3,6,4,9,8,5,4,3,2,2,1]);
+            line15.Set('chart.hmargin', 10);
+            line15.Set('chart.tickmarks', 'arrow');
+            line15.Set('chart.noaxes', true);
+            line15.Set('chart.yaxispos', 'right');
+            line15.Set('chart.units.post', '%');
+            line15.Set('chart.colors', ['black', 'red', 'yellow']);
+            line15.Set('chart.linewidth', 3);
+            line15.Set('chart.shadow', true);
+            line15.Set('chart.title', 'A graph with no axes');
+            line15.Set('chart.key', ['Marjorie', 'Fredrick', 'Garry']);
+            line15.Set('chart.key.position', 'gutter');
+            line15.Set('chart.gutter', 45);
+            line15.Set('chart.background.grid.vlines', false);
+            line15.Set('chart.background.grid.border', false);
+            line15.Draw();
+
+            line16a = new RGraph.Line('line16', [4,6,5,6,5,4,6,7,3,6]);
+            line16a.Set('chart.labels', ['Fred', 'Julie', 'Candy', 'Joe', 'Garry','Fred', 'Julie', 'Candy', 'Joe', 'Garry']);
+            line16a.Set('chart.colors', ['black']);
+            line16a.Set('chart.shadow', 1);
+            line16a.Set('chart.shadow.blur', 15);
+            line16a.Set('chart.hmargin', 10);
+            line16a.Set('chart.units.post', 'lb');
+            line16a.Set('chart.gutter', 40);
+            line16a.Set('chart.linewidth', 5);
+            line16a.Set('chart.background.hbars', [[7,2,'rgba(255,255,0,0.3)'], [0,7, 'rgba(0,255,0,0.3)'], [9,1,'rgba(255,0,0,0.3)']]);
+            line16a.Set('chart.noendxtick', true);
+            line16a.Draw();
+    
+            line16b = new RGraph.Line('line16', [2,9,8,8,1,2,3,4,7,7]);
+            line16b.Set('chart.background.grid', false);
+            line16b.Set('chart.title', 'Y axes on both sides');
+            line16b.Set('chart.colors', ['red', 'black']);
+            line16b.Set('chart.key', ['Share', 'Weight']);
+            line16b.Set('chart.key.position', 'gutter');
+            line16b.Set('chart.yaxispos', 'right');
+            line16b.Set('chart.shadow', 1);
+            line16b.Set('chart.shadow.blur', 15);
+            line16b.Set('chart.hmargin', 10);
+            line16b.Set('chart.gutter', 40);
+            line16b.Set('chart.linewidth', 5);
+            line16b.Set('chart.units.post', '%');
+            line16b.Set('chart.noendxtick', true);
+            line16b.Set('chart.noxaxis', true);
+            line16b.Draw();
+
+            line17 = new RGraph.Line('line17', [1,2,4,56,4,3,5,22,12,45,78,77,45,42,31,15,1,6,26,43,42,45,42,41,34,23]);
+            line17.Set('chart.ymax', 100);
+            line17.Set('chart.gutter', 30);
+            line17.Set('chart.hmargin', 5);
+            line17.Set('chart.linewidth', 2);
+            line17.Set('chart.background.barcolor1', 'white');
+            line17.Set('chart.background.barcolor2', 'white');
+            line17.Set('chart.background.grid.hsize', 48);
+            line17.Set('chart.background.grid.vsize', 29.55);
+            line17.Set('chart.colors', ['red']);
+            line17.Set('chart.shadow', true);
+            line17.Set('chart.shadow.offsetx', 1);
+            line17.Set('chart.shadow.offsety', 1);
+            line17.Set('chart.tickmarks', 'dot');
+            line17.Set('chart.title', 'A graph');
+            line17.Set('chart.labels', ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']);
+            line17.Draw();
+        }
+    </script>
+
+</head>
+<body>
+
+<div id="logo">
+    <a href="../index.html">RGraph: HTML5 canvas graph library</a>
+    >
+    <a href="./index.html">Examples</a>
+    >
+    Line chart
+</div>
+
+<h1>RGraph: Line chart</h1>
+
+    <script>
+        if (document.all) {
+            document.write('<div style="background-color: #fee; border: 2px dashed red; padding: 5px"><b>Important</b><br /><br /> Internet Explorer does not natively support the HTML5 canvas tag yet, so if you want to see the graphs, you can either:<ul><li>Install <a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a></li><li>Use another browser entirely. Your choices are Firefox, Chrome or Safari</li></ul></div>');
+        }
+    </script>
+    
+    <div>
+        <p>
+            Like the Bar chart, this is one of the most versatile chart types. It is similar, but can indicate chronological
+            data better. It's good if, for example, you want to illustarate sales figures over a year (or any period of time).
+            You'll then be able to easily see whether sales are going up, down or are stagnant. It will also become apparent
+            which months are busier than others. By using multiple lines you can add multiple sets of data (eg two or more years
+            of figures) to your chart.
+            You can customise this chart by stipulating it as being filled, having drop shadows, keys, having the X axis in the centre,
+            different colours, different tickmark styles and tooltips etc.
+        </p>
+        
+        <p>
+            The first graph uses external DIVs for the tooltip contents. The DIVs are at the bottom of this page (they're set not to
+            be visible). Using external DIVs for tooltips can make maintenance easier.
+        </p>
+    
+        <div>
+            <ul>
+                <li><a href="../docs/line.html">Line chart API documentation</a></li>
+            </ul>
+        </div>
+
+        <div>
+            <canvas id="line1" width="475" height="250"><div class="canvasfallback">[No canvas support]</div></canvas>
+            <canvas id="line2" width="475" height="250"><div class="canvasfallback">[No canvas support]</div></canvas>
+            <canvas id="line3" width="475" height="250"><div class="canvasfallback">[No canvas support]</div></canvas>
+            <canvas id="line4" width="475" height="250"><div class="canvasfallback">[No canvas support]</div></canvas>
+            <canvas id="line5" width="475" height="250"><div class="canvasfallback">[No canvas support]</div></canvas>
+            <canvas id="line6" width="475" height="250"><div class="canvasfallback">[No canvas support]</div></canvas>
+            <canvas id="line7" width="475" height="250"><div class="canvasfallback">[No canvas support]</div></canvas>
+            <canvas id="line8" width="475" height="250"><div class="canvasfallback">[No canvas support]</div></canvas>
+            <canvas id="line9" width="475" height="350"><div class="canvasfallback">[No canvas support]</div></canvas>
+            <canvas id="line10" width="475" height="350"><div class="canvasfallback">[No canvas support]</div></canvas>
+
+            <table border="0" width="100%">
+                <tr>
+                    <td valign="center">
+                        <canvas id="line11" width="475" height="350"><div class="canvasfallback">[No canvas support]</div></canvas>
+                    </td>
+                    
+                    <td align="center">
+                        <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+                        A sparkline: <canvas id="line12" width="100" height="15"><div class="canvasfallback">[No canvas support]</div></canvas>
+                    </td>
+                </tr>
+            </table>
+            
+            <canvas id="line13" width="475" height="350"><div class="canvasfallback">[No canvas support]</div></canvas>
+            
+            <div class="code" style="width: 50%">
+                Multiple sets of data in this case are achieved by using two graphs, drawn on the same canvas.
+                Essentially the second graph is drawn on top of the first. The two graph objects are line13
+                and line14 and you can see the code by reviewing the source of this page.
+            </div>
+            
+            <canvas id="line15" width="475" height="250"><div class="canvasfallback">[No canvas support]</div></canvas>
+            <canvas id="line16" width="475" height="250"><div class="canvasfallback">[No canvas support]</div></canvas>
+            <canvas id="line17" width="475" height="250"><div class="canvasfallback">[No canvas support]</div></canvas>
+        </div>
+    </div>
+
+    <!--
+        These are the tooltips for the first graph.
+    -->
+    <div style="display: none">
+        <div id="tooltip_china"><b>China</b><br />A populous country</div>
+        <div id="tooltip_la"><b>Los Angeles</b><br />Home of sexy time!</div>
+        <div id="tooltip_plymouth"><b>Plymouth</b><br />Plenty of surfers dude</div>
+        <div id="tooltip_meadowhall"><b>Meadowhall</b><br />Shopping heaven (or hell...) here</div>
+        <div id="tooltip_sydney"><b>Sydney</b><br />Home of kangeroos</div>
+        <div id="tooltip_toronto"><b>Toronto</b><br />Brrrr, chilly</div>
+        <div id="tooltip_france"><b>France</b><br />Ever had frogs legs?</div>
+        <div id="tooltip_norway"><b>Norway</b><br />Skiing here</div>
+        <div id="tooltip_sweden"><b>Sweden</b><br />Skiing here too</div>
+        <div id="tooltip_spain"><b>Spain</b><br />Hola!</div>
+        <div id="tooltip_deli"><b>Deli</b><br />Hot and humid here</div>
+        <div id="tooltip_congo"><b>Congo</b><br />Not exactly a holiday resort</div>
+        <div id="tooltip_plymouth"><b>Plymouth</b><br />Plenty of surfers here</div>
+        <div id="tooltip_brazil"><b>Brazil</b><br />Fooseball</div>
+        <div id="tooltip_california"><b>Califonia</b><br />"I'll be back..." And he was</div>
+        <div id="tooltip_newyork"><b>New York</b><br />Home of the Friends comedy show</div>
+        <div id="tooltip_paris"><b>Paris</b><br />Ever eaten frogs legs?</div>
+        <div id="tooltip_uk"><b>UK</b><br />Lots of pasty faced folk here</div>
+        <div id="tooltip_antartica"><b>Antartica</b><br />Surprisingly, incorporates the driest place in the world</div>
+        <div id="tooltip_sahara"><b>Sahara</b><br />A questionable film, and a rather hot place</div>
+        <div id="tooltip_zagreb"><b>Zagreb</b><br />Anyone know where this is...?</div>
+    </div>
+
+</body>
+</html>

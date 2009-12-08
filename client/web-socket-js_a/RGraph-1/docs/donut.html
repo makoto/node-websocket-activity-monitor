@@ -1,0 +1,77 @@
+<?php ob_start('ob_gzhandler') ?>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <!--
+        /**
+        * o------------------------------------------------------------------------------o
+        * | This file is part of the RGraph package - you can learn more at:             |
+        * |                                                                              |
+        * |                          http://www.rgraph.net                               |
+        * |                                                                              |
+        * | This package is licensed under the RGraph license. For all kinds of business |
+        * | purposes there is a small one-time licensing fee to pay and for personal,    |
+        * | charity and educational purposes it is free to use. You can read the full    |
+        * | license here:                                                                |
+        * |                      http://www.rgraph.net/LICENSE.txt                       |
+        * o------------------------------------------------------------------------------o
+        */
+    -->
+    <title>RGraph: HTML5 canvas graph library - donut chart documentation</title>
+    <link rel="stylesheet" href="../css/website.css" type="text/css" media="screen" />
+    <link rel="icon" type="image/png" href="/favicon.png">
+</head>
+<body>
+    <div id="logo">
+        <a href="../index.html">RGraph: HTML5 canvas graph library</a>
+        >
+        <a href="index.html">Documentation</a>
+        >
+        Donut chart
+    </div>
+
+    <h1>RGraph: Donut chart documentation</h1>
+
+    <script>
+        if (document.all) {
+            document.write('<div style="background-color: #fee; border: 2px dashed red; padding: 5px"><b>Important</b><br /><br /> Internet Explorer does not natively support the HTML5 canvas tag yet, so if you want to see the graphs, you can either:<ul><li>Install <a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a></li><li>Use another browser entirely. Your choices are Firefox, Chrome or Safari</li></ul></div>');
+        }
+    </script>
+
+    <p>
+        This is the donut chart. It's essentially a pie chart with a big hole in the middle.
+        You can use the pie chart properties when customising the donut.
+    </p>
+    
+    <p> 
+        The example file is <a href="../examples/donut.html">here</a>.
+    </p> 
+    
+    <pre class="code">
+&lt;script&gt;
+    window.onload = function ()
+    {
+        var data = [45,57,48,32];
+    
+        var donut = new RGraph.Donut('myDonut', data);
+        donut.Set('chart.labels', ['Jan', 'Ben', 'Mark', 'Lucy']);
+        donut.Set('chart.linewidth', 5);
+        donut.Set('chart.strokestyle', 'rgba(255,255,255,1)');
+        donut.Set('chart.tooltips', ['Jan', 'Ben', 'Mark', 'Lucy']);
+        donut.Draw();
+    }
+&lt;/script&gt;
+</pre>
+
+
+    <h2>Available properties</h2>
+    
+    <p>
+        Please see the <a href="pie.html">Pie chart documentation</a> for what properties you can set. Most of the pie chart properties
+        are available on the donut chart too.
+    </p>
+
+    <p>
+</body>
+</html>
