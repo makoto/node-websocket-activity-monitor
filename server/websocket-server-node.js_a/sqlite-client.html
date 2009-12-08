@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+            var webSocket = new WebSocket('ws://localhost:8000/sqlite');
+
+            webSocket.onopen = function() {
+                webSocket.send('movies.db \'select * from movies\'');
+            };
+
+            webSocket.onmessage = function(event) {
+                var rows = eval(event.data);
+                for (var i = 0; i < rows.length; i++)
+                    document.body.innerHTML += rows[i].title + '|' +
+                        rows[i].year + '<br>';
+                webSocket.close();
+            };
+        </script>
+    </head>
+    <body>
+    </body>
+</html>
+

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+            // webSocket is referenced from the HTML-elements, so it has to stay
+            // in the global scope.
+            var webSocket;
+
+            function ready() {
+                var out = document.getElementById('out');
+                webSocket = new WebSocket('ws://localhost:8000/echo');
+
+                webSocket.onopen = function() {
+                    out.innerHTML += 'Connection opened.<br>';
+                };
+
+                webSocket.onmessage = function(event) {
+                    out.innerHTML += event.data + '<br>';
+                };
+
+                webSocket.onclose = function() {
+                    out.innerHTML += 'Connection closed.<br>';
+                };
+            };
+        </script>
+    </head>
+    <body onload="ready();">
+
+        <input type="text" id="message" value="Hello, Web Socket!">
+
+        <input type="button" value="Send"
+            onclick="webSocket.send(document.getElementById('message').value);">
+
+        <input type="button" value="Close connection"
+            onclick="webSocket.close();">
+
+        <div id="out"></div>
+
+    </body>
+</html>
+

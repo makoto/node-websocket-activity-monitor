@@ -1,0 +1,22 @@
+websocket-server-node.js
+
+A minimal Web Socket server written in JavaScript using node.js. It's intended
+to be used locally.
+
+
+1. Get node.js from nodejs.org
+2. node server.js
+3. Open echo-client.html in a browser that supports the Web Socket protocol
+
+
+TSL is not supported.
+
+The reason why the server blocks remote addresses other than localhost, is that
+I only use it locally myself, and also because I want to keep the code as simple
+as possible.
+
+The resources included by default allows the client to do anything that a user
+can do from the command line. You would either have to remove resources or
+write authentication/authorization code, and remove the remoteAddress-check
+to make it usable for other remote addresses. 
+
