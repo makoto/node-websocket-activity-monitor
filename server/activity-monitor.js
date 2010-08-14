@@ -6,7 +6,7 @@ var sys = require('sys')
   , http = require("http")
   , ws = require('./node-websocket-server/lib/ws');
 
-// var child_process = process.createChildProcess("iostat", ["-w 1"]);
+var iostat = require('child_process').spawn("iostat", ["-w 1"]);
 
 var httpServer = http.createServer();
 
@@ -21,14 +21,11 @@ server.addListener("listening", function(){
 // Handle WebSocket Requests
 server.addListener("connection", function(conn){
   sys.log("opened connection: "+conn.id);
-  
   server.send(conn.id, "Connected as: "+conn.id);
-  conn.broadcast("<"+conn.id+"> connected");
-  
-  conn.addListener("message", function(message){
-    sys.log("<"+conn.id+"> "+message);
-    conn.broadcast("<"+conn.id+"> "+message);
+  iostat.stdout.on('data', function (data) {
+    sys.log('stdout: ' + data);
   });
+  server.send(conn.id, "Connected as: "+conn.id);
 });
 
 server.addListener("close", function(conn){
